@@ -1,26 +1,28 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include "EntityAttributes.h"
 #include "Object.h"
 #include "Sprite.h"
-#include "Vector.h"
-#include "Particles.h"
 
-class Player : public Object
-{
-private:
-    Sprite * sprite;
-    Particles * tail;
+enum SpriteState { LEFT, RIGHT };
 
-public:
-    Vector * speed;
+class Player : public Object {
+    private:
+        Sprite * sprite;
+        SpriteState spriteState;
+        EntityAttributes attributes;
+        uint level;
 
-    Player();
-    ~Player();
-    
-    void Move(Vector && v);
-    void Update();
-    void Draw();
+        void HandleMovement();
+        void InitializeAttributes();
+    public:
+        Player();
+        ~Player();
+        
+        void LevelUp();
+        void Update();
+        void Draw();
 }; 
 
 #endif

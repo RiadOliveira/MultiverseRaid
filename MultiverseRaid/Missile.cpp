@@ -4,17 +4,16 @@
 
 Player* & Missile::player = MultiverseRaid::player;
 
-Missile::Missile()
-{
+Missile::Missile() {
     sprite = new Sprite("Resources/Missile.png");
 
     BBox(new Circle(8));
     
-    speed.RotateTo(player->speed->Angle());
+    //speed.RotateTo(player->speed->Angle());
     speed.ScaleTo(15.0f);
     
     MoveTo(player->X() + 22 * cos(speed.Radians()), player->Y() - 22 * sin(speed.Radians()));
-    RotateTo(-player->speed->Angle() + 90.0f);
+    //RotateTo(-player->speed->Angle() + 90.0f);
 
     type = MISSILE;
 }

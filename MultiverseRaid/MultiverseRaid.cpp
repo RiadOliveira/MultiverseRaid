@@ -1,19 +1,18 @@
 #include "Resources.h"
 #include "MultiverseRaid.h"
 #include "Engine.h"    
-#include "Magenta.h"
-#include "Blue.h"    
-#include "Green.h"
-#include "Orange.h"
+#include "RobotEnemy.h"
+#include "WizardEnemy.h"
+#include "AlienEnemy.h"
 #include "Delay.h"
 
 Player * MultiverseRaid::player  = nullptr;
 Audio  * MultiverseRaid::audio   = nullptr;
 Scene  * MultiverseRaid::scene   = nullptr;
+uint     MultiverseRaid::gameWave = 0;
 bool     MultiverseRaid::viewHUD = false;
 
-void MultiverseRaid::Init()
-{
+void MultiverseRaid::Init() {
     audio = new Audio();
     audio->Add(THEME, "Resources/Theme.wav");
     audio->Add(FIRE, "Resources/Fire.wav");
@@ -21,8 +20,9 @@ void MultiverseRaid::Init()
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
 
-    audio->Volume(FIRE, 0.2f);
-    audio->Volume(START, 0.8f);
+    audio->Volume(THEME, 0.0f);
+    audio->Volume(FIRE, 0.0f);
+    audio->Volume(START, 0.0f);
 
     backg   = new Background("Resources/Space.jpg");
     player  = new Player();
@@ -31,10 +31,9 @@ void MultiverseRaid::Init()
     hud = new Hud();
 
     scene->Add(player, STATIC);
-    scene->Add(new Magenta(player), STATIC);
-    scene->Add(new Blue(player), STATIC);
-    scene->Add(new Green(player), STATIC);
-    scene->Add(new Orange(player), STATIC);
+    scene->Add(new RobotEnemy(player), STATIC);
+    scene->Add(new WizardEnemy(player), STATIC);
+    scene->Add(new AlienEnemy(player), STATIC);
     scene->Add(new Delay(), STATIC);
 
     float difx = (game->Width() - window->Width()) / 2.0f;
@@ -46,8 +45,7 @@ void MultiverseRaid::Init()
     viewport.bottom = viewport.top + window->Height();
 }
 
-void MultiverseRaid::Update()
-{
+void MultiverseRaid::Update() {
     if (window->KeyDown(VK_ESCAPE))
         window->Close();
 
@@ -88,8 +86,7 @@ void MultiverseRaid::Update()
     }
 } 
 
-void MultiverseRaid::Draw()
-{
+void MultiverseRaid::Draw() {
     backg->Draw(viewport);
 
     scene->Draw();
@@ -101,8 +98,7 @@ void MultiverseRaid::Draw()
         scene->DrawBBox();
 }
 
-void MultiverseRaid::Finalize()
-{
+void MultiverseRaid::Finalize() {
     delete audio;
     delete hud;
     delete scene;

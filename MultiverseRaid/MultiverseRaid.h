@@ -8,27 +8,27 @@
 #include "Player.h"
 #include "Hud.h"
 
-enum ObjectIds { PLAYER, MISSILE, BLUE, GREEN, MAGENTA, ORANGE, WALLHIT };
+enum ObjectIds { PLAYER, MISSILE, ALIEN_ENEMY, WIZARD_ENEMY, ROBOT_ENEMY, WALLHIT };
 
 enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL };
 
-class MultiverseRaid : public Game
-{
-private:
-    Background * backg = nullptr;
-    Hud * hud = nullptr;
-    bool viewBBox = false;
+class MultiverseRaid : public Game {
+    private:
+        Background * backg = nullptr;
+        Hud * hud = nullptr;
+        bool viewBBox = false;
 
-public:
-    static Player * player;
-    static Audio * audio;
-    static Scene * scene;
-    static bool viewHUD;
+    public:
+        static Player * player;
+        static Audio * audio;
+        static Scene * scene;
+        static uint gameWave;
+        static bool viewHUD;
 
-    void Init();
-    void Update();
-    void Draw();
-    void Finalize();
+        void Init();
+        void Update();
+        void Draw();
+        void Finalize();
 };
 
 #endif
