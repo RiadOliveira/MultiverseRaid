@@ -162,9 +162,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlienAvatar.cpp" />
     <ClCompile Include="AlienEnemy.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
+    <ClCompile Include="Avatar.cpp" />
     <ClCompile Include="Background.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Delay.cpp" />
@@ -182,6 +184,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RobotAvatar.cpp" />
     <ClCompile Include="RobotEnemy.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -192,12 +195,15 @@
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WallHit.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="WizardAvatar.cpp" />
     <ClCompile Include="WizardEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlienAvatar.h" />
     <ClInclude Include="AlienEnemy.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
+    <ClInclude Include="Avatar.h" />
     <ClInclude Include="Background.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Delay.h" />
@@ -217,6 +223,7 @@
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources.h" />
+    <ClInclude Include="RobotAvatar.h" />
     <ClInclude Include="RobotEnemy.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sound.h" />
@@ -228,6 +235,7 @@
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WallHit.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="WizardAvatar.h" />
     <ClInclude Include="WizardEnemy.h" />
   </ItemGroup>
   <ItemGroup>

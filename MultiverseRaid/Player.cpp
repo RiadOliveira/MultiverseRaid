@@ -1,6 +1,9 @@
 #include "Player.h" 
 #include "Missile.h"
 #include "MultiverseRaid.h"
+#include "WizardAvatar.h"
+#include "RobotAvatar.h"
+#include "AlienAvatar.h"
 
 void Player::InitializeAttributes() {
     attributes.hp = 10.0f;
@@ -11,8 +14,13 @@ void Player::InitializeAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): spriteState(LEFT), level(0) {
+Player::Player(): spriteState(LEFT), level(0), selectedAvatar(WIZARD) {
     sprite = new Sprite("Resources/Player.png");
+
+    avatars = new Avatar*[3];
+    avatars[WIZARD] = (Avatar*) new WizardAvatar();
+    avatars[ROBOT] = (Avatar*) new RobotAvatar();
+    avatars[ALIEN] = (Avatar*) new AlienAvatar();
 
     BBox(new Circle(18.0f));
     MoveTo(game->CenterX(), game->CenterY());
@@ -22,6 +30,11 @@ Player::Player(): spriteState(LEFT), level(0) {
 
 Player::~Player() {
     delete sprite;
+
+    for(int ind=0 ; ind<3 ; ind++) {
+        delete avatars[ind];
+    }
+    delete[] avatars;
 }
 
 void Player::LevelUp() {
@@ -65,10 +78,12 @@ void Player::HandleMovement() {
 }
 
 void Player::Update() {
-    HandleMovement(); 
+    HandleMovement();
+    avatars[selectedAvatar]->Update();
 }
 
 void Player::Draw() {
     float rotation = spriteState == LEFT ? 0.0f : 180.0f;
     sprite->Draw(x, y, Layer::MIDDLE, 1.0f, rotation);
+    avatars[selectedAvatar]->Draw();
 }

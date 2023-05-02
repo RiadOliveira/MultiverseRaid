@@ -4,12 +4,16 @@
 #include "EntityAttributes.h"
 #include "Object.h"
 #include "Sprite.h"
+#include "Avatar.h"
 
 enum SpriteState { LEFT, RIGHT };
 
 class Player : public Object {
     private:
         Sprite * sprite;
+        Avatar ** avatars;
+        AvatarType selectedAvatar;
+
         SpriteState spriteState;
         EntityAttributes attributes;
         uint level;
