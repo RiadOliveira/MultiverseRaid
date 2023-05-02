@@ -7,16 +7,14 @@ EntityAttributes WizardEnemy::wizardsAttributes = {
     180.0f, //speed
     8.0f, //damage
     3.5f, //attackSpeed
-    0.25f //defense
+    0.25f, //defense
+    300.0f //range
 };
 
-WizardEnemy::WizardEnemy(Player * p): player(p), hp(wizardsAttributes.hp) {
+WizardEnemy::WizardEnemy(): hp(wizardsAttributes.hp) {
     sprite = new Sprite("Resources/WizardEnemy.png");
-    speed  = new Vector(0, 2.0f);
+    speed  = new Vector(0, 1.0f);
     BBox(new Circle(20.0f));
-
-    RandI dist{ 300, 400 };
-    distance = dist.Rand();
 
     RandF posX{ game->Width() - 50, game->Width() };
     RandF posY{ game->Height() - 50, game->Height() };
@@ -47,18 +45,21 @@ void WizardEnemy::OnCollision(Object * obj) {
 }
 
 void WizardEnemy::Update() {
+    Player * player = MultiverseRaid::player;
+
     float angle = Line::Angle(Point(x, y), Point(player->X(), player->Y()));
-    float magnitude = 10.0f * gameTime;
+    float magnitude = 20.0f * gameTime;
     Vector target = Vector(angle, magnitude);
     
-    if (Point::Distance(Point(x, y), Point(player->X(), player->Y())) < distance)
-    {
-        target.Rotate(180.0f);
-        target.ScaleTo(20.0f * gameTime);
-    }
+    float distanceToPlayer = Point::Distance(Point(x, y), Point(player->X(), player->Y()));
+    bool hasToEscape = distanceToPlayer < wizardsAttributes.range - 20.0f;
+    bool hasToGetCloser = distanceToPlayer > wizardsAttributes.range;
+
+    if(!hasToEscape && !hasToGetCloser) target.Rotate(90.0f);
+    else if(hasToEscape) target.Rotate(180.0f);
 
     speed->Add(target);
-    if (speed->Magnitude() > 3) speed->ScaleTo(3.0f);
+    if (speed->Magnitude() > 1.0f) speed->ScaleTo(1.0f);
 
     float parsedSpeed = wizardsAttributes.speed * gameTime;
     Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);

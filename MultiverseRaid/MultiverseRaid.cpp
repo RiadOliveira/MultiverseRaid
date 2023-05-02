@@ -30,10 +30,10 @@ void MultiverseRaid::Init() {
 
     hud = new Hud();
 
-    scene->Add(player, STATIC);
-    scene->Add(new RobotEnemy(player), STATIC);
-    scene->Add(new WizardEnemy(player), STATIC);
-    scene->Add(new AlienEnemy(player), STATIC);
+    scene->Add(player, MOVING);
+    scene->Add(new RobotEnemy(), STATIC);
+    scene->Add(new WizardEnemy(), STATIC);
+    scene->Add(new AlienEnemy(), STATIC);
     scene->Add(new Delay(), STATIC);
 
     float difx = (game->Width() - window->Width()) / 2.0f;
@@ -46,17 +46,13 @@ void MultiverseRaid::Init() {
 }
 
 void MultiverseRaid::Update() {
-    if (window->KeyDown(VK_ESCAPE))
-        window->Close();
+    if (window->KeyDown(VK_ESCAPE)) window->Close();
 
     scene->Update();
     scene->CollisionDetection();
 
-    if (window->KeyPress('B'))
-        viewBBox = !viewBBox;
-
-    if (window->KeyPress('H'))
-        viewHUD = !viewHUD;
+    if (window->KeyPress('B')) viewBBox = !viewBBox;
+    if (window->KeyPress('H')) viewHUD = !viewHUD;
 
     viewport.left   = player->X() - window->CenterX();
     viewport.right  = player->X() + window->CenterX();
@@ -91,11 +87,8 @@ void MultiverseRaid::Draw() {
 
     scene->Draw();
 
-    if (viewHUD)
-        hud->Draw();
-
-    if (viewBBox)
-        scene->DrawBBox();
+    if (viewHUD) hud->Draw();
+    if (viewBBox) scene->DrawBBox();
 }
 
 void MultiverseRaid::Finalize() {

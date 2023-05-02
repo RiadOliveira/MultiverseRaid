@@ -6,17 +6,18 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
+#include "Timer.h"
 
 class AlienEnemy : public Object {
     private:
         static EntityAttributes aliensAttributes;
 
         float hp;
+        Timer * attackSpeedTimer;
         Sprite * sprite;
         Vector * speed;
-        Player * player;
     public:
-        AlienEnemy(Player * p);
+        AlienEnemy();
         ~AlienEnemy();
         
         static void UpdateWaveAttributes();

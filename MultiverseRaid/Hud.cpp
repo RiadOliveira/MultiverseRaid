@@ -1,8 +1,7 @@
 #include "Hud.h"
 #include "MultiverseRaid.h"
 
-Hud::Hud()
-{
+Hud::Hud() {
     font = new Font("Resources/Tahoma14.png");
     font->Spacing("Resources/Tahoma14.dat");
     bold = new Font("Resources/Tahoma14b.png");
@@ -12,21 +11,18 @@ Hud::Hud()
     keyMap = new Sprite("Resources/Keymap.png");
 }
 
-Hud::~Hud()
-{
+Hud::~Hud() {
     delete font;
     delete bold;
     delete infoBox;
     delete keyMap;
 }
 
-void Hud::Update()
-{
+void Hud::Update() {
 
 }
 
-void Hud::Draw()
-{
+void Hud::Draw() {
     infoBox->Draw(game->viewport.left + 140, game->viewport.top + 100, Layer::FRONT);
     keyMap->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() - 16.0f, Layer::FRONT);
 
@@ -49,7 +45,7 @@ void Hud::Draw()
     font->Draw(40, 132, text.str(), textColor);
 
     text.str("");
-    text << "Mísseis: " << MultiverseRaid::scene->Size() - 5;
+    text << "Vida: " << MultiverseRaid::player->Hp();
     font->Draw(40, 152, text.str(), textColor);
 
     text.str("");
@@ -57,6 +53,6 @@ void Hud::Draw()
     bold->Draw(window->CenterX() - 84.0f, window->Height() - 7.0f, text.str(), textColor);
 
     text.str("");
-    text << "Disparo";
+    text << "Atirar";
     bold->Draw(window->CenterX() + 115.0f, window->Height() - 7.0f, text.str(), textColor);
 }

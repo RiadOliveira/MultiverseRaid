@@ -7,12 +7,13 @@ EntityAttributes RobotEnemy::robotsAttributes = {
     200.0f, //speed
     5.0f, //damage
     3.0f, //attackSpeed
-    0.40f //defense
+    0.40f, //defense
+    30.0f //range
 };
 
-RobotEnemy::RobotEnemy(Player * p) : player (p), hp(robotsAttributes.hp) {
+RobotEnemy::RobotEnemy(): hp(robotsAttributes.hp) {
     sprite = new Sprite("Resources/RobotEnemy.png");
-    speed  = new Vector(0, 2.0f);
+    speed  = new Vector(0, 1.0f);
     BBox(new Circle(18.0f));
     
     RandF posX{ 300, 400 };
@@ -25,6 +26,7 @@ RobotEnemy::RobotEnemy(Player * p) : player (p), hp(robotsAttributes.hp) {
 RobotEnemy::~RobotEnemy() {
     delete sprite;
     delete speed;
+    delete attackSpeedTimer;
 }
 
 void RobotEnemy::UpdateWaveAttributes() {
@@ -39,12 +41,33 @@ void RobotEnemy::UpdateWaveAttributes() {
 }
 
 void RobotEnemy::OnCollision(Object * obj) {
-    if (obj->Type() == MISSILE) MultiverseRaid::scene->Delete(this, MOVING);
+    if(obj->Type() != PLAYER) return;
+    Player * player = MultiverseRaid::player;
+
+    bool isFirstPlayerCollision = attackSpeedTimer == nullptr;
+    if(isFirstPlayerCollision) {
+        player->ApplyDamage(robotsAttributes.damage);
+        attackSpeedTimer = new Timer();
+        attackSpeedTimer->Start();
+
+        return;
+    }
+
+    bool attackOnCooldown = attackSpeedTimer->Elapsed() < robotsAttributes.attackSpeed;
+    if(attackOnCooldown) return;
+
+    player->ApplyDamage(robotsAttributes.damage);
+    attackSpeedTimer->Start();
 }
 
 void RobotEnemy::Update() {
+    Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
 
-    float parsedSpeed = robotsAttributes.speed * gameTime;
-    Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
+    float distanceToPlayer = Point::Distance(Point(x, y), Point(player->X(), player->Y()));
+
+    if(distanceToPlayer > robotsAttributes.range) {
+        float parsedSpeed = robotsAttributes.speed * gameTime;
+        Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
+    }
 }

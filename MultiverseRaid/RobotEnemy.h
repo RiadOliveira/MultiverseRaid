@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
+#include "Timer.h"
 
 class RobotEnemy : public Object {
     private:
@@ -15,9 +16,9 @@ class RobotEnemy : public Object {
         float hp;
         Sprite * sprite;
         Vector * speed;
-        Player * player;
+        Timer * attackSpeedTimer = nullptr;
     public:
-        RobotEnemy(Player * p);
+        RobotEnemy();
         ~RobotEnemy();
         
         static void UpdateWaveAttributes();

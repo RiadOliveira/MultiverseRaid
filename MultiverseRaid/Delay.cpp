@@ -22,7 +22,7 @@ void Delay::Update()
         notPlayed = false;
     }
 
-    if (timer.Elapsed(6.0f))
+    if (timer.Elapsed(2.0f))
     {
         MultiverseRaid::audio->Play(THEME, true);
         MultiverseRaid::viewHUD = true;

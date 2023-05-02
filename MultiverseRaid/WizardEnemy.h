@@ -14,10 +14,8 @@ class WizardEnemy : public Object {
         float hp;
         Sprite * sprite;
         Vector * speed;
-        Player * player;
-        int distance;
     public:
-        WizardEnemy(Player * p);
+        WizardEnemy();
         ~WizardEnemy();
         
         static void UpdateWaveAttributes();

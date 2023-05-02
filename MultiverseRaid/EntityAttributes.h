@@ -7,6 +7,7 @@ struct EntityAttributes {
     float damage;
     float attackSpeed;
     float defense;
+    float range;
 };
 
 #endif

@@ -4,17 +4,19 @@
 
 EntityAttributes AlienEnemy::aliensAttributes = {
     6.0f, //hp
-    220.0f, //speed
+    440.0f, //speed
     7.0f, //damage
     3.5f, //attackSpeed
-    0.30f //defense
+    0.30f, //defense
+    30.0f //range
 };
 
-AlienEnemy::AlienEnemy(Player * p) : player (p), hp(aliensAttributes.hp) {
+AlienEnemy::AlienEnemy(): hp(aliensAttributes.hp) {
     sprite = new Sprite("Resources/AlienEnemy.png");
-    speed  = new Vector(0, 2.0f);
+    speed  = new Vector(0, 1.0f);
     BBox(new Circle(20.0f));
 
+    Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     RotateTo(-speed->Angle());
     
@@ -27,6 +29,7 @@ AlienEnemy::AlienEnemy(Player * p) : player (p), hp(aliensAttributes.hp) {
 AlienEnemy::~AlienEnemy() {
     delete sprite;
     delete speed;
+    delete attackSpeedTimer;
 }
 
 void AlienEnemy::UpdateWaveAttributes() {
@@ -40,10 +43,24 @@ void AlienEnemy::UpdateWaveAttributes() {
     }
 }
 
-void AlienEnemy::OnCollision(Object * obj)
-{
-    if (obj->Type() == MISSILE)
-        MultiverseRaid::scene->Delete(this, MOVING);
+void AlienEnemy::OnCollision(Object * obj) {
+    if (obj->Type() != PLAYER) return;
+    Player * player = MultiverseRaid::player;
+
+    bool isFirstPlayerCollision = attackSpeedTimer == nullptr;
+    if(isFirstPlayerCollision) {
+        player->ApplyDamage(aliensAttributes.damage);
+        attackSpeedTimer = new Timer();
+        attackSpeedTimer->Start();
+
+        return;
+    }
+
+    bool attackOnCooldown = attackSpeedTimer->Elapsed() < aliensAttributes.attackSpeed;
+    if(attackOnCooldown) return;
+
+    player->ApplyDamage(aliensAttributes.damage);
+    attackSpeedTimer->Start();
 }
 
 void AlienEnemy::Update() {
@@ -51,6 +68,8 @@ void AlienEnemy::Update() {
     Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
 
     if (x < 100 || y < 100 || x > game->Width() - 100 || y > game->Height() - 100) {
+        Player * player = MultiverseRaid::player;
+
         speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
         RotateTo(-speed->Angle());
     }

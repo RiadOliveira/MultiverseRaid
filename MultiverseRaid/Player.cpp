@@ -8,6 +8,7 @@ void Player::InitializeAttributes() {
     attributes.damage = 8.0f;
     attributes.attackSpeed = 3.0f;
     attributes.defense = 0.3f;
+    attributes.range = 290.0f;
 }
 
 Player::Player(): spriteState(LEFT), level(0) {
@@ -39,17 +40,22 @@ void Player::LevelUp() {
 void Player::HandleMovement() {
     float parsedSpeed = attributes.speed * gameTime;
 
-    if(window->KeyDown(VK_RIGHT)) {
+    bool upCommandPressed = window->KeyDown(VK_UP) || window->KeyDown('W');
+    bool downCommandPressed = window->KeyDown(VK_DOWN) || window->KeyDown('S');
+    bool rightCommandPressed = window->KeyDown(VK_RIGHT) || window->KeyDown('D');
+    bool leftCommandPressed = window->KeyDown(VK_LEFT) || window->KeyDown('A');
+
+    if(upCommandPressed) Translate(0, -parsedSpeed);
+    if(downCommandPressed) Translate(0, parsedSpeed);
+
+    if(rightCommandPressed) {
         Translate(parsedSpeed, 0);
         spriteState = RIGHT;
     }
-    if(window->KeyDown(VK_LEFT)) {
+    if(leftCommandPressed) {
         Translate(-parsedSpeed, 0);
         spriteState = LEFT;
     }
-
-    if(window->KeyDown(VK_UP)) Translate(0, -parsedSpeed);
-    if(window->KeyDown(VK_DOWN)) Translate(0, parsedSpeed);
 
     if (x < 50) MoveTo(50, y);
     else if (x > game->Width() - 50) MoveTo(game->Width() - 50, y);
