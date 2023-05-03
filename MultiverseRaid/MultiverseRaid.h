@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "Hud.h"
 
-enum ObjectIds { PLAYER, MISSILE, ALIEN_ENEMY, WIZARD_ENEMY, ROBOT_ENEMY, WALLHIT };
+enum ObjectIds { PLAYER, MISSILE, ENEMY, PLAYER_ATTACK, WALLHIT };
 
 enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL };
 

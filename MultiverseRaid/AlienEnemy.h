@@ -1,21 +1,16 @@
 #ifndef _ALIEN_ENEMY_H_
 #define _ALIEN_ENEMY_H_
 
-#include "Object.h"    
+#include "Enemy.h"    
 #include "Types.h"
 #include "Sprite.h"
-#include "Vector.h"
 #include "Player.h"
 #include "Timer.h"
+#include "Vector.h"
 
-class AlienEnemy : public Object {
+class AlienEnemy : public Enemy {
     private:
         static EntityAttributes aliensAttributes;
-
-        float hp;
-        Timer * attackSpeedTimer;
-        Sprite * sprite;
-        Vector * speed;
     public:
         AlienEnemy();
         ~AlienEnemy();
@@ -23,7 +18,6 @@ class AlienEnemy : public Object {
         static void UpdateWaveAttributes();
         void OnCollision(Object* obj);
         void Update();
-        void Draw();
 }; 
 
 #endif

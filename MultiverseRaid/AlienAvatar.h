@@ -4,13 +4,10 @@
 #include "Types.h"
 #include "Avatar.h"
 
-class AlienAvatar : Avatar {
+class AlienAvatar : public Avatar {
     private:
-        void PassiveUpdate();
-        void PassiveDraw();
-
-        void UltUpdate();
-        void UltDraw();
+        void HandleBasicAttack(Object* obj);
+        void HandleUlt();
     public:
         AlienAvatar();
         ~AlienAvatar();

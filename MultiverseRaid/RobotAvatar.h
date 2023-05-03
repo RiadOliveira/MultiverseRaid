@@ -4,13 +4,10 @@
 #include "Types.h"
 #include "Avatar.h"
 
-class RobotAvatar : Avatar {
+class RobotAvatar : public Avatar {
     private:
-        void PassiveUpdate();
-        void PassiveDraw();
-
-        void UltUpdate();
-        void UltDraw();
+        void HandleBasicAttack(Object* obj);
+        void HandleUlt();
     public:
         RobotAvatar();
         ~RobotAvatar();

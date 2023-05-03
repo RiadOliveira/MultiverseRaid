@@ -14,25 +14,28 @@ void Player::InitializeAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): spriteState(LEFT), level(0), selectedAvatar(WIZARD) {
+Player::Player(): spriteState(LEFT), level(0), selectedAvatar(ROBOT) {
     sprite = new Sprite("Resources/Player.png");
 
     avatars = new Avatar*[3];
-    avatars[WIZARD] = (Avatar*) new WizardAvatar();
-    avatars[ROBOT] = (Avatar*) new RobotAvatar();
-    avatars[ALIEN] = (Avatar*) new AlienAvatar();
+    avatars[WIZARD] = new WizardAvatar();
+    avatars[ROBOT] = new RobotAvatar();
+    avatars[ALIEN] = new AlienAvatar();
 
     BBox(new Circle(18.0f));
     MoveTo(game->CenterX(), game->CenterY());
     InitializeAttributes();
     type = PLAYER;
+
+    Scene * scene = MultiverseRaid::scene;
+    scene->Add(avatars[selectedAvatar], MOVING);
 }
 
 Player::~Player() {
     delete sprite;
 
     for(int ind=0 ; ind<3 ; ind++) {
-        delete avatars[ind];
+        if(ind != selectedAvatar) delete avatars[ind];
     }
     delete[] avatars;
 }
@@ -79,11 +82,21 @@ void Player::HandleMovement() {
 
 void Player::Update() {
     HandleMovement();
-    avatars[selectedAvatar]->Update();
+
+    bool hasToSwitchAvatar = Avatar::ReachedActiveTimeLimit();
+    bool chooseAndCanSwitchAvatar = window->KeyDown('Q') && Avatar::CanSwitchAvatar();
+    if(hasToSwitchAvatar || chooseAndCanSwitchAvatar) {
+        Scene * scene = MultiverseRaid::scene;
+
+        scene->Remove(avatars[selectedAvatar], MOVING);
+        selectedAvatar = (selectedAvatar + 1) % 3;
+
+        scene->Add(avatars[selectedAvatar], MOVING);
+        Avatar::ResetActiveTimeTimer();
+    }
 }
 
 void Player::Draw() {
     float rotation = spriteState == LEFT ? 0.0f : 180.0f;
     sprite->Draw(x, y, Layer::MIDDLE, 1.0f, rotation);
-    avatars[selectedAvatar]->Draw();
 }

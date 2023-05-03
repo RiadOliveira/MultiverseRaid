@@ -11,11 +11,12 @@ EntityAttributes AlienEnemy::aliensAttributes = {
     30.0f //range
 };
 
-AlienEnemy::AlienEnemy(): hp(aliensAttributes.hp) {
+AlienEnemy::AlienEnemy() {
     sprite = new Sprite("Resources/AlienEnemy.png");
     speed  = new Vector(0, 1.0f);
-    BBox(new Circle(20.0f));
+    hp = aliensAttributes.hp;
 
+    BBox(new Circle(20.0f));
     Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     RotateTo(-speed->Angle());
@@ -23,7 +24,8 @@ AlienEnemy::AlienEnemy(): hp(aliensAttributes.hp) {
     RandF pos{ 100, 150 };
     MoveTo(pos.Rand(), pos.Rand());
 
-    type = ALIEN_ENEMY;
+    type = ENEMY;
+    enemyType = ALIEN;
 }
 
 AlienEnemy::~AlienEnemy() {
@@ -73,8 +75,4 @@ void AlienEnemy::Update() {
         speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
         RotateTo(-speed->Angle());
     }
-}
-
-void AlienEnemy::Draw() {
-    sprite->Draw(x, y, Layer::LOWER, scale, rotation);
 }

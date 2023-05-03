@@ -11,16 +11,18 @@ EntityAttributes WizardEnemy::wizardsAttributes = {
     300.0f //range
 };
 
-WizardEnemy::WizardEnemy(): hp(wizardsAttributes.hp) {
+WizardEnemy::WizardEnemy() {
     sprite = new Sprite("Resources/WizardEnemy.png");
     speed  = new Vector(0, 1.0f);
-    BBox(new Circle(20.0f));
+    hp = wizardsAttributes.hp;
 
+    BBox(new Circle(20.0f));
     RandF posX{ game->Width() - 50, game->Width() };
     RandF posY{ game->Height() - 50, game->Height() };
     MoveTo(posX.Rand(), posY.Rand());
 
-    type = WIZARD_ENEMY;
+    type = ENEMY;
+    enemyType = WIZARD;
 }
 
 WizardEnemy::~WizardEnemy() {

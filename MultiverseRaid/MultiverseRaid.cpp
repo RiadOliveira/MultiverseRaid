@@ -25,8 +25,8 @@ void MultiverseRaid::Init() {
     audio->Volume(START, 0.0f);
 
     backg   = new Background("Resources/Space.jpg");
-    player  = new Player();
     scene   = new Scene();
+    player  = new Player();
 
     hud = new Hud();
 

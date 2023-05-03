@@ -11,16 +11,18 @@ EntityAttributes RobotEnemy::robotsAttributes = {
     30.0f //range
 };
 
-RobotEnemy::RobotEnemy(): hp(robotsAttributes.hp) {
+RobotEnemy::RobotEnemy() {
     sprite = new Sprite("Resources/RobotEnemy.png");
     speed  = new Vector(0, 1.0f);
+    hp = robotsAttributes.hp;
+
     BBox(new Circle(18.0f));
-    
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
     MoveTo(posX.Rand(), posY.Rand());
 
-    type = ROBOT_ENEMY;
+    type = ENEMY;
+    enemyType = ROBOT;
 }
 
 RobotEnemy::~RobotEnemy() {
@@ -41,23 +43,26 @@ void RobotEnemy::UpdateWaveAttributes() {
 }
 
 void RobotEnemy::OnCollision(Object * obj) {
-    if(obj->Type() != PLAYER) return;
-    Player * player = MultiverseRaid::player;
+    if(obj->Type() == PLAYER) {
+        Player * player = MultiverseRaid::player;
 
-    bool isFirstPlayerCollision = attackSpeedTimer == nullptr;
-    if(isFirstPlayerCollision) {
+        bool isFirstPlayerCollision = attackSpeedTimer == nullptr;
+        if(isFirstPlayerCollision) {
+            player->ApplyDamage(robotsAttributes.damage);
+            attackSpeedTimer = new Timer();
+            attackSpeedTimer->Start();
+
+            return;
+        }
+
+        bool attackOnCooldown = attackSpeedTimer->Elapsed() < robotsAttributes.attackSpeed;
+        if(attackOnCooldown) return;
+
         player->ApplyDamage(robotsAttributes.damage);
-        attackSpeedTimer = new Timer();
         attackSpeedTimer->Start();
-
-        return;
+    } else if(obj->Type() == PLAYER_ATTACK) {
+        // Tratamento do ataque.
     }
-
-    bool attackOnCooldown = attackSpeedTimer->Elapsed() < robotsAttributes.attackSpeed;
-    if(attackOnCooldown) return;
-
-    player->ApplyDamage(robotsAttributes.damage);
-    attackSpeedTimer->Start();
 }
 
 void RobotEnemy::Update() {

@@ -1,24 +1,17 @@
 #include "WizardAvatar.h"
 
 WizardAvatar::WizardAvatar() {
-    type = WIZARD;
+    avatarType = WIZARD;
+    basicAttackCooldown = 3.0f;
 }
 
 WizardAvatar::~WizardAvatar() {
 }
 
-void WizardAvatar::PassiveUpdate() {
+void WizardAvatar::HandleBasicAttack(Object* obj) {
 
 }
 
-void WizardAvatar::PassiveDraw() {
-    
-}
+void WizardAvatar::HandleUlt() {
 
-void WizardAvatar::UltUpdate() {
-
-}
-
-void WizardAvatar::UltDraw() {
-    
 }

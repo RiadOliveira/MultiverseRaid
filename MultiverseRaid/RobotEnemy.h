@@ -1,22 +1,17 @@
 #ifndef _ROBOT_ENEMY_H_
 #define _ROBOT_ENEMY_H_
 
-#include "Object.h"
+#include "Enemy.h"
 #include "EntityAttributes.h"
 #include "Types.h"
 #include "Sprite.h"
-#include "Vector.h"
 #include "Player.h"
 #include "Timer.h"
+#include "Vector.h"
 
-class RobotEnemy : public Object {
+class RobotEnemy : public Enemy {
     private:
         static EntityAttributes robotsAttributes;
-
-        float hp;
-        Sprite * sprite;
-        Vector * speed;
-        Timer * attackSpeedTimer = nullptr;
     public:
         RobotEnemy();
         ~RobotEnemy();
@@ -24,10 +19,6 @@ class RobotEnemy : public Object {
         static void UpdateWaveAttributes();
         void OnCollision(Object * obj);
         void Update();
-        void Draw();
 }; 
-
-inline void RobotEnemy::Draw()
-{ sprite->Draw(x, y, Layer::LOWER, scale, rotation); }
 
 #endif

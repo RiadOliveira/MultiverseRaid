@@ -1,19 +1,15 @@
 #ifndef _WIZARD_ENEMY_H_
 #define _WIZARD_ENEMY_H_
 
-#include "Object.h"    
+#include "Enemy.h"    
 #include "Types.h"
 #include "Sprite.h"
 #include "Vector.h"
 #include "Player.h"
 
-class WizardEnemy : public Object {
+class WizardEnemy : public Enemy {
     private:
         static EntityAttributes wizardsAttributes;
-
-        float hp;
-        Sprite * sprite;
-        Vector * speed;
     public:
         WizardEnemy();
         ~WizardEnemy();
@@ -21,10 +17,6 @@ class WizardEnemy : public Object {
         static void UpdateWaveAttributes();
         void OnCollision(Object* obj);
         void Update();
-        void Draw();
-}; 
-
-inline void WizardEnemy::Draw()
-{ sprite->Draw(x, y, Layer::LOWER, scale, rotation); }
+};
 
 #endif

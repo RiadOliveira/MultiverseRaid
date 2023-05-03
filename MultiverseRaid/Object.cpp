@@ -1,15 +1,15 @@
 /**********************************************************************************
-// Object (Código Fonte)
+// Object (Cï¿½digo Fonte)
 //
-// Criação:     01 Out 2007
-// Atualização: 07 Out 2021
+// Criaï¿½ï¿½o:     01 Out 2007
+// Atualizaï¿½ï¿½o: 07 Out 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Essa é a classe base para todos objetos do jogo.
+// Descriï¿½ï¿½o:   Essa ï¿½ a classe base para todos objetos do jogo.
 //
-//              Um objeto do jogo é qualquer coisa que possámos querer desenhar
-//              ou interagir dentro do jogo. Por exemplo, um soldado, um prédio,
-//              um projétil, uma forma geométrica, etc.
+//              Um objeto do jogo ï¿½ qualquer coisa que possï¿½mos querer desenhar
+//              ou interagir dentro do jogo. Por exemplo, um soldado, um prï¿½dio,
+//              um projï¿½til, uma forma geomï¿½trica, etc.
 //
 **********************************************************************************/
 
@@ -17,20 +17,20 @@
 #include "Engine.h"
 
 // -------------------------------------------------------------------------------
-// Inicialização de variáveis estáticas da classe
+// Inicializaï¿½ï¿½o de variï¿½veis estï¿½ticas da classe
 
 Window* & Object::window   = Engine::window;        // ponteiro para a janela
 Game*   & Object::game     = Engine::game;          // ponteiro para o jogo
-float   & Object::gameTime = Engine::frameTime;     // tempo do último quadro
+float   & Object::gameTime = Engine::frameTime;     // tempo do ï¿½ltimo quadro
 
 // -------------------------------------------------------------------------------
 
 Object::Object()
 {
-    posX = posY = 0.0f;     // posição
+    posX = posY = 0.0f;     // posiï¿½ï¿½o
     posZ = 0.5f;            // profundidade
     scaleFactor = 1.0f;     // escala
-    rotationAngle = 0.0f;   // rotação
+    rotationAngle = 0.0f;   // rotaï¿½ï¿½o
     type = 0;               // tipo
     bbox = nullptr;         // bounding box
 }

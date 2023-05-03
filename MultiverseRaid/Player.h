@@ -12,7 +12,7 @@ class Player : public Object {
     private:
         Sprite * sprite;
         Avatar ** avatars;
-        AvatarType selectedAvatar;
+        uint selectedAvatar;
 
         SpriteState spriteState;
         EntityAttributes attributes;

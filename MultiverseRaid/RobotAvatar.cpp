@@ -1,24 +1,22 @@
 #include "RobotAvatar.h"
+#include "RobotAttack.h"
+#include "MultiverseRaid.h"
 
 RobotAvatar::RobotAvatar() {
-    type = ROBOT;
+    avatarType = ROBOT;
+    basicAttackCooldown = 1.0f;
 }
 
 RobotAvatar::~RobotAvatar() {
 }
 
-void RobotAvatar::PassiveUpdate() {
-
+void RobotAvatar::HandleBasicAttack(Object* obj) {
+    RobotAttack* attack = new RobotAttack(
+        x, y, obj
+    );
+    MultiverseRaid::scene->Add(attack, MOVING);
 }
 
-void RobotAvatar::PassiveDraw() {
-    
-}
+void RobotAvatar::HandleUlt() {
 
-void RobotAvatar::UltUpdate() {
-
-}
-
-void RobotAvatar::UltDraw() {
-    
 }

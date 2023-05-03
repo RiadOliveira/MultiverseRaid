@@ -1,24 +1,17 @@
 #include "AlienAvatar.h"
 
 AlienAvatar::AlienAvatar() {
-    type = ALIEN;
+    avatarType = ALIEN;
+    basicAttackCooldown = 3.0f;
 }
 
 AlienAvatar::~AlienAvatar() {
 }
 
-void AlienAvatar::PassiveUpdate() {
+void AlienAvatar::HandleBasicAttack(Object* obj) {
 
 }
 
-void AlienAvatar::PassiveDraw() {
-    
-}
+void AlienAvatar::HandleUlt() {
 
-void AlienAvatar::UltUpdate() {
-
-}
-
-void AlienAvatar::UltDraw() {
-    
 }
