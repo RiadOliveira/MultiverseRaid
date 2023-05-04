@@ -4,8 +4,8 @@
 
 EntityAttributes WizardEnemy::wizardsAttributes = {
     5.0f, //hp
-    180.0f, //speed
     8.0f, //damage
+    180.0f, //speed
     3.5f, //attackSpeed
     0.25f, //defense
     300.0f //range
@@ -26,14 +26,12 @@ WizardEnemy::WizardEnemy() {
 }
 
 WizardEnemy::~WizardEnemy() {
-    delete sprite;
-    delete speed;
 }
 
 void WizardEnemy::UpdateWaveAttributes() {
     wizardsAttributes.hp += 2.0f;
-    wizardsAttributes.speed += 18.0f;
     wizardsAttributes.damage += 2.5f;
+    wizardsAttributes.speed += 18.0f;
     wizardsAttributes.attackSpeed -= 0.2f;
 
     if(wizardsAttributes.attackSpeed < 2.0f) {
@@ -42,13 +40,29 @@ void WizardEnemy::UpdateWaveAttributes() {
 }
 
 void WizardEnemy::OnCollision(Object * obj) {
-    if (obj->Type() == MISSILE)
-        MultiverseRaid::scene->Delete(this, MOVING);
+    if(obj->Type() == PLAYER) {
+        HandlePlayerCollision(
+            wizardsAttributes.damage,
+            wizardsAttributes.attackSpeed
+        );
+        return;
+    };
+    if(obj->Type() != PLAYER_ATTACK) return;
+
+    PlayerAttack* attack = (PlayerAttack*) obj;
+    bool receiveIncreaseDamage = attack->DamageType() == ROBOT;
+    float damageReduction = receiveIncreaseDamage ? 0.0f : wizardsAttributes.defense;
+
+    HandlePlayerAttackCollision(attack, damageReduction);
 }
 
 void WizardEnemy::Update() {
-    Player * player = MultiverseRaid::player;
+    if(IsDead()) {
+        MultiverseRaid::scene->Delete();
+        return;
+    }
 
+    Player * player = MultiverseRaid::player;
     float angle = Line::Angle(Point(x, y), Point(player->X(), player->Y()));
     float magnitude = 20.0f * gameTime;
     Vector target = Vector(angle, magnitude);

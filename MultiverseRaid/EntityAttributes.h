@@ -3,8 +3,8 @@
 
 struct EntityAttributes {
     float hp;
-    float speed;
     float damage;
+    float speed;
     float attackSpeed;
     float defense;
     float range;

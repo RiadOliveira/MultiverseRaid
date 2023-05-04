@@ -25,7 +25,7 @@ class Player : public Object {
         ~Player();
         
         float Hp();
-        bool isDead();
+        bool IsDead();
         void ApplyDamage(float damage);
 
         void LevelUp();
@@ -37,13 +37,13 @@ inline float Player::Hp() {
     return attributes.hp;
 }
 
-inline bool Player::isDead() {
-    return attributes.hp <= 0;
+inline bool Player::IsDead() {
+    return attributes.hp <= 0.0f;
 }
 
 inline void Player::ApplyDamage(float damage) {
     attributes.hp -= damage;
-    if(attributes.hp < 0) attributes.hp = 0;
+    if(attributes.hp < 0.0f) attributes.hp = 0.0f;
 }
 
 #endif

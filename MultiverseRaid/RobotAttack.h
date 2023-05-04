@@ -9,8 +9,8 @@
 
 class RobotAttack : public PlayerAttack {
     private:
-        TileSet* laserBeam;
-        Animation* animation;
+        TileSet* laserBeam = nullptr;
+        Animation* animation = nullptr;
     public:
         RobotAttack(float posX, float posY, Object* target);
         ~RobotAttack();

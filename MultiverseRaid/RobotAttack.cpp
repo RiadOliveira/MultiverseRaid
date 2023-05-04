@@ -3,6 +3,10 @@
 #include "Vector.h"
 
 RobotAttack::RobotAttack(float posX, float posY, Object* target) {
+    damageType = ROBOT;
+    damageTickTime = 1.0f;
+    damagePerTick = 8.0f;
+
     float tileWidth = 25.0f, halfTileWidth = tileWidth/2;
     float tileHeight = 65.0f, halfTileHeight = tileHeight/2;
     float distanceFromPlayer = 18.0f + halfTileHeight;
@@ -11,7 +15,7 @@ RobotAttack::RobotAttack(float posX, float posY, Object* target) {
         "Resources/RobotAttack.png",
         tileWidth, tileHeight, 3, 3
     );
-    animation = new Animation(laserBeam, 0.060f, false);
+    animation = new Animation(laserBeam, 0.090f, false);
     uint sequence[3] = {0, 1, 2};
     animation->Add(0, sequence, 3);
 

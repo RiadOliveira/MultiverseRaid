@@ -4,8 +4,8 @@
 
 EntityAttributes RobotEnemy::robotsAttributes = {
     10.0f, //hp
-    200.0f, //speed
     5.0f, //damage
+    200.0f, //speed
     3.0f, //attackSpeed
     0.40f, //defense
     30.0f //range
@@ -26,15 +26,12 @@ RobotEnemy::RobotEnemy() {
 }
 
 RobotEnemy::~RobotEnemy() {
-    delete sprite;
-    delete speed;
-    delete attackSpeedTimer;
 }
 
 void RobotEnemy::UpdateWaveAttributes() {
     robotsAttributes.hp += 2.0f;
-    robotsAttributes.speed += 15.0f;
     robotsAttributes.damage += 0.5f;
+    robotsAttributes.speed += 15.0f;
     robotsAttributes.attackSpeed -= 0.2f;
 
     if(robotsAttributes.attackSpeed < 1.5f) {
@@ -44,31 +41,29 @@ void RobotEnemy::UpdateWaveAttributes() {
 
 void RobotEnemy::OnCollision(Object * obj) {
     if(obj->Type() == PLAYER) {
-        Player * player = MultiverseRaid::player;
+        HandlePlayerCollision(
+            robotsAttributes.damage,
+            robotsAttributes.attackSpeed
+        );
+        return;
+    };
+    if(obj->Type() != PLAYER_ATTACK) return;
 
-        bool isFirstPlayerCollision = attackSpeedTimer == nullptr;
-        if(isFirstPlayerCollision) {
-            player->ApplyDamage(robotsAttributes.damage);
-            attackSpeedTimer = new Timer();
-            attackSpeedTimer->Start();
+    PlayerAttack* attack = (PlayerAttack*) obj;
+    bool receiveIncreaseDamage = attack->DamageType() == ALIEN;
+    float damageReduction = receiveIncreaseDamage ? 0.0f : robotsAttributes.defense;
 
-            return;
-        }
-
-        bool attackOnCooldown = attackSpeedTimer->Elapsed() < robotsAttributes.attackSpeed;
-        if(attackOnCooldown) return;
-
-        player->ApplyDamage(robotsAttributes.damage);
-        attackSpeedTimer->Start();
-    } else if(obj->Type() == PLAYER_ATTACK) {
-        // Tratamento do ataque.
-    }
+    HandlePlayerAttackCollision(attack, damageReduction);
 }
 
 void RobotEnemy::Update() {
+    if(IsDead()) {
+        MultiverseRaid::scene->Delete();
+        return;
+    }
+
     Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
-
     float distanceToPlayer = Point::Distance(Point(x, y), Point(player->X(), player->Y()));
 
     if(distanceToPlayer > robotsAttributes.range) {
