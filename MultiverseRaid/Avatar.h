@@ -12,8 +12,8 @@ class Avatar : public Object {
         const static float ALLOW_SWITCH_TIME;
         const static float ACTIVE_TIME_LIMIT;
 
-        uint avatarType;
-        float basicAttackCooldown;
+        uint avatarType = 0;
+        float basicAttackCooldown = 0.0f;
         
         static bool canSwitchAvatar;
         static bool reachedActiveTimeLimit;

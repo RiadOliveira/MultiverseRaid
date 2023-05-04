@@ -15,6 +15,8 @@ Avatar::Avatar() {
     BBox(new Circle(290.0f));
     activeTimeTimer->Start();
     basicAttackTimer->Start();
+
+    type = AVATAR;
 }
 
 Avatar::~Avatar() {

@@ -3,23 +3,39 @@
 #include "Vector.h"
 
 RobotAttack::RobotAttack(float posX, float posY, Object* target) {
-    BBox(new Rect(-12.5f, -140.5f, 12.5f, 140.5f));
-    
-    laserBeam = new TileSet("Resources/RobotAttack.png", 25, 65, 3, 3);
-    animation = new Animation(laserBeam, 0.060f, false);
+    float tileWidth = 25.0f, halfTileWidth = tileWidth/2;
+    float tileHeight = 65.0f, halfTileHeight = tileHeight/2;
+    float distanceFromPlayer = 18.0f + halfTileHeight;
 
+    laserBeam = new TileSet(
+        "Resources/RobotAttack.png",
+        tileWidth, tileHeight, 3, 3
+    );
+    animation = new Animation(laserBeam, 0.060f, false);
     uint sequence[3] = {0, 1, 2};
     animation->Add(0, sequence, 3);
 
-    Point centerPoint = Point(posX, posY);
-    Point targetPoint = Point(target->X(), target->Y());
-
-    float angle = Line::Angle(centerPoint, targetPoint);
+    float angle = Line::Angle(
+        Point(posX, posY),
+        Point(target->X(), target->Y())
+    );
     Vector vector = Vector(angle, 1.0f);
-    vector.Scale(48.0f);
+    vector.Scale(distanceFromPlayer);
 
-    MoveTo(posX + vector.XComponent(), posY - vector.YComponent());
+    MoveTo(
+        posX + vector.XComponent(),
+        posY - vector.YComponent()
+    );
     Rotate(-(angle + 90.0f));
+
+    Point p1 = Point(-halfTileWidth, -halfTileHeight);
+    Point p2 = Point(halfTileWidth, -halfTileHeight);
+    float laserEnd = 288.0f - distanceFromPlayer;
+    Point p3 = Point(halfTileWidth, laserEnd);
+    Point p4 = Point(-halfTileWidth, laserEnd);
+
+    Point list[4] = {p1, p2, p3, p4};
+    BBox(new Poly(list, 4));
 }
 
 RobotAttack::~RobotAttack() {
