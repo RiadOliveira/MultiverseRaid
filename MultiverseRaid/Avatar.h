@@ -27,7 +27,7 @@ class Avatar : public Object {
         Avatar();
         virtual ~Avatar();
 
-        static void ResetTimers();
+        static void ResetTimersData();
         static bool CanSwitchAvatar();
         static bool ReachedActiveTimeLimit();
         
@@ -39,7 +39,10 @@ class Avatar : public Object {
         void Draw();
 };
 
-inline void Avatar::ResetTimers() { activeTimeTimer->Reset(); basicAttackTimer->Reset(); }
+inline void Avatar::ResetTimersData() { 
+    basicAttackTimer->Reset(); activeTimeTimer->Reset();
+    canSwitchAvatar = false; reachedActiveTimeLimit = false;
+}
 inline bool Avatar::CanSwitchAvatar() { return canSwitchAvatar; }
 inline bool Avatar::ReachedActiveTimeLimit() { return reachedActiveTimeLimit; }
 

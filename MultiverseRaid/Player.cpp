@@ -98,7 +98,7 @@ void Player::Update() {
 
         currentAvatar->HandleSelectAvatar();
         scene->Add(currentAvatar, MOVING);
-        Avatar::ResetTimers();
+        Avatar::ResetTimersData();
     }
 }
 
