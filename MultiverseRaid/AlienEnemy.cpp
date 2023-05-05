@@ -12,11 +12,11 @@ EntityAttributes AlienEnemy::aliensAttributes = {
 };
 
 AlienEnemy::AlienEnemy() {
-    sprite = new Sprite("Resources/AlienEnemy.png");
+    sprite = new Sprite("Resources/Alien/AlienEnemy.png");
     speed  = new Vector(0, 1.0f);
     hp = aliensAttributes.hp;
 
-    BBox(new Circle(20.0f));
+    BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
     Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     RotateTo(-speed->Angle());
@@ -53,7 +53,7 @@ void AlienEnemy::OnCollision(Object * obj) {
     if(obj->Type() != PLAYER_ATTACK) return;
 
     PlayerAttack* attack = (PlayerAttack*) obj;
-    bool receiveIncreaseDamage = attack->DamageType() == WIZARD;
+    bool receiveIncreaseDamage = attack->DamageType() == ROBOT;
     float damageReduction = receiveIncreaseDamage ? 0.0f : aliensAttributes.defense;
 
     HandlePlayerAttackCollision(attack, damageReduction);

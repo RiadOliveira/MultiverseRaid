@@ -188,6 +188,8 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RobotAttack.cpp" />
     <ClCompile Include="RobotAvatar.cpp" />
+    <ClCompile Include="RobotDrone.cpp" />
+    <ClCompile Include="RobotDroneAttack.cpp" />
     <ClCompile Include="RobotEnemy.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Sound.cpp" />
@@ -230,6 +232,8 @@
     <ClInclude Include="Resources.h" />
     <ClInclude Include="RobotAttack.h" />
     <ClInclude Include="RobotAvatar.h" />
+    <ClInclude Include="RobotDrone.h" />
+    <ClInclude Include="RobotDroneAttack.h" />
     <ClInclude Include="RobotEnemy.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Sound.h" />

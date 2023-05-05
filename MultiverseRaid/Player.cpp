@@ -28,6 +28,7 @@ Player::Player(): spriteState(LEFT), level(0), selectedAvatar(ROBOT) {
     type = PLAYER;
 
     Scene * scene = MultiverseRaid::scene;
+    avatars[selectedAvatar]->HandleSelectAvatar();
     scene->Add(avatars[selectedAvatar], MOVING);
 }
 
@@ -87,12 +88,17 @@ void Player::Update() {
     bool chooseAndCanSwitchAvatar = window->KeyDown('Q') && Avatar::CanSwitchAvatar();
     if(hasToSwitchAvatar || chooseAndCanSwitchAvatar) {
         Scene * scene = MultiverseRaid::scene;
+        
+        Avatar* previousAvatar = avatars[selectedAvatar];
+        previousAvatar->HandleUnselectAvatar();
+        scene->Remove(previousAvatar, MOVING);
 
-        scene->Remove(avatars[selectedAvatar], MOVING);
         selectedAvatar = (selectedAvatar + 1) % 3;
+        Avatar* currentAvatar = avatars[selectedAvatar];
 
-        scene->Add(avatars[selectedAvatar], MOVING);
-        Avatar::ResetActiveTimeTimer();
+        currentAvatar->HandleSelectAvatar();
+        scene->Add(currentAvatar, MOVING);
+        Avatar::ResetTimers();
     }
 }
 

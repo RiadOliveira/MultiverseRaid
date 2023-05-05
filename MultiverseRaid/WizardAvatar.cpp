@@ -8,6 +8,14 @@ WizardAvatar::WizardAvatar() {
 WizardAvatar::~WizardAvatar() {
 }
 
+void WizardAvatar::HandleSelectAvatar() {
+
+}
+
+void WizardAvatar::HandleUnselectAvatar() {
+
+}
+
 void WizardAvatar::HandleBasicAttack(Object* obj) {
 
 }

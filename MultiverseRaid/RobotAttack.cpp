@@ -2,18 +2,22 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-RobotAttack::RobotAttack(float posX, float posY, Object* target) {
+RobotAttack::RobotAttack(float damage, Object* target) {
     damageType = ROBOT;
     damageTickTime = 1.0f;
-    damagePerTick = 8.0f;
+    damagePerTick = damage;
+
+    Player* player = MultiverseRaid::player;
+    float posX = player->X();
+    float posY = player->Y();
 
     float tileWidth = 25.0f, halfTileWidth = tileWidth/2;
     float tileHeight = 65.0f, halfTileHeight = tileHeight/2;
     float distanceFromPlayer = 18.0f + halfTileHeight;
 
     laserBeam = new TileSet(
-        "Resources/RobotAttack.png",
-        tileWidth, tileHeight, 3, 3
+        "Resources/Robot/RobotAttack.png",
+        (uint) tileWidth, (uint) tileHeight, 3, 3
     );
     animation = new Animation(laserBeam, 0.090f, false);
     uint sequence[3] = {0, 1, 2};

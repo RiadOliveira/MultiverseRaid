@@ -11,6 +11,9 @@ class WizardAvatar : public Avatar {
     public:
         WizardAvatar();
         ~WizardAvatar();
+
+        void HandleSelectAvatar();
+        void HandleUnselectAvatar();
 }; 
 
 #endif

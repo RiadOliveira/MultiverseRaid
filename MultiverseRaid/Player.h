@@ -27,6 +27,7 @@ class Player : public Object {
         float Hp();
         bool IsDead();
         void ApplyDamage(float damage);
+        SpriteState SpriteState();
 
         void LevelUp();
         void Update();
@@ -45,5 +46,7 @@ inline void Player::ApplyDamage(float damage) {
     attributes.hp -= damage;
     if(attributes.hp < 0.0f) attributes.hp = 0.0f;
 }
+
+inline SpriteState Player::SpriteState() { return spriteState; }
 
 #endif

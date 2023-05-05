@@ -12,11 +12,11 @@ EntityAttributes RobotEnemy::robotsAttributes = {
 };
 
 RobotEnemy::RobotEnemy() {
-    sprite = new Sprite("Resources/RobotEnemy.png");
+    sprite = new Sprite("Resources/Robot/RobotEnemy.png");
     speed  = new Vector(0, 1.0f);
     hp = robotsAttributes.hp;
 
-    BBox(new Circle(18.0f));
+    BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
     MoveTo(posX.Rand(), posY.Rand());
@@ -50,7 +50,7 @@ void RobotEnemy::OnCollision(Object * obj) {
     if(obj->Type() != PLAYER_ATTACK) return;
 
     PlayerAttack* attack = (PlayerAttack*) obj;
-    bool receiveIncreaseDamage = attack->DamageType() == ALIEN;
+    bool receiveIncreaseDamage = attack->DamageType() == WIZARD;
     float damageReduction = receiveIncreaseDamage ? 0.0f : robotsAttributes.defense;
 
     HandlePlayerAttackCollision(attack, damageReduction);

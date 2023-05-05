@@ -11,6 +11,9 @@ class AlienAvatar : public Avatar {
     public:
         AlienAvatar();
         ~AlienAvatar();
+
+        void HandleSelectAvatar();
+        void HandleUnselectAvatar();
 }; 
 
 #endif

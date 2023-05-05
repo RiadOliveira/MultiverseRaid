@@ -8,6 +8,14 @@ AlienAvatar::AlienAvatar() {
 AlienAvatar::~AlienAvatar() {
 }
 
+void AlienAvatar::HandleSelectAvatar() {
+
+}
+
+void AlienAvatar::HandleUnselectAvatar() {
+
+}
+
 void AlienAvatar::HandleBasicAttack(Object* obj) {
 
 }
