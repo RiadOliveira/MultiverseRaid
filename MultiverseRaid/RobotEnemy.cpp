@@ -12,14 +12,29 @@ EntityAttributes RobotEnemy::robotsAttributes = {
 };
 
 RobotEnemy::RobotEnemy() {
-    sprite = new Sprite("Resources/Robot/RobotEnemy.png");
     speed  = new Vector(0, 1.0f);
     hp = robotsAttributes.hp;
 
-    BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
+    Point vertex[24] =
+    {
+        Point(11, -37), Point(11, -26), Point(18, -26), Point(18, -5),
+        Point(13, -5), Point(13, 4), Point(25, 4), Point(25, 33), Point(13, 33), Point(13, 8), Point(5, 18), Point(5, 37),
+        Point(-7, 37), Point(-7, 18), Point(-13, 8), Point(-13, 33), Point(-25,33), Point(-25,4), Point(-13, 4),
+        Point(-13, -5), Point(-16, -5), Point(-16, -26), Point(-11, -26), Point(-11, -37)
+    };
+    BBox(new Poly(vertex, 24));
+
     RandF posX{ 300, 400 };
     RandF posY{ game->Height() - 400, game->Height() - 300 };
     MoveTo(posX.Rand(), posY.Rand());
+
+    tileSet = new TileSet(
+        "Resources/Robot/RobotEnemy.png",
+        (uint)252, (uint)300, 4, 4
+    );
+    animation = new Animation(tileSet, 0.2f, true);
+    uint sequence[4] = { 0, 1, 2, 3 };
+    animation->Add(0, sequence, 4);
 
     type = ENEMY;
     enemyType = ROBOT;
@@ -57,6 +72,7 @@ void RobotEnemy::OnCollision(Object * obj) {
 }
 
 void RobotEnemy::Update() {
+    animation->NextFrame();
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;

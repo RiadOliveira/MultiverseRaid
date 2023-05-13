@@ -8,13 +8,16 @@
 #include "Timer.h"
 #include "Vector.h"
 #include "PlayerAttack.h"
+#include "TileSet.h"
+#include "Animation.h"
 
 class Enemy : public Object {
     protected:
         uint enemyType = 0;
         float hp = 0.0f;
 
-        Sprite* sprite = nullptr;
+        TileSet* tileSet = nullptr;
+        Animation* animation = nullptr;
         Vector* speed = nullptr;
         Timer* attackSpeedTimer = nullptr;
         Timer* damageReceiverTimer = nullptr;
@@ -32,7 +35,7 @@ class Enemy : public Object {
 
         virtual void OnCollision(Object * obj) = 0;
         virtual void Update() = 0;
-        virtual void Draw();
+        virtual void Draw() = 0;
 };
 
 inline void Enemy::ApplyDamage(float damage) {
@@ -41,9 +44,5 @@ inline void Enemy::ApplyDamage(float damage) {
 }
 
 inline bool Enemy::IsDead() { return hp <= 0.0f; }
-
-inline void Enemy::Draw() {
-    sprite->Draw(x, y, Layer::LOWER, scale, rotation);
-}
 
 #endif

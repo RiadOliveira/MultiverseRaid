@@ -5,7 +5,8 @@ Enemy::Enemy() {
 }
 
 Enemy::~Enemy() {
-    delete sprite;
+    delete tileSet;
+    delete animation;
     delete speed;
     delete attackSpeedTimer;
     delete damageReceiverTimer;

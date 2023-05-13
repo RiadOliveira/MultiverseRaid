@@ -19,6 +19,11 @@ class RobotEnemy : public Enemy {
         static void UpdateWaveAttributes();
         void OnCollision(Object * obj);
         void Update();
-}; 
+        void Draw();
+};
+
+inline void RobotEnemy::Draw() {
+    animation->Draw(x, y, Layer::LOWER, 0.25f, rotation);
+}
 
 #endif

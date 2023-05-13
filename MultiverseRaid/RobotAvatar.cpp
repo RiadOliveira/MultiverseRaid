@@ -4,7 +4,7 @@
 
 RobotAvatar::RobotAvatar() {
     avatarType = ROBOT;
-    basicAttackCooldown = 1.0f;
+    basicAttackCooldown = 2.5f;
 }
 
 RobotAvatar::~RobotAvatar() {

@@ -17,6 +17,11 @@ class WizardEnemy : public Enemy {
         static void UpdateWaveAttributes();
         void OnCollision(Object* obj);
         void Update();
+        void Draw();
 };
+
+inline void WizardEnemy::Draw() {
+    animation->Draw(x, y, Layer::LOWER, scale, rotation);
+}
 
 #endif

@@ -12,9 +12,16 @@ EntityAttributes WizardEnemy::wizardsAttributes = {
 };
 
 WizardEnemy::WizardEnemy() {
-    sprite = new Sprite("Resources/Wizard/WizardEnemy.png");
     speed  = new Vector(0, 1.0f);
     hp = wizardsAttributes.hp;
+
+    tileSet = new TileSet(
+        "Resources/Wizard/WizardEnemy.png",
+        (uint)60, (uint)60, 1, 1
+    );
+    animation = new Animation(tileSet, 0.2f, true);
+    uint sequence[1] = { 0 };
+    animation->Add(0, sequence, 1);
 
     BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
     RandF posX{ game->Width() - 50, game->Width() };
@@ -57,6 +64,8 @@ void WizardEnemy::OnCollision(Object * obj) {
 }
 
 void WizardEnemy::Update() {
+    animation->NextFrame();
+
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;

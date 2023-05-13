@@ -18,6 +18,11 @@ class AlienEnemy : public Enemy {
         static void UpdateWaveAttributes();
         void OnCollision(Object* obj);
         void Update();
+        void Draw();
 }; 
+
+inline void AlienEnemy::Draw() {
+    animation->Draw(x, y, Layer::LOWER, scale, rotation);
+}
 
 #endif

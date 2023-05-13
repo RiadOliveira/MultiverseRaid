@@ -12,9 +12,16 @@ EntityAttributes AlienEnemy::aliensAttributes = {
 };
 
 AlienEnemy::AlienEnemy() {
-    sprite = new Sprite("Resources/Alien/AlienEnemy.png");
     speed  = new Vector(0, 1.0f);
     hp = aliensAttributes.hp;
+
+    tileSet = new TileSet(
+        "Resources/Alien/AlienEnemy.png",
+        (uint)46, (uint)36, 1, 1
+    );
+    animation = new Animation(tileSet, 0.2f, true);
+    uint sequence[1] = { 0 };
+    animation->Add(0, sequence, 1);
 
     BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
     Player * player = MultiverseRaid::player;
@@ -60,6 +67,7 @@ void AlienEnemy::OnCollision(Object * obj) {
 }
 
 void AlienEnemy::Update() {
+    animation->NextFrame();
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;
