@@ -13,7 +13,7 @@ WizardAttack::WizardAttack(float damage, Object* target) {
 
     fireBall = new TileSet(
         "Resources/Wizard/WizardAttack.png",
-        16.0f, 16.0f, 4, 4
+        (uint) 16, (uint) 16, 4, 4
     );
     animation = new Animation(fireBall, 0.090f, true);
     uint sequence[4] = {0, 1, 2, 3};

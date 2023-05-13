@@ -13,7 +13,6 @@ class RobotDrone : public Object {
     private:
         static EntityAttributes dronesAttributes;
 
-        Image* energyBall = nullptr;
         TileSet* drone = nullptr;
         Animation* animation = nullptr;
         Timer* attackTimer = nullptr;

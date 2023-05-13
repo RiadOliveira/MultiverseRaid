@@ -13,8 +13,7 @@ class RobotDroneAttack : public PlayerAttack {
         Vector speed;
     public:
         RobotDroneAttack(
-            Image* energyBall, float damage,
-            RobotDrone* drone, Object* target
+            float damage, RobotDrone* drone, Object* target
         );
         ~RobotDroneAttack();
 

@@ -47,7 +47,6 @@ RobotAttack::RobotAttack(float damage, Object* target) {
 }
 
 RobotAttack::~RobotAttack() {
-    delete laserBeam;
     delete animation;
 }
 

@@ -11,11 +11,26 @@ AlienAvatar::~AlienAvatar() {
 }
 
 void AlienAvatar::HandleSelectAvatar() {
+    orbsQuantity = 2;
+    cosmicOrbImage = new Image("Resources/Alien/AlienCosmicOrb.png");
+    cosmicOrbs = new AlienCosmicOrb*[orbsQuantity];
 
+    float orbsAngle = 360.0f / orbsQuantity;
+    for(int ind=0 ; ind<orbsQuantity ; ind++) {
+        cosmicOrbs[ind] = new AlienCosmicOrb(
+            cosmicOrbImage, 8.0f, orbsAngle * ind
+        );
+        MultiverseRaid::scene->Add(cosmicOrbs[ind], MOVING);
+    }
 }
 
 void AlienAvatar::HandleUnselectAvatar() {
+    for(int ind=0 ; ind<orbsQuantity ; ind++) {
+        MultiverseRaid::scene->Delete(cosmicOrbs[ind], MOVING);
+    }
 
+    delete cosmicOrbImage;
+    delete[] cosmicOrbs;
 }
 
 void AlienAvatar::HandleBasicAttack(Object* obj) {
@@ -24,5 +39,4 @@ void AlienAvatar::HandleBasicAttack(Object* obj) {
 }
 
 void AlienAvatar::HandleUlt() {
-
 }

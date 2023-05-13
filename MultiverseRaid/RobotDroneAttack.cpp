@@ -3,13 +3,12 @@
 #include "Vector.h"
 
 RobotDroneAttack::RobotDroneAttack(
-    Image* energyBall, float damage,
-    RobotDrone* drone, Object* target
+    float damage, RobotDrone* drone, Object* target
 ) {
     damageType = ROBOT;
     damageTickTime = 2.0f;
     damagePerTick = damage;
-    sprite = new Sprite(energyBall);
+    sprite = new Sprite("Resources/Robot/RobotDroneAttack.png");
 
     float posX = drone->X();
     float posY = drone->Y();

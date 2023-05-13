@@ -4,9 +4,11 @@
 #include "Types.h"
 #include "Avatar.h"
 #include "RobotDrone.h"
+#include "TileSet.h"
 
 class RobotAvatar : public Avatar {
     private:
+        TileSet* laserBeamTileSet = nullptr;
         RobotDrone* drone = nullptr;
 
         void HandleBasicAttack(Object* obj);

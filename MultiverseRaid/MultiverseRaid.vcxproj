@@ -164,6 +164,7 @@
   <ItemGroup>
     <ClCompile Include="AlienAttack.cpp" />
     <ClCompile Include="AlienAvatar.cpp" />
+    <ClCompile Include="AlienCosmicOrb.cpp" />
     <ClCompile Include="AlienEnemy.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Audio.cpp" />
@@ -208,6 +209,7 @@
   <ItemGroup>
     <ClInclude Include="AlienAttack.h" />
     <ClInclude Include="AlienAvatar.h" />
+    <ClInclude Include="AlienCosmicOrb.h" />
     <ClInclude Include="AlienEnemy.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="Audio.h" />
