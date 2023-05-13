@@ -22,12 +22,11 @@ AlienCosmicOrb::AlienCosmicOrb(
         posY = player->Y();
     }
     
-    Vector position = Vector(playerAngle, 120.0f);
     speed.RotateTo(playerAngle + 90.0f);
     speed.ScaleTo(200.0f);
     
-    MoveTo(posX + position.XComponent(), posY - position.YComponent());
-    BBox(new Circle(14.0f));
+    MoveTo(posX, posY);
+    BBox(new Circle(21.0f));
 }
 
 AlienCosmicOrb::~AlienCosmicOrb() {
@@ -45,9 +44,8 @@ void AlienCosmicOrb::Update() {
 
     float distance = Point::Distance(playerPoint, orbPoint);
     float distanceFromMaxPoint = distance - 120.0f;
-    if(abs(distanceFromMaxPoint) > 10.0f) {
-        float angle = Line::Angle(orbPoint, playerPoint);
-        Vector vector = Vector(angle, distanceFromMaxPoint);
-        Translate(vector.XComponent(), -vector.YComponent());
-    }
+    
+    float angle = Line::Angle(orbPoint, playerPoint);
+    Vector vector = Vector(angle, distanceFromMaxPoint);
+    Translate(vector.XComponent(), -vector.YComponent());
 }
