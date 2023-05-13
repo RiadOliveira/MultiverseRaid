@@ -23,16 +23,13 @@ RobotAttack::RobotAttack(float damage, Object* target) {
     uint sequence[6] = {0, 1, 2, 3, 4, 5};
     animation->Add(0, sequence, 6);
 
-    float angle = Line::Angle(
-        Point(posX, posY),
-        Point(target->X(), target->Y())
+    angle = Line::Angle(
+        Point(posX, posY), Point(target->X(), target->Y())
     );
-    Vector vector = Vector(angle, 1.0f);
-    vector.Scale(distanceFromPlayer);
+    Vector vector = Vector(angle, distanceFromPlayer);
 
     MoveTo(
-        posX + vector.XComponent(),
-        posY - vector.YComponent()
+        posX + vector.XComponent(), posY - vector.YComponent()
     );
     Rotate(-(angle + 90.0f));
 
@@ -52,14 +49,13 @@ RobotAttack::~RobotAttack() {
 
 void RobotAttack::Update() {
     Player * player = MultiverseRaid::player;
-    Point playerCenter = Point(player->X(), player->Y());
-    Point attackCenter = Point(x, y);
+    float posX = player->X();
+    float posY = player->Y();
 
-    float angle = Line::Angle(playerCenter, attackCenter);
-    float distance = Point::Distance(playerCenter, attackCenter);
-
-    Vector vector = Vector(angle, 160 - distance);
-    Translate(vector.XComponent(), -vector.YComponent());
+    Vector vector = Vector(angle, 153.0f);
+    MoveTo(
+        posX + vector.XComponent(), posY - vector.YComponent()
+    );
 
     if(animation->Inactive()) MultiverseRaid::scene->Delete();
     else animation->NextFrame();

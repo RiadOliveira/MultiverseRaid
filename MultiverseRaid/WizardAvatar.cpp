@@ -4,16 +4,19 @@
 
 WizardAvatar::WizardAvatar() {
     avatarType = WIZARD;
-    basicAttackCooldown = 3.0f;
+    basicAttackCooldown = 2.0f;
 }
 
 WizardAvatar::~WizardAvatar() {
 }
 
 void WizardAvatar::HandleSelectAvatar() {
+    thunderStorm = new WizardThunderStorm();
+    MultiverseRaid::scene->Add(thunderStorm, MOVING);
 }
 
 void WizardAvatar::HandleUnselectAvatar() {
+    MultiverseRaid::scene->Delete(thunderStorm, MOVING);
 }
 
 void WizardAvatar::HandleBasicAttack(Object* obj) {

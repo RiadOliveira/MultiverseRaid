@@ -34,7 +34,6 @@ void Enemy::HandlePlayerAttackCollision(
     PlayerAttack* attack, float damageReduction
 ) {
     float damageToApply = attack->DamagePerTick() * (1.0f - damageReduction);
-
     if(damageReceiverTimer == nullptr) {
         ApplyDamage(damageToApply);
         damageReceiverTimer = new Timer();

@@ -2,10 +2,13 @@
 #define _WIZARD_AVATAR_H_
 
 #include "Types.h"
+#include "WizardThunderStorm.h"
 #include "Avatar.h"
 
 class WizardAvatar : public Avatar {
     private:
+        WizardThunderStorm* thunderStorm = nullptr;
+
         void HandleBasicAttack(Object* obj);
         void HandleUlt();
     public:

@@ -12,7 +12,7 @@ WizardAttack::WizardAttack(float damage, Object* target) {
     float posY = player->Y();
 
     fireBall = new TileSet(
-        "Resources/Wizard/WizardAttack.png",
+        "Resources/Wizard/FireBallAttack.png",
         (uint) 16, (uint) 16, 4, 4
     );
     animation = new Animation(fireBall, 0.090f, true);
@@ -20,8 +20,7 @@ WizardAttack::WizardAttack(float damage, Object* target) {
     animation->Add(0, sequence, 4);
 
     float angle = Line::Angle(
-        Point(posX, posY),
-        Point(target->X(), target->Y())
+        Point(posX, posY), Point(target->X(), target->Y())
     );
     
     speed.RotateTo(angle);

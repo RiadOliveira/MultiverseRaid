@@ -177,6 +177,7 @@
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="ThunderStormLighting.cpp" />
     <ClCompile Include="MultiverseRaid.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Hud.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="WizardAttack.cpp" />
     <ClCompile Include="WizardAvatar.cpp" />
     <ClCompile Include="WizardEnemy.cpp" />
+    <ClCompile Include="WizardThunderStorm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlienAttack.h" />
@@ -223,6 +225,7 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Geometry.h" />
+    <ClInclude Include="ThunderStormLighting.h" />
     <ClInclude Include="MultiverseRaid.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hud.h" />
@@ -253,6 +256,7 @@
     <ClInclude Include="WizardAttack.h" />
     <ClInclude Include="WizardAvatar.h" />
     <ClInclude Include="WizardEnemy.h" />
+    <ClInclude Include="WizardThunderStorm.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Pixel.hlsl">

@@ -9,6 +9,8 @@
 
 class RobotAttack : public PlayerAttack {
     private:
+        float angle = 0.0f;
+
         TileSet* laserBeam = nullptr;
         Animation* animation = nullptr;
     public:
