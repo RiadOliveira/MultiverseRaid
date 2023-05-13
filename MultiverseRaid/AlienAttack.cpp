@@ -29,11 +29,10 @@ AlienAttack::AlienAttack(float damage, Object* target) {
     );
     
     speed.RotateTo(angle);
-    speed.ScaleTo(3.0f);
+    speed.ScaleTo(270.0f);
     
     MoveTo(posX + 22 * cos(speed.Radians()), posY - 22 * sin(speed.Radians()));
     RotateTo(-angle + 90.0f);
-
     BBox(new Circle(58.0f));
 }
 
@@ -50,15 +49,11 @@ void AlienAttack::OnCollision(Object* obj) {
 
     float xTranslation = gravitationalField.XComponent() * gameTime;
     float yTranslation = gravitationalField.YComponent() * gameTime;
-
     obj->Translate(xTranslation, -yTranslation);
 }
 
 void AlienAttack::Update() {
-    Translate(
-        speed.XComponent() * 90.0f * gameTime,
-        -speed.YComponent() * 90.0f * gameTime
-    );
+    Translate(speed.XComponent() * gameTime, -speed.YComponent() * gameTime);
     animation->NextFrame();
 
     if (x > game->Width() - 50 || x < 50 || y > game->Height() - 50 || y < 50) {

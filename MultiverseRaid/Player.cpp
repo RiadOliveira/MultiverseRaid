@@ -14,7 +14,7 @@ void Player::InitializeAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): spriteState(LEFT), level(0), selectedAvatar(ROBOT) {
+Player::Player(): spriteState(LEFT), level(0), selectedAvatar(WIZARD) {
     sprite = new Sprite("Resources/Player.png");
 
     avatars = new Avatar*[3];

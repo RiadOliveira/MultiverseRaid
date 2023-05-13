@@ -28,6 +28,7 @@ RobotDrone::RobotDrone() {
     uint sequence[4] = {0, 1, 2, 3};
     animation->Add(0, sequence, 4);
 
+    energyBall = new Image("Resources/Robot/RobotDroneAttack.png");
     type = PLAYER_COMPANION;
 }
 
@@ -35,6 +36,7 @@ RobotDrone::~RobotDrone() {
     delete drone;
     delete animation;
     delete attackTimer;
+    delete energyBall;
 }
 
 void RobotDrone::MoveToPlayer() {
@@ -63,7 +65,7 @@ void RobotDrone::OnCollision(Object* obj) {
 
     if(attackTimer->Elapsed() >= dronesAttributes.attackSpeed) {
         RobotDroneAttack* attack = new RobotDroneAttack(
-            dronesAttributes.damage, this, obj
+            energyBall, dronesAttributes.damage, this, obj
         );
         MultiverseRaid::scene->Add(attack, MOVING);
         attackTimer->Reset();

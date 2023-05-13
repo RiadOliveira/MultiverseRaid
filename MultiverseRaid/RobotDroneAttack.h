@@ -4,18 +4,18 @@
 #include "Types.h"
 #include "Sprite.h"
 #include "PlayerAttack.h"
-#include "TileSet.h"
-#include "Animation.h"
 #include "RobotDrone.h"
 #include "Vector.h"
 
 class RobotDroneAttack : public PlayerAttack {
     private:
-        TileSet* energyBall = nullptr;
-        Animation* animation = nullptr;
-        Vector* speed = nullptr;
+        Sprite* sprite = nullptr;
+        Vector speed;
     public:
-        RobotDroneAttack(float damage, RobotDrone* drone, Object* target);
+        RobotDroneAttack(
+            Image* energyBall, float damage,
+            RobotDrone* drone, Object* target
+        );
         ~RobotDroneAttack();
 
         void Update();
@@ -23,7 +23,7 @@ class RobotDroneAttack : public PlayerAttack {
 };
 
 inline void RobotDroneAttack::Draw() {
-    animation->Draw(x, y, z, 1.0f, rotation);
+    sprite->Draw(x, y, z, 2.5f, rotation);
 }
 
 #endif
