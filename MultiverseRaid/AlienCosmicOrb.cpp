@@ -35,7 +35,7 @@ AlienCosmicOrb::~AlienCosmicOrb() {
 
 void AlienCosmicOrb::Update() {
     Rotate(300 * gameTime);
-    speed.Add(Vector(speed.Angle() + 90.0f, 200.0f));
+    speed.Add(Vector(speed.Angle() + 90.0f, 100.0f));
     Translate(speed.XComponent() * gameTime, -speed.YComponent() * gameTime);
 
     Player* player = MultiverseRaid::player;
@@ -43,9 +43,11 @@ void AlienCosmicOrb::Update() {
     Point orbPoint = Point(x, y);
 
     float distance = Point::Distance(playerPoint, orbPoint);
-    float distanceFromMaxPoint = distance - 120.0f;
+    float distanceFromMaxPoint = 120.0f - distance;
     
-    float angle = Line::Angle(orbPoint, playerPoint);
-    Vector vector = Vector(angle, distanceFromMaxPoint);
-    Translate(vector.XComponent(), -vector.YComponent());
+    if(distanceFromMaxPoint < 0.0f) {
+        float angle = Line::Angle(orbPoint, playerPoint);
+        Vector vector = Vector(angle, abs(distanceFromMaxPoint));
+        Translate(vector.XComponent(), -vector.YComponent());
+    }
 }

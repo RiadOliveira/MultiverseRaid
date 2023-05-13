@@ -20,7 +20,7 @@ WizardThunderStorm::~WizardThunderStorm() {
 
 void WizardThunderStorm::OnCollision(Object* obj) {
     if(obj->Type() != ENEMY) return;
-    if(cooldownTimer->Elapsed() < 4.0f) return;
+    if(cooldownTimer->Elapsed() < 3.0f) return;
 
     Point* target = new Point(obj->X(), obj->Y());
     MultiverseRaid::scene->Add(

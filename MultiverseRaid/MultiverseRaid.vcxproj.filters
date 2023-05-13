@@ -150,19 +150,19 @@
     <ClCompile Include="RobotDroneAttack.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="AlienAttack.cpp">
-      <Filter>Engine\Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="WizardAttack.cpp">
-      <Filter>Engine\Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="AlienCosmicOrb.cpp">
-      <Filter>Engine\Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="ThunderStormLighting.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="WizardThunderStorm.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienAttack.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="AlienCosmicOrb.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="WizardAttack.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -296,19 +296,19 @@
     <ClInclude Include="RobotDroneAttack.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="AlienAttack.h">
-      <Filter>Engine\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="WizardAttack.h">
-      <Filter>Engine\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="AlienCosmicOrb.h">
-      <Filter>Engine\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="ThunderStormLighting.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="WizardThunderStorm.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienAttack.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="AlienCosmicOrb.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="WizardAttack.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
