@@ -11,17 +11,17 @@ RobotAttack::RobotAttack(float damage, Object* target) {
     float posX = player->X();
     float posY = player->Y();
 
-    float tileWidth = 25.0f, halfTileWidth = tileWidth/2;
-    float tileHeight = 65.0f, halfTileHeight = tileHeight/2;
+    float tileWidth = 24.0f, halfTileWidth = tileWidth/2;
+    float tileHeight = 270.0f, halfTileHeight = tileHeight/2;
     float distanceFromPlayer = 18.0f + halfTileHeight;
 
     laserBeam = new TileSet(
         "Resources/Robot/RobotAttack.png",
-        (uint) tileWidth, (uint) tileHeight, 3, 3
+        (uint) tileWidth, (uint) tileHeight, 6, 6
     );
-    animation = new Animation(laserBeam, 0.090f, false);
-    uint sequence[3] = {0, 1, 2};
-    animation->Add(0, sequence, 3);
+    animation = new Animation(laserBeam, 0.16f, false);
+    uint sequence[6] = {0, 1, 2, 3, 4, 5};
+    animation->Add(0, sequence, 6);
 
     float angle = Line::Angle(
         Point(posX, posY),
@@ -58,7 +58,7 @@ void RobotAttack::Update() {
     float angle = Line::Angle(playerCenter, attackCenter);
     float distance = Point::Distance(playerCenter, attackCenter);
 
-    Vector vector = Vector(angle, 48.0f - distance);
+    Vector vector = Vector(angle, 160 - distance);
     Translate(vector.XComponent(), -vector.YComponent());
 
     if(animation->Inactive()) MultiverseRaid::scene->Delete();
