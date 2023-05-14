@@ -24,6 +24,6 @@ class AlienEnemy : public Enemy {
         void Draw();
 }; 
 
-inline void AlienEnemy::Draw() { DefaultDraw(); }
+inline void AlienEnemy::Draw() { DefaultDraw(0.3f); }
 
 #endif

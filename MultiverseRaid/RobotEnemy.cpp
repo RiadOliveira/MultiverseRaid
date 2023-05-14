@@ -36,7 +36,7 @@ RobotEnemy::RobotEnemy() {
 
     tileSet = new TileSet(
         "Resources/Robot/RobotEnemy.png",
-        (uint)252, (uint)300, 4, 4
+        (uint)252, (uint)300, 4, 1
     );
     animation = new Animation(tileSet, 0.2f, true);
     uint sequence[4] = { 0, 1, 2, 3 };

@@ -26,13 +26,22 @@ AlienEnemy::AlienEnemy() {
 
     tileSet = new TileSet(
         "Resources/Alien/AlienEnemy.png",
-        (uint)46, (uint)36, 1, 1
+        (uint)300, (uint)200, 2, 4
     );
     animation = new Animation(tileSet, 0.2f, true);
-    uint sequence[1] = { 0 };
-    animation->Add(0, sequence, 1);
+    uint sequence[4] = { 0, 1, 2, 3 };
+    animation->Add(0, sequence, 4);
 
-    BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
+    Point vertex[14] =
+    {
+        Point(6, -30), Point(24, -16), Point(24, -20),   Point(45, -1),
+        Point(24, 20), Point(24, 16),  Point(6, 30),
+        Point(-27, 30), Point(-16, 20), Point(-40, 16),
+        Point(-45, -1), Point(-40, -16), Point(-16, -20), Point(-27, -30)
+
+    };
+    BBox(new Poly(vertex, 14));
+
     Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     RotateTo(-speed->Angle());
