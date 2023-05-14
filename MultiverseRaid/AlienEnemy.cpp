@@ -6,7 +6,7 @@ EntityAttributes AlienEnemy::defaultAttributes = {
     6.0f, //hp
     7.0f, //damage
     440.0f, //speed
-    3.5f, //attackSpeed
+    2.0f, //attackSpeed
     0.30f, //defense
     30.0f //range
 };
@@ -15,7 +15,7 @@ EntityAttributes AlienEnemy::aliensAttributes = {
     6.0f, //hp
     7.0f, //damage
     440.0f, //speed
-    3.5f, //attackSpeed
+    2.0f, //attackSpeed
     0.30f, //defense
     30.0f //range
 };

@@ -23,8 +23,6 @@ class WizardEnemy : public Enemy {
         void Draw();
 };
 
-inline void WizardEnemy::Draw() {
-    animation->Draw(x, y, Layer::LOWER, scale, rotation);
-}
+inline void WizardEnemy::Draw() { DefaultDraw(); }
 
 #endif

@@ -24,8 +24,6 @@ class AlienEnemy : public Enemy {
         void Draw();
 }; 
 
-inline void AlienEnemy::Draw() {
-    animation->Draw(x, y, Layer::LOWER, scale, rotation);
-}
+inline void AlienEnemy::Draw() { DefaultDraw(); }
 
 #endif

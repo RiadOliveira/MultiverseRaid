@@ -60,16 +60,18 @@ void RobotDrone::MoveToPlayer() {
 void RobotDrone::OnCollision(Object* obj) {
     uint type = obj->Type();
     if(type != ENEMY) return;
+    if(attackTimer->Elapsed() < dronesAttributes.attackSpeed) return;
 
-    if(attackTimer->Elapsed() >= dronesAttributes.attackSpeed) {
+    float angle = Line::Angle(Point(x, y), Point(obj->X(), obj->Y()));
+    for(int ind=-10 ; ind<=10 ; ind += 10) {
         RobotDroneAttack* attack = new RobotDroneAttack(
-            dronesAttributes.damage, this, obj
+            dronesAttributes.damage, angle + (float) ind, this
         );
         MultiverseRaid::scene->Add(attack, MOVING);
-        attackTimer->Reset();
-
-        BBox()->ScaleTo(0.0f);
     }
+
+    attackTimer->Reset();
+    BBox()->ScaleTo(0.0f);
 }
 
 void RobotDrone::Update() {

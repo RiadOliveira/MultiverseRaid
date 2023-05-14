@@ -25,8 +25,6 @@ class RobotEnemy : public Enemy {
         void Draw();
 };
 
-inline void RobotEnemy::Draw() {
-    animation->Draw(x, y, Layer::LOWER, 0.25f, rotation);
-}
+inline void RobotEnemy::Draw() { DefaultDraw(0.25f); }
 
 #endif

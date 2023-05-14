@@ -11,7 +11,7 @@
 
 enum ObjectIds { PLAYER, PLAYER_PASSIVE, MISSILE, AVATAR, ENEMY, PLAYER_ATTACK, WALLHIT };
 
-enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL };
+enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, THUNDER_STORM_PHRASE, FIRE_BALL };
 
 class MultiverseRaid : public Game {
     private:

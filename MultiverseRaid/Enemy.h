@@ -13,6 +13,8 @@
 
 class Enemy : public Object {
     protected:
+        Timer* colorTimer = nullptr;
+
         uint enemyType = 0;
         float hp = 0.0f;
 
@@ -26,6 +28,7 @@ class Enemy : public Object {
         void HandlePlayerAttackCollision(
             PlayerAttack* attack, float damageReduction
         );
+        void DefaultDraw(float scale);
     public:
         Enemy();
         virtual ~Enemy();
@@ -44,5 +47,14 @@ inline void Enemy::ApplyDamage(float damage) {
 }
 
 inline bool Enemy::IsDead() { return hp <= 0.0f; }
+
+inline void Enemy::DefaultDraw(float scale = 1.0f) {
+    Color animationColor;
+    if(colorTimer == nullptr || colorTimer->Elapsed() > 0.25f) {
+        animationColor = Color{1.0f, 1.0f, 1.0f, 1.0f};
+    } else animationColor = Color{1.0f, 0.5f, 0.5f, 1.0f};
+
+    animation->Draw(x, y, Layer::LOWER, scale, rotation, animationColor);
+}
 
 #endif

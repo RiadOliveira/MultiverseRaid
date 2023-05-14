@@ -10,10 +10,13 @@
 class RobotDroneAttack : public PlayerAttack {
     private:
         Sprite* sprite = nullptr;
+
+        Point startPoint;
         Vector speed;
     public:
         RobotDroneAttack(
-            float damage, RobotDrone* drone, Object* target
+            float damage, float angle,
+            RobotDrone* drone
         );
         ~RobotDroneAttack();
 
@@ -22,7 +25,7 @@ class RobotDroneAttack : public PlayerAttack {
 };
 
 inline void RobotDroneAttack::Draw() {
-    sprite->Draw(x, y, z, 2.5f, rotation);
+    sprite->Draw(x, y, z, 0.03f, rotation);
 }
 
 #endif

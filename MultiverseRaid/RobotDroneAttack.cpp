@@ -3,7 +3,7 @@
 #include "Vector.h"
 
 RobotDroneAttack::RobotDroneAttack(
-    float damage, RobotDrone* drone, Object* target
+    float damage, float angle, RobotDrone* drone
 ) {
     damageType = ROBOT;
     damageTickTime = 2.0f;
@@ -12,17 +12,16 @@ RobotDroneAttack::RobotDroneAttack(
 
     float posX = drone->X();
     float posY = drone->Y();
-
-    float angle = Line::Angle(
-        Point(posX, posY),
-        Point(target->X(), target->Y())
-    );
-    
     speed.RotateTo(angle);
     speed.ScaleTo(460.0f);
     
-    MoveTo(posX + 22 * cos(speed.Radians()), posY - 22 * sin(speed.Radians()));
-    RotateTo(-angle + 90.0f);
+    startPoint = Point(
+        posX + 22 * cos(speed.Radians()),
+        posY - 22 * sin(speed.Radians())
+    );
+
+    MoveTo(startPoint.X(), startPoint.Y());
+    RotateTo(-angle);
     BBox(new Circle(14.0f));
 }
 
@@ -31,10 +30,9 @@ RobotDroneAttack::~RobotDroneAttack() {
 }
 
 void RobotDroneAttack::Update() {
-    Rotate(300 * gameTime);
     Translate(speed.XComponent() * gameTime, -speed.YComponent() * gameTime);
 
-    if (x > game->Width() - 50 || x < 50 || y > game->Height() - 50 || y < 50) {
-        MultiverseRaid::scene->Delete();
-    }
+    bool outOfGame = x > game->Width() - 50 || x < 50 || y > game->Height() - 50 || y < 50;
+    bool outOfRange = Point::Distance(startPoint, Point(x, y)) >= 123.0f;
+    if (outOfGame || outOfRange) MultiverseRaid::scene->Delete();
 }

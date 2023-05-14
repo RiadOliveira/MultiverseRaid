@@ -22,6 +22,7 @@ void WizardAvatar::HandleUnselectAvatar() {
 void WizardAvatar::HandleBasicAttack(Object* obj) {
     WizardAttack* attack = new WizardAttack(8.0f, obj);
     MultiverseRaid::scene->Add(attack, MOVING);
+    MultiverseRaid::audio->Play(FIRE_BALL);
 }
 
 void WizardAvatar::HandleUlt() {

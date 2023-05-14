@@ -28,6 +28,7 @@ void WizardThunderStorm::OnCollision(Object* obj) {
     MultiverseRaid::scene->Add(
         new ThunderStormLighting(target), MOVING
     );
+    MultiverseRaid::audio->Play(THUNDER_STORM_PHRASE);
 
     cooldownTimer->Reset();
     delete target;

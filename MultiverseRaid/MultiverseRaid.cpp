@@ -15,11 +15,19 @@ bool     MultiverseRaid::viewHUD = false;
 
 void MultiverseRaid::Init() {
     audio = new Audio();
+    audio->Add(THUNDER_STORM_PHRASE, "Resources/Wizard/ThunderStormPhrase.wav");
+    audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
     audio->Add(THEME, "Resources/Theme.wav");
     audio->Add(FIRE, "Resources/Fire.wav");
     audio->Add(HITWALL, "Resources/Hitwall.wav");
     audio->Add(EXPLODE, "Resources/Explode.wav");
     audio->Add(START, "Resources/Start.wav");
+
+    audio->Volume(THUNDER_STORM_PHRASE, 0.2f);
+    audio->Frequency(THUNDER_STORM_PHRASE, 1.5f);
+
+    audio->Volume(FIRE_BALL, 0.2f);
+    audio->Frequency(FIRE_BALL, 2.0f);
 
     audio->Volume(THEME, 0.0f);
     audio->Volume(FIRE, 0.0f);
