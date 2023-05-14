@@ -2,6 +2,15 @@
 #include "AlienEnemy.h"
 #include "Random.h"
 
+EntityAttributes AlienEnemy::defaultAttributes = {
+    6.0f, //hp
+    7.0f, //damage
+    440.0f, //speed
+    3.5f, //attackSpeed
+    0.30f, //defense
+    30.0f //range
+};
+
 EntityAttributes AlienEnemy::aliensAttributes = {
     6.0f, //hp
     7.0f, //damage
@@ -28,14 +37,22 @@ AlienEnemy::AlienEnemy() {
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     RotateTo(-speed->Angle());
     
-    RandF pos{ 100, 150 };
-    MoveTo(pos.Rand(), pos.Rand());
-
     type = ENEMY;
     enemyType = ALIEN;
+    MultiverseRaid::remainingEnemies++;
 }
 
 AlienEnemy::~AlienEnemy() {
+    MultiverseRaid::remainingEnemies--;
+}
+
+void AlienEnemy::ResetWaveAttributes() {
+    aliensAttributes.hp = defaultAttributes.hp;
+    aliensAttributes.damage = defaultAttributes.damage;
+    aliensAttributes.speed = defaultAttributes.speed;
+    aliensAttributes.attackSpeed = defaultAttributes.attackSpeed;
+    aliensAttributes.defense = defaultAttributes.defense;
+    aliensAttributes.range = defaultAttributes.range;
 }
 
 void AlienEnemy::UpdateWaveAttributes() {

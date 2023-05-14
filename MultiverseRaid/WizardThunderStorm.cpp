@@ -12,6 +12,8 @@ WizardThunderStorm::WizardThunderStorm() {
     cooldownTimer = new Timer();
     cooldownTimer->Start();
     BBox(new Circle(240.0f));
+
+    type = PLAYER_PASSIVE;
 }
 
 WizardThunderStorm::~WizardThunderStorm() {

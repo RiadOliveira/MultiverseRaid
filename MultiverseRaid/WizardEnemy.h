@@ -9,12 +9,15 @@
 
 class WizardEnemy : public Enemy {
     private:
+        static EntityAttributes defaultAttributes;
         static EntityAttributes wizardsAttributes;
     public:
         WizardEnemy();
         ~WizardEnemy();
         
+        static void ResetWaveAttributes();
         static void UpdateWaveAttributes();
+        
         void OnCollision(Object* obj);
         void Update();
         void Draw();

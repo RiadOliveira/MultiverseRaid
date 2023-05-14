@@ -10,6 +10,7 @@ Player * MultiverseRaid::player  = nullptr;
 Audio  * MultiverseRaid::audio   = nullptr;
 Scene  * MultiverseRaid::scene   = nullptr;
 uint     MultiverseRaid::gameWave = 0;
+uint     MultiverseRaid::remainingEnemies = 0;
 bool     MultiverseRaid::viewHUD = false;
 
 void MultiverseRaid::Init() {
@@ -29,11 +30,9 @@ void MultiverseRaid::Init() {
     player  = new Player();
 
     hud = new Hud();
+    waveGenerator = new WaveGenerator();
 
     scene->Add(player, MOVING);
-    scene->Add(new RobotEnemy(), STATIC);
-    scene->Add(new WizardEnemy(), STATIC);
-    scene->Add(new AlienEnemy(), STATIC);
     scene->Add(new Delay(), STATIC);
 
     float difx = (game->Width() - window->Width()) / 2.0f;
@@ -48,6 +47,14 @@ void MultiverseRaid::Init() {
 void MultiverseRaid::Update() {
     if (window->KeyDown(VK_ESCAPE)) window->Close();
 
+    if(waveGenerator->FinishedCurrentWave()) {
+        waveGenerator->Start(++gameWave);
+
+        if(gameWave > 1) player->LevelUp();
+        else player->ResetAttributes();
+    }
+
+    waveGenerator->UpdateGeneration();
     scene->Update();
     scene->CollisionDetection();
 

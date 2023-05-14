@@ -2,6 +2,15 @@
 #include "MultiverseRaid.h"
 #include "Random.h"
 
+EntityAttributes WizardEnemy::defaultAttributes = {
+    5.0f, //hp
+    8.0f, //damage
+    180.0f, //speed
+    3.5f, //attackSpeed
+    0.25f, //defense
+    300.0f //range
+};
+
 EntityAttributes WizardEnemy::wizardsAttributes = {
     5.0f, //hp
     8.0f, //damage
@@ -24,15 +33,22 @@ WizardEnemy::WizardEnemy() {
     animation->Add(0, sequence, 1);
 
     BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
-    RandF posX{ game->Width() - 50, game->Width() };
-    RandF posY{ game->Height() - 50, game->Height() };
-    MoveTo(posX.Rand(), posY.Rand());
-
     type = ENEMY;
     enemyType = WIZARD;
+    MultiverseRaid::remainingEnemies++;
 }
 
 WizardEnemy::~WizardEnemy() {
+    MultiverseRaid::remainingEnemies--;
+}
+
+void WizardEnemy::ResetWaveAttributes() {
+    wizardsAttributes.hp = defaultAttributes.hp;
+    wizardsAttributes.damage = defaultAttributes.damage;
+    wizardsAttributes.speed = defaultAttributes.speed;
+    wizardsAttributes.attackSpeed = defaultAttributes.attackSpeed;
+    wizardsAttributes.defense = defaultAttributes.defense;
+    wizardsAttributes.range = defaultAttributes.range;
 }
 
 void WizardEnemy::UpdateWaveAttributes() {

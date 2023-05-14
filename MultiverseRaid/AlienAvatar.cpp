@@ -16,7 +16,7 @@ void AlienAvatar::HandleSelectAvatar() {
     cosmicOrbs = new AlienCosmicOrb*[orbsQuantity];
 
     float orbsAngle = 360.0f / orbsQuantity;
-    for(int ind=0 ; ind<orbsQuantity ; ind++) {
+    for(uint ind=0 ; ind<orbsQuantity ; ind++) {
         cosmicOrbs[ind] = new AlienCosmicOrb(
             cosmicOrbImage, 8.0f, orbsAngle * ind
         );
@@ -25,7 +25,7 @@ void AlienAvatar::HandleSelectAvatar() {
 }
 
 void AlienAvatar::HandleUnselectAvatar() {
-    for(int ind=0 ; ind<orbsQuantity ; ind++) {
+    for(uint ind=0 ; ind<orbsQuantity ; ind++) {
         MultiverseRaid::scene->Delete(cosmicOrbs[ind], MOVING);
     }
 

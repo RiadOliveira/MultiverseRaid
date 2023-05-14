@@ -28,7 +28,7 @@ RobotDrone::RobotDrone() {
     uint sequence[4] = {0, 1, 2, 3};
     animation->Add(0, sequence, 4);
 
-    type = PLAYER_COMPANION;
+    type = PLAYER_PASSIVE;
 }
 
 RobotDrone::~RobotDrone() {

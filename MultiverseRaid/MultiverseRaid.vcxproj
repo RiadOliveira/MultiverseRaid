@@ -202,6 +202,7 @@
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vector.cpp" />
     <ClCompile Include="WallHit.cpp" />
+    <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WizardAttack.cpp" />
     <ClCompile Include="WizardAvatar.cpp" />
@@ -252,6 +253,7 @@
     <ClInclude Include="Types.h" />
     <ClInclude Include="Vector.h" />
     <ClInclude Include="WallHit.h" />
+    <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WizardAttack.h" />
     <ClInclude Include="WizardAvatar.h" />

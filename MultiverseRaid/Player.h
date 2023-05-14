@@ -19,7 +19,6 @@ class Player : public Object {
         uint level;
 
         void HandleMovement();
-        void InitializeAttributes();
     public:
         Player();
         ~Player();
@@ -29,7 +28,9 @@ class Player : public Object {
         void ApplyDamage(float damage);
         SpriteState SpriteState();
 
+        void ResetAttributes();
         void LevelUp();
+        
         void Update();
         void Draw();
 };

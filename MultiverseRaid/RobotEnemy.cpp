@@ -1,6 +1,14 @@
 #include "MultiverseRaid.h"
 #include "RobotEnemy.h"
-#include "Random.h"
+
+EntityAttributes RobotEnemy::defaultAttributes = {
+    10.0f, //hp
+    5.0f, //damage
+    200.0f, //speed
+    3.0f, //attackSpeed
+    0.40f, //defense
+    30.0f //range
+};
 
 EntityAttributes RobotEnemy::robotsAttributes = {
     10.0f, //hp
@@ -18,15 +26,13 @@ RobotEnemy::RobotEnemy() {
     Point vertex[24] =
     {
         Point(11, -37), Point(11, -26), Point(18, -26), Point(18, -5),
-        Point(13, -5), Point(13, 4), Point(25, 4), Point(25, 33), Point(13, 33), Point(13, 8), Point(5, 18), Point(5, 37),
-        Point(-7, 37), Point(-7, 18), Point(-13, 8), Point(-13, 33), Point(-25,33), Point(-25,4), Point(-13, 4),
-        Point(-13, -5), Point(-16, -5), Point(-16, -26), Point(-11, -26), Point(-11, -37)
+        Point(13, -5), Point(13, 4), Point(25, 4), Point(25, 33),
+        Point(13, 33), Point(13, 8), Point(5, 18), Point(5, 37),
+        Point(-7, 37), Point(-7, 18), Point(-13, 8), Point(-13, 33),
+        Point(-25,33), Point(-25,4), Point(-13, 4), Point(-13, -5),
+        Point(-16, -5), Point(-16, -26), Point(-11, -26), Point(-11, -37)
     };
     BBox(new Poly(vertex, 24));
-
-    RandF posX{ 300, 400 };
-    RandF posY{ game->Height() - 400, game->Height() - 300 };
-    MoveTo(posX.Rand(), posY.Rand());
 
     tileSet = new TileSet(
         "Resources/Robot/RobotEnemy.png",
@@ -38,9 +44,20 @@ RobotEnemy::RobotEnemy() {
 
     type = ENEMY;
     enemyType = ROBOT;
+    MultiverseRaid::remainingEnemies++;
 }
 
 RobotEnemy::~RobotEnemy() {
+    MultiverseRaid::remainingEnemies--;
+}
+
+void RobotEnemy::ResetWaveAttributes() {
+    robotsAttributes.hp = defaultAttributes.hp;
+    robotsAttributes.damage = defaultAttributes.damage;
+    robotsAttributes.speed = defaultAttributes.speed;
+    robotsAttributes.attackSpeed = defaultAttributes.attackSpeed;
+    robotsAttributes.defense = defaultAttributes.defense;
+    robotsAttributes.range = defaultAttributes.range;
 }
 
 void RobotEnemy::UpdateWaveAttributes() {

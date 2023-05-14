@@ -11,12 +11,15 @@
 
 class RobotEnemy : public Enemy {
     private:
+        static EntityAttributes defaultAttributes;
         static EntityAttributes robotsAttributes;
     public:
         RobotEnemy();
         ~RobotEnemy();
         
+        static void ResetWaveAttributes();
         static void UpdateWaveAttributes();
+
         void OnCollision(Object * obj);
         void Update();
         void Draw();

@@ -5,7 +5,7 @@
 #include "RobotAvatar.h"
 #include "AlienAvatar.h"
 
-void Player::InitializeAttributes() {
+void Player::ResetAttributes() {
     attributes.hp = 10.0f;
     attributes.damage = 0.0f;
     attributes.speed = 180.0f;
@@ -14,7 +14,7 @@ void Player::InitializeAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): spriteState(LEFT), level(0), selectedAvatar(ROBOT) {
+Player::Player(): spriteState(LEFT), level(0), selectedAvatar(WIZARD) {
     sprite = new Sprite("Resources/Player.png");
 
     avatars = new Avatar*[3];
@@ -24,7 +24,6 @@ Player::Player(): spriteState(LEFT), level(0), selectedAvatar(ROBOT) {
 
     BBox(new Circle(18.0f));
     MoveTo(game->CenterX(), game->CenterY());
-    InitializeAttributes();
     type = PLAYER;
 
     Scene * scene = MultiverseRaid::scene;

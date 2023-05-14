@@ -29,7 +29,7 @@ void Hud::Draw() {
     Color textColor{ 0.7f, 0.7f, 0.7f, 1.0f };
 
     text.str("");
-    text << "Geometry Wars";
+    text << "Multiverse Raid";
     bold->Draw(40, 62, text.str(), textColor);
 
     text.str("");
@@ -47,6 +47,14 @@ void Hud::Draw() {
     text.str("");
     text << "Vida: " << MultiverseRaid::player->Hp();
     font->Draw(40, 152, text.str(), textColor);
+
+    text.str("");
+    text << "Onda: " << MultiverseRaid::gameWave;
+    font->Draw(40, 172, text.str(), textColor);
+
+    text.str("");
+    text << "Inimigos: " << MultiverseRaid::remainingEnemies;
+    font->Draw(40, 192, text.str(), textColor);
 
     text.str("");
     text << "Movimento";
