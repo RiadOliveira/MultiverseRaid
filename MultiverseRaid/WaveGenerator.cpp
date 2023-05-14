@@ -30,10 +30,10 @@ void WaveGenerator::UpdateEnemiesAttributes() {
 void WaveGenerator::Start(uint w) {
     wave = w;
     finishedCurrentWave = false;
-    float waveDivisor = wave <= 3 ? 4 : 8;
+    float waveDivisor = (((float) wave) <= 3.0f) ? 4.0f : 8.0f;
 
     waveSpawningTime = WAVE_TOTAL_TIME / waveDivisor;
-    waveEnemiesByTime = (float) pow(2, 2 + wave) / waveDivisor;
+    waveEnemiesByTime = 2.0f * wave;
 
     waveTimer->Start();
     generationTimer->Start();
@@ -42,15 +42,17 @@ void WaveGenerator::Start(uint w) {
     else UpdateEnemiesAttributes();
 }
 
-Enemy* WaveGenerator::GenerateRandomEnemy() {
-    RandI enemyType{0, 2};
+Enemy* WaveGenerator::GenerateRandomEnemy(int generatedWaveType) {
+    if(generatedWaveType >= 9) return new WizardEnemy();
+    if(generatedWaveType >= 8) return new AlienEnemy();
+    if(generatedWaveType >= 6) return new RobotEnemy();
 
-    switch(enemyType.Rand()) {
-        case WIZARD: return new WizardEnemy();
-        case ROBOT: return new RobotEnemy();
-        case ALIEN: return new AlienEnemy();
-        default: return new RobotEnemy();
-    }
+    RandI enemyType{0, 9};
+    int generatedType = enemyType.Rand();
+
+    if(generatedType <= 4) return new RobotEnemy();
+    if(generatedType <= 7) return new WizardEnemy();
+    return new AlienEnemy();
 }
 
 Point* WaveGenerator::GenerateRandomPosition() {
@@ -73,8 +75,11 @@ void WaveGenerator::UpdateGeneration() {
     }
     if(generationTimer->Elapsed() < waveSpawningTime) return;
 
+    RandI waveType{0, 9};
+    int generatedWaveType = waveType.Rand();
+
     for(int ind=0 ; ind < (int) waveEnemiesByTime ; ind++) {
-        Enemy* enemy = GenerateRandomEnemy();
+        Enemy* enemy = GenerateRandomEnemy(generatedWaveType);
         Point* position = GenerateRandomPosition();
 
         enemy->MoveTo(position->X(), position->Y());

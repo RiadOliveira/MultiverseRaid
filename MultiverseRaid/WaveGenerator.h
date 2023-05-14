@@ -16,7 +16,7 @@ class WaveGenerator {
         Timer* waveTimer = nullptr;
         Timer* generationTimer = nullptr;
 
-        Enemy* GenerateRandomEnemy();
+        Enemy* GenerateRandomEnemy(int generatedWaveType);
         Point* GenerateRandomPosition();
 
         void ResetEnemiesAttributes();
