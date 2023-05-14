@@ -22,7 +22,7 @@ RobotDroneAttack::RobotDroneAttack(
 
     MoveTo(startPoint.X(), startPoint.Y());
     RotateTo(-angle);
-    BBox(new Circle(14.0f));
+    BBox(new Circle(9.0f));
 }
 
 RobotDroneAttack::~RobotDroneAttack() {

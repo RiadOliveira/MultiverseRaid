@@ -11,6 +11,8 @@ class WizardEnemy : public Enemy {
     private:
         static EntityAttributes defaultAttributes;
         static EntityAttributes wizardsAttributes;
+
+        void HandleAttackPlayer();
     public:
         WizardEnemy();
         ~WizardEnemy();

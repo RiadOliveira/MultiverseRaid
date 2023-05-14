@@ -63,13 +63,6 @@ void WizardEnemy::UpdateWaveAttributes() {
 }
 
 void WizardEnemy::OnCollision(Object * obj) {
-    if(obj->Type() == PLAYER) {
-        HandlePlayerCollision(
-            wizardsAttributes.damage,
-            wizardsAttributes.attackSpeed
-        );
-        return;
-    };
     if(obj->Type() != PLAYER_ATTACK) return;
 
     PlayerAttack* attack = (PlayerAttack*) obj;
@@ -79,13 +72,26 @@ void WizardEnemy::OnCollision(Object * obj) {
     HandlePlayerAttackCollision(attack, damageReduction);
 }
 
+void WizardEnemy::HandleAttackPlayer() {
+    Player* player = MultiverseRaid::player;
+    float playerX = player->X();
+    float playerY = player->X();
+
+    float distance = Point::Distance(Point(playerX, playerY), Point(x, y));
+    if(distance > wizardsAttributes.range) return;
+    if(attackSpeedTimer->Elapsed() < wizardsAttributes.attackSpeed) return;
+
+    attackSpeedTimer->Reset();
+}
+
 void WizardEnemy::Update() {
     animation->NextFrame();
-
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;
     }
+
+    HandleAttackPlayer();
 
     Player * player = MultiverseRaid::player;
     float angle = Line::Angle(Point(x, y), Point(player->X(), player->Y()));
