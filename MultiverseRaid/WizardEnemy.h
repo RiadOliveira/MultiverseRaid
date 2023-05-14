@@ -25,6 +25,6 @@ class WizardEnemy : public Enemy {
         void Draw();
 };
 
-inline void WizardEnemy::Draw() { DefaultDraw(); }
+inline void WizardEnemy::Draw() { DefaultDraw(0.25f); }
 
 #endif

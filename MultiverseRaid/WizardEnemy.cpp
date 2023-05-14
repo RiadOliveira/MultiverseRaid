@@ -26,13 +26,21 @@ WizardEnemy::WizardEnemy() {
 
     tileSet = new TileSet(
         "Resources/Wizard/WizardEnemy.png",
-        (uint)60, (uint)60, 1, 1
+        (uint)320, (uint)300, 2, 4
     );
-    animation = new Animation(tileSet, 0.2f, true);
-    uint sequence[1] = { 0 };
-    animation->Add(0, sequence, 1);
+    animation = new Animation(tileSet, 0.6f, true);
+    uint sequence[4] = { 0, 1, 2, 3 };
+    animation->Add(0, sequence, 4);
 
-    BBox(new Rect(-18.0f, -18.0f, 18.0f, 18.0f));
+    Point vertex[20] =
+    {
+       Point(1, -8), Point(7, -4),
+       Point(7,5),  Point(1, 9), Point(12, 16), Point(4, 21), Point(5, 34),
+       Point(-30, 34), Point(-30, 26), Point(-34, 22), Point(-27, 12), Point(-34, 7),
+       Point(-34, -2), Point(-32, -6), Point(-28, -6), Point(-20, -20), Point(-9, -20), Point(-3, -12), Point(-11, -12), Point(-10, -7)
+
+    };
+    BBox(new Poly(vertex, 20));
     type = ENEMY;
     enemyType = WIZARD;
     MultiverseRaid::remainingEnemies++;
