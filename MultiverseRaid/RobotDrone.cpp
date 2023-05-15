@@ -43,7 +43,7 @@ void RobotDrone::MoveToPlayer() {
     float playerX = player->X(), playerY = player->Y();
     MoveTo(x, playerY - 24.0f);
 
-    SpriteState state = player->SpriteState();
+    uint state = player->TileSetState();
     float expectedDistance = playerX + (state == LEFT ? -48.0f : 48.0f);
     float xDifference = abs(x - expectedDistance);
 

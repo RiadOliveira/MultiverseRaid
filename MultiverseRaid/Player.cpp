@@ -17,7 +17,7 @@ void Player::ResetAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): spriteState(LEFT), level(0), selectedAvatar(WIZARD) {
+Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
     sprite = new Sprite("Resources/Player.png");
 
     avatars = new Avatar*[3];
@@ -100,11 +100,11 @@ void Player::HandleMovement() {
 
     if(rightCommandPressed) {
         Translate(parsedSpeed, 0);
-        spriteState = RIGHT;
+        tileSetState = RIGHT;
     }
     if(leftCommandPressed) {
         Translate(-parsedSpeed, 0);
-        spriteState = LEFT;
+        tileSetState = LEFT;
     }
 
     if (x < 50) MoveTo(50, y);
@@ -136,6 +136,6 @@ void Player::Update() {
 }
 
 void Player::Draw() {
-    float rotation = spriteState == LEFT ? 0.0f : 180.0f;
+    float rotation = tileSetState == LEFT ? 0.0f : 180.0f;
     sprite->Draw(x, y, Layer::MIDDLE, 1.0f, rotation);
 }

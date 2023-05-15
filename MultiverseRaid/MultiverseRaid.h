@@ -10,8 +10,9 @@
 #include "WaveGenerator.h"
 
 enum ObjectIds { PLAYER, PLAYER_ATTACK, PLAYER_PASSIVE, MISSILE, AVATAR, ENEMY, ENEMY_ATTACK, WALLHIT };
-
 enum SoundIds { THEME, START, FIRE, EXPLODE, HITWALL, THUNDER_STORM_PHRASE, FIRE_BALL };
+
+enum TileSetState { LEFT, RIGHT };
 
 class MultiverseRaid : public Game {
     private:

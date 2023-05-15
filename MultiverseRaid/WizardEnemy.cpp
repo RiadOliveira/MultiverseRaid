@@ -2,6 +2,7 @@
 #include "MultiverseRaid.h"
 #include "WizardEnemyAttack.h"
 #include "Random.h"
+#include "MultiverseRaid.h"
 
 EntityAttributes WizardEnemy::defaultAttributes = {
     5.0f, //hp
@@ -27,18 +28,23 @@ WizardEnemy::WizardEnemy() {
 
     tileSet = new TileSet(
         "Resources/Wizard/WizardEnemy.png",
-        (uint)320, (uint)300, 2, 4
+        (uint)320, (uint)250, 4, 8
     );
     animation = new Animation(tileSet, 0.6f, true);
-    uint sequence[4] = { 0, 1, 2, 3 };
-    animation->Add(0, sequence, 4);
+    
+    uint leftSequence[4] = { 0, 1, 2, 3 };
+    animation->Add(LEFT, leftSequence, 4);
+
+    uint rightSequence[4] = { 7, 6, 5, 4 };
+    animation->Add(RIGHT, rightSequence, 4);
 
     Point vertex[20] =
     {
-       Point(1, -8), Point(7, -4),
-       Point(7,5),  Point(1, 9), Point(12, 16), Point(4, 21), Point(5, 34),
-       Point(-30, 34), Point(-30, 26), Point(-34, 22), Point(-27, 12), Point(-34, 7),
-       Point(-34, -2), Point(-32, -6), Point(-28, -6), Point(-20, -20), Point(-9, -20), Point(-3, -12), Point(-11, -12), Point(-10, -7)
+       Point(1, -8), Point(7, -4), Point(7,5),  Point(1, 9),
+       Point(12, 16), Point(4, 21), Point(5, 34), Point(-30, 34),
+       Point(-30, 26), Point(-34, 22), Point(-27, 12), Point(-34, 7),
+       Point(-34, -2), Point(-32, -6), Point(-28, -6), Point(-20, -20),
+       Point(-9, -20), Point(-3, -12), Point(-11, -12), Point(-10, -7)
 
     };
     BBox(new Poly(vertex, 20));
@@ -98,7 +104,6 @@ void WizardEnemy::HandleAttackPlayer() {
 }
 
 void WizardEnemy::Update() {
-    animation->NextFrame();
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;
@@ -123,6 +128,8 @@ void WizardEnemy::Update() {
 
     float parsedSpeed = wizardsAttributes.speed * gameTime;
     Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
+    animation->Select(speed->XComponent() > 0 ? LEFT : RIGHT);
+    animation->NextFrame();
 
     if (x < 50) MoveTo(50, y);
     else if (x > game->Width() - 50) MoveTo(game->Width() - 50, y);

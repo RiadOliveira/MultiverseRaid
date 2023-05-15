@@ -1,5 +1,5 @@
-#include "MultiverseRaid.h"
 #include "RobotEnemy.h"
+#include "MultiverseRaid.h"
 
 EntityAttributes RobotEnemy::defaultAttributes = {
     10.0f, //hp
@@ -36,11 +36,15 @@ RobotEnemy::RobotEnemy() {
 
     tileSet = new TileSet(
         "Resources/Robot/RobotEnemy.png",
-        (uint)252, (uint)300, 4, 1
+        (uint)252, (uint)300, 4, 8
     );
     animation = new Animation(tileSet, 0.2f, true);
-    uint sequence[4] = { 0, 1, 2, 3 };
-    animation->Add(0, sequence, 4);
+
+    uint leftSequence[4] = { 0, 1, 2, 3 };
+    animation->Add(LEFT, leftSequence, 4);
+
+    uint rightSequence[4] = { 7, 6, 5, 4 };
+    animation->Add(RIGHT, rightSequence, 4);
 
     type = ENEMY;
     enemyType = ROBOT;
@@ -89,7 +93,6 @@ void RobotEnemy::OnCollision(Object * obj) {
 }
 
 void RobotEnemy::Update() {
-    animation->NextFrame();
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;
@@ -99,8 +102,10 @@ void RobotEnemy::Update() {
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));
     float distanceToPlayer = Point::Distance(Point(x, y), Point(player->X(), player->Y()));
 
-    if(distanceToPlayer > robotsAttributes.range) {
-        float parsedSpeed = robotsAttributes.speed * gameTime;
-        Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
-    }
+    if(distanceToPlayer <= robotsAttributes.range) return;
+    float parsedSpeed = robotsAttributes.speed * gameTime;
+    
+    Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
+    animation->Select(speed->XComponent() > 0 ? LEFT : RIGHT);
+    animation->NextFrame();
 }

@@ -6,15 +6,13 @@
 #include "Sprite.h"
 #include "Avatar.h"
 
-enum SpriteState { LEFT, RIGHT };
-
 class Player : public Object {
     private:
         Sprite * sprite;
         Avatar ** avatars;
         uint selectedAvatar;
 
-        SpriteState spriteState;
+        uint tileSetState;
         EntityAttributes attributes;
         uint level;
 
@@ -29,7 +27,7 @@ class Player : public Object {
         float Hp();
         bool IsDead();
         void ApplyDamage(float damage, uint damageType);
-        SpriteState SpriteState();
+        uint TileSetState();
 
         void ResetAttributes();
         void LevelUp();
@@ -46,6 +44,6 @@ inline bool Player::IsDead() {
     return attributes.hp <= 0.0f;
 }
 
-inline SpriteState Player::SpriteState() { return spriteState; }
+inline uint Player::TileSetState() { return tileSetState; }
 
 #endif
