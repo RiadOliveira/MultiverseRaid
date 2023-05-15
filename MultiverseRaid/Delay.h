@@ -5,19 +5,18 @@
 #include "Sprite.h"
 #include "Timer.h"
 
-class Delay : public Object
-{
-private:
-    Sprite * logo;
-    Timer timer;
-    bool notPlayed;
+class Delay : public Object {
+    private:
+        Sprite * logo;
+        Timer timer;
+        bool notPlayed;
 
-public:
-    Delay();
-    ~Delay();
+    public:
+        Delay();
+        ~Delay();
 
-    void Update();
-    void Draw();
+        void Update();
+        void Draw();
 };
 
 #endif

@@ -2,30 +2,21 @@
 #include "MultiverseRaid.h"
 
 Hud::Hud() {
-    font = new Font("Resources/Tahoma14.png");
-    font->Spacing("Resources/Tahoma14.dat");
-    bold = new Font("Resources/Tahoma14b.png");
-    bold->Spacing("Resources/Tahoma14b.dat");
-
-    infoBox = new Sprite("Resources/InfoBox.png");
-    keyMap = new Sprite("Resources/Keymap.png");
+    font = new Font("Resources/TwCenMT12.png");
+    font->Spacing("Resources/TwCenMT12.dat");
+    bold = new Font("Resources/TwCenMT12Bold.png");
+    bold->Spacing("Resources/TwCenMT12Bold.dat");
 }
 
 Hud::~Hud() {
     delete font;
     delete bold;
-    delete infoBox;
-    delete keyMap;
 }
 
 void Hud::Update() {
-
 }
 
 void Hud::Draw() {
-    infoBox->Draw(game->viewport.left + 140, game->viewport.top + 100, Layer::FRONT);
-    keyMap->Draw(game->viewport.left + window->CenterX(), game->viewport.top + window->Height() - 16.0f, Layer::FRONT);
-
     Color textColor{ 0.7f, 0.7f, 0.7f, 1.0f };
 
     text.str("");
@@ -55,12 +46,4 @@ void Hud::Draw() {
     text.str("");
     text << "Inimigos: " << MultiverseRaid::remainingEnemies;
     font->Draw(40, 192, text.str(), textColor);
-
-    text.str("");
-    text << "Movimento";
-    bold->Draw(window->CenterX() - 84.0f, window->Height() - 7.0f, text.str(), textColor);
-
-    text.str("");
-    text << "Atirar";
-    bold->Draw(window->CenterX() + 115.0f, window->Height() - 7.0f, text.str(), textColor);
 }

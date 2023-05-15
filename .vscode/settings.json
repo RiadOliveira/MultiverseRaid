@@ -2,6 +2,10 @@
     "files.associations": {
         "cstdlib": "cpp",
         "cmath": "cpp",
-        "iosfwd": "cpp"
-    }
+        "iosfwd": "cpp",
+        "sstream": "cpp",
+        "xiosbase": "cpp",
+        "ostream": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }

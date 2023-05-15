@@ -6,6 +6,7 @@
 #include "AlienEnemy.h"
 #include "Delay.h"
 #include "WizardAvatar.h"
+#include "WaveHighlight.h"
 
 Player * MultiverseRaid::player  = nullptr;
 Audio  * MultiverseRaid::audio   = nullptr;
@@ -81,14 +82,18 @@ void MultiverseRaid::Init() {
 void MultiverseRaid::Update() {
     if (window->KeyDown(VK_ESCAPE)) window->Close();
 
-    // if(gameWave > 0 && player->IsDead()) {
-    //     Engine::Next<MultiverseRaid>();
-    //     return;
-    // }
+    if(gameWave > 0 && player->IsDead()) {
+        Engine::Next<MultiverseRaid>();
+        return;
+    }
 
     if(waveGenerator->FinishedCurrentWave()) {
         waveGenerator->Start(++gameWave);
-        if(gameWave > 1) player->LevelUp();
+
+        if(gameWave > 1) {
+            player->LevelUp();
+            scene->Add(new WaveHighlight(), STATIC);
+        }
     }
 
     waveGenerator->UpdateGeneration();

@@ -1,21 +1,21 @@
-#ifndef _HUD_H_
-#define _HUD_H_
+#ifndef _WAVE_HIGHLIGHT_H_
+#define _WAVE_HIGHLIGHT_H_
 
 #include "Object.h"
 #include "Sprite.h"
+#include "Timer.h"
 #include "Font.h"
 #include <sstream>
 using std::stringstream;
 
-class Hud : public Object {
+class WaveHighlight : public Object {
     private:
-        Font * font = nullptr;
-        Font * bold = nullptr;
+        Font * font;
+        Timer timer;
         stringstream text;
-
     public:
-        Hud();
-        ~Hud();
+        WaveHighlight();
+        ~WaveHighlight();
 
         void Update();
         void Draw();
