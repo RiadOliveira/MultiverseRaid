@@ -14,24 +14,27 @@ uint     MultiverseRaid::remainingEnemies = 0;
 bool     MultiverseRaid::viewHUD = false;
 
 void MultiverseRaid::Init() {
-    audio = new Audio();
-    audio->Add(THUNDER_STORM_PHRASE, "Resources/Wizard/ThunderStormPhrase.wav");
-    audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
-    audio->Add(THEME, "Resources/Theme.wav");
-    audio->Add(FIRE, "Resources/Fire.wav");
-    audio->Add(HITWALL, "Resources/Hitwall.wav");
-    audio->Add(EXPLODE, "Resources/Explode.wav");
-    audio->Add(START, "Resources/Start.wav");
+    Size(3840, 2160);
+    if(audio == nullptr) {
+        audio = new Audio();
+        audio->Add(THUNDER_STORM_PHRASE, "Resources/Wizard/ThunderStormPhrase.wav");
+        audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
+        audio->Add(THEME, "Resources/Theme.wav");
+        audio->Add(FIRE, "Resources/Fire.wav");
+        audio->Add(HITWALL, "Resources/Hitwall.wav");
+        audio->Add(EXPLODE, "Resources/Explode.wav");
+        audio->Add(START, "Resources/Start.wav");
 
-    audio->Volume(THUNDER_STORM_PHRASE, 0.2f);
-    audio->Frequency(THUNDER_STORM_PHRASE, 1.5f);
+        audio->Volume(THUNDER_STORM_PHRASE, 0.2f);
+        audio->Frequency(THUNDER_STORM_PHRASE, 1.5f);
 
-    audio->Volume(FIRE_BALL, 0.2f);
-    audio->Frequency(FIRE_BALL, 2.0f);
+        audio->Volume(FIRE_BALL, 0.2f);
+        audio->Frequency(FIRE_BALL, 2.0f);
 
-    audio->Volume(THEME, 0.0f);
-    audio->Volume(FIRE, 0.0f);
-    audio->Volume(START, 0.0f);
+        audio->Volume(THEME, 0.0f);
+        audio->Volume(FIRE, 0.0f);
+        audio->Volume(START, 0.0f);
+    }
 
     backg   = new Background("Resources/Space.jpg");
     scene   = new Scene();
@@ -54,6 +57,11 @@ void MultiverseRaid::Init() {
 
 void MultiverseRaid::Update() {
     if (window->KeyDown(VK_ESCAPE)) window->Close();
+
+    if(gameWave > 0 && player->IsDead()) {
+        Engine::Next<MultiverseRaid>();
+        return;
+    }
 
     if(waveGenerator->FinishedCurrentWave()) {
         waveGenerator->Start(++gameWave);
@@ -106,11 +114,15 @@ void MultiverseRaid::Draw() {
 }
 
 void MultiverseRaid::Finalize() {
-    delete audio;
+    //delete audio;
     delete hud;
     delete scene;
     delete backg;
     delete waveGenerator;
+
+    player = nullptr;
+    gameWave = 0;
+    remainingEnemies = 0;
 }
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 
@@ -126,11 +138,9 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
     engine->window->HideCursor(true);
     //engine->graphics->VSync(true);
 
-    Game * game = new MultiverseRaid();
-
-    game->Size(3840, 2160);
-    
-    int status = engine->Start(game);
+    int status = engine->Start(
+        new MultiverseRaid()
+    );
 
     delete engine;
     return status;

@@ -20,7 +20,6 @@ class MultiverseRaid : public Game {
         Background * backg = nullptr;
         Hud * hud = nullptr;
         bool viewBBox = false;
-
     public:
         static uint gameWave;
         static uint remainingEnemies;

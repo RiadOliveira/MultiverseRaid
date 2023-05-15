@@ -5,7 +5,7 @@ EntityAttributes RobotEnemy::defaultAttributes = {
     10.0f, //hp
     5.0f, //damage
     180.0f, //speed
-    3.0f, //attackSpeed
+    2.0f, //attackSpeed
     0.40f, //defense
     30.0f //range
 };
@@ -14,7 +14,7 @@ EntityAttributes RobotEnemy::robotsAttributes = {
     10.0f, //hp
     5.0f, //damage
     180.0f, //speed
-    3.0f, //attackSpeed
+    2.0f, //attackSpeed
     0.40f, //defense
     30.0f //range
 };
