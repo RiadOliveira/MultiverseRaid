@@ -10,9 +10,10 @@
 
 class AlienEnemy : public Enemy {
     private:
-        static EntityAttributes defaultAttributes;
         static EntityAttributes aliensAttributes;
     public:
+        static EntityAttributes defaultAttributes;
+
         AlienEnemy();
         ~AlienEnemy();
         

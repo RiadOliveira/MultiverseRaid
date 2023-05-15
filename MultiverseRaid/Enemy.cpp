@@ -19,7 +19,7 @@ void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {
     Player * player = MultiverseRaid::player;
 
     if(attackSpeedTimer->Elapsed() < enemyAttackSpeed) return;
-    player->ApplyDamage(enemyDamage);
+    player->ApplyDamage(enemyDamage, enemyType);
     attackSpeedTimer->Reset();
 }
 

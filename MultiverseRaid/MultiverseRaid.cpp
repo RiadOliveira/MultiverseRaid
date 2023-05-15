@@ -99,7 +99,6 @@ void MultiverseRaid::Update() {
 
 void MultiverseRaid::Draw() {
     backg->Draw(viewport);
-
     scene->Draw();
 
     if (viewHUD) hud->Draw();
@@ -111,6 +110,7 @@ void MultiverseRaid::Finalize() {
     delete hud;
     delete scene;
     delete backg;
+    delete waveGenerator;
 }
 
 int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, 

@@ -4,6 +4,9 @@
 #include "WizardAvatar.h"
 #include "RobotAvatar.h"
 #include "AlienAvatar.h"
+#include "RobotEnemy.h"
+#include "WizardEnemy.h"
+#include "AlienEnemy.h"
 
 void Player::ResetAttributes() {
     attributes.hp = 10.0f;
@@ -51,6 +54,37 @@ void Player::LevelUp() {
     if(attributes.attackSpeed < 1.0f) {
         attributes.attackSpeed = 1.0f;
     }
+}
+
+float Player::GetSelectedAvatarDefenseValue() {
+    switch(selectedAvatar) {
+        case WIZARD: return WizardEnemy::defaultAttributes.defense;
+        case ROBOT: return RobotEnemy::defaultAttributes.defense;
+        case ALIEN: return AlienEnemy::defaultAttributes.defense;
+        default: return WizardEnemy::defaultAttributes.defense;
+    }
+}
+
+bool Player::HasDisadvantageOnEnemyType(uint enemyType) {
+    switch(enemyType) {
+        case WIZARD: return selectedAvatar == ROBOT;
+        case ROBOT: return selectedAvatar == ALIEN;
+        case ALIEN: return selectedAvatar == WIZARD;
+        default: return false;
+    }
+}
+
+float Player::GetDamageReduction(uint damageReceivedType) {
+    if(HasDisadvantageOnEnemyType(damageReceivedType)) return 0.0f;
+    return GetSelectedAvatarDefenseValue();
+}
+
+void Player::ApplyDamage(float damage, uint damageType) {
+    float damageReduction = GetDamageReduction(damageType);
+    float damageToApply = damage * (1.0f - damageReduction);
+
+    attributes.hp -= damageToApply;
+    if(attributes.hp < 0.0f) attributes.hp = 0.0f;
 }
 
 void Player::HandleMovement() {

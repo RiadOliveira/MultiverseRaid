@@ -11,9 +11,10 @@
 
 class RobotEnemy : public Enemy {
     private:
-        static EntityAttributes defaultAttributes;
         static EntityAttributes robotsAttributes;
     public:
+        static EntityAttributes defaultAttributes;
+
         RobotEnemy();
         ~RobotEnemy();
         

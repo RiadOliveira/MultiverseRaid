@@ -19,13 +19,16 @@ class Player : public Object {
         uint level;
 
         void HandleMovement();
+        float GetSelectedAvatarDefenseValue();
+        bool HasDisadvantageOnEnemyType(uint enemyType);
+        float GetDamageReduction(uint damageReceivedType);
     public:
         Player();
         ~Player();
         
         float Hp();
         bool IsDead();
-        void ApplyDamage(float damage);
+        void ApplyDamage(float damage, uint damageType);
         SpriteState SpriteState();
 
         void ResetAttributes();
@@ -41,11 +44,6 @@ inline float Player::Hp() {
 
 inline bool Player::IsDead() {
     return attributes.hp <= 0.0f;
-}
-
-inline void Player::ApplyDamage(float damage) {
-    attributes.hp -= damage;
-    if(attributes.hp < 0.0f) attributes.hp = 0.0f;
 }
 
 inline SpriteState Player::SpriteState() { return spriteState; }
