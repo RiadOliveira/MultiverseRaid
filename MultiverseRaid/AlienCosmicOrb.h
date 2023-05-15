@@ -19,6 +19,7 @@ class AlienCosmicOrb : public Attack {
         );
         ~AlienCosmicOrb();
 
+        void OnCollision(Object* obj);
         void Update();
         void Draw();
 };

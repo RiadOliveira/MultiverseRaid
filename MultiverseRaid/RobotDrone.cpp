@@ -16,7 +16,7 @@ RobotDrone::RobotDrone() {
     attackTimer = new Timer();
 
     if(player == nullptr) {
-        MoveTo(game->CenterX() - 48.0f, game->CenterY() - 24.0f);
+        MoveTo(game->CenterX() - 52.0f, game->CenterY());
     } else MoveTo(player->X(), player->Y());
     BBox(new Circle(dronesAttributes.range));
 
@@ -36,24 +36,33 @@ RobotDrone::~RobotDrone() {
     delete drone;
     delete animation;
     delete attackTimer;
+
+    MultiverseRaid::audio->Stop(DRONE_ATTACK);
 }
 
 void RobotDrone::MoveToPlayer() {
     Player* player = MultiverseRaid::player;
-
     float playerX = player->X(), playerY = player->Y();
-    MoveTo(x, playerY - 24.0f);
+
+    float multiplier = shouldGoUp ? -1.0f : 1.0f;
+    float yDifference = playerY - y + multiplier * 24.0f;
+
+    if(shouldGoUp && yDifference >= 0.0f) shouldGoUp = false;
+    else if(!shouldGoUp && yDifference <= 0.0f) shouldGoUp = true;
+
+    float droneSpeed = abs(yDifference) > 50.0f ? dronesAttributes.speed : 60.0f;
+    Translate(0, multiplier * gameTime * droneSpeed);
 
     uint state = player->TileSetState();
-    float expectedDistance = playerX + (state == LEFT ? -48.0f : 48.0f);
+    float expectedDistance = playerX + (state == LEFT ? -52.0f : 52.0f);
     float xDifference = abs(x - expectedDistance);
 
     float xTranslation =
         (xDifference > 10.0f ? 360.0f : dronesAttributes.speed) * gameTime;
 
-    if(state == LEFT && x > playerX - 48.0f) {
+    if(state == LEFT && x > playerX - 52.0f) {
         Translate(-xTranslation, 0);
-    } else if(state == RIGHT && x < playerX + 48.0f) {
+    } else if(state == RIGHT && x < playerX + 52.0f) {
         Translate(xTranslation, 0);
     }
 }
@@ -68,7 +77,9 @@ void RobotDrone::OnCollision(Object* obj) {
         RobotDroneAttack* attack = new RobotDroneAttack(
             dronesAttributes.damage, angle + (float) ind, this
         );
+        
         MultiverseRaid::scene->Add(attack, STATIC);
+        MultiverseRaid::audio->Play(DRONE_ATTACK);
     }
 
     attackTimer->Reset();

@@ -33,6 +33,12 @@ AlienCosmicOrb::AlienCosmicOrb(
 
 AlienCosmicOrb::~AlienCosmicOrb() {
     delete sprite;
+    MultiverseRaid::audio->Stop(COSMIC_ORB);
+}
+
+void AlienCosmicOrb::OnCollision(Object* obj) {
+    if(obj->Type() != ENEMY) return;
+    MultiverseRaid::audio->Play(COSMIC_ORB);
 }
 
 void AlienCosmicOrb::Update() {

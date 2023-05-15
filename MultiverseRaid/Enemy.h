@@ -14,6 +14,7 @@
 class Enemy : public Object {
     protected:
         Timer* colorTimer = nullptr;
+        Attack* lastAttackReceived = nullptr;
 
         uint enemyType = 0;
         float hp = 0.0f;

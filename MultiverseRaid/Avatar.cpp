@@ -3,7 +3,8 @@
 #include "math.h"
 
 const float Avatar::ALLOW_SWITCH_TIME = 1.0f;
-const float Avatar::ACTIVE_TIME_LIMIT = 30.0f;
+const float Avatar::DEFAULT_ACTIVE_TIME_LIMIT = 30.0f;
+float Avatar::ACTIVE_TIME_LIMIT = 30.0f;
 
 bool Avatar::canSwitchAvatar = false;
 bool Avatar::reachedActiveTimeLimit = false;

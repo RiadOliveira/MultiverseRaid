@@ -18,6 +18,7 @@ WizardThunderStorm::WizardThunderStorm() {
 
 WizardThunderStorm::~WizardThunderStorm() {
     delete cooldownTimer;
+    MultiverseRaid::audio->Stop(THUNDER_STORM_LIGHTING);
 }
 
 void WizardThunderStorm::OnCollision(Object* obj) {
@@ -28,7 +29,7 @@ void WizardThunderStorm::OnCollision(Object* obj) {
     MultiverseRaid::scene->Add(
         new ThunderStormLighting(target), STATIC
     );
-    MultiverseRaid::audio->Play(THUNDER_STORM_PHRASE);
+    MultiverseRaid::audio->Play(THUNDER_STORM_LIGHTING);
 
     cooldownTimer->Reset();
     delete target;

@@ -8,6 +8,11 @@ AlienAvatar::AlienAvatar() {
 }
 
 AlienAvatar::~AlienAvatar() {
+    MultiverseRaid::audio->Stop(ALIEN_THEME);
+    MultiverseRaid::audio->Stop(BLACK_HOLE);
+
+    if(cosmicOrbImage != nullptr) delete cosmicOrbImage;
+    if(cosmicOrbs != nullptr) delete[] cosmicOrbs;
 }
 
 void AlienAvatar::HandleSelectAvatar() {
@@ -22,20 +27,23 @@ void AlienAvatar::HandleSelectAvatar() {
         );
         MultiverseRaid::scene->Add(cosmicOrbs[ind], STATIC);
     }
+    MultiverseRaid::audio->Play(ALIEN_THEME, true);
 }
 
 void AlienAvatar::HandleUnselectAvatar() {
     for(uint ind=0 ; ind<orbsQuantity ; ind++) {
         MultiverseRaid::scene->Delete(cosmicOrbs[ind], STATIC);
     }
+    MultiverseRaid::audio->Stop(ALIEN_THEME);
 
-    delete cosmicOrbImage;
-    delete[] cosmicOrbs;
+    delete cosmicOrbImage; cosmicOrbImage = nullptr;
+    delete[] cosmicOrbs; cosmicOrbs = nullptr;
 }
 
 void AlienAvatar::HandleBasicAttack(Object* obj) {
     AlienAttack* attack = new AlienAttack(8.0f, obj);
     MultiverseRaid::scene->Add(attack, STATIC);
+    MultiverseRaid::audio->Play(BLACK_HOLE);
 }
 
 void AlienAvatar::HandleUlt() {

@@ -8,6 +8,7 @@
 class WizardAvatar : public Avatar {
     private:
         WizardThunderStorm* thunderStorm = nullptr;
+        uint selectedTheme;
 
         void HandleBasicAttack(Object* obj);
         void HandleUlt();

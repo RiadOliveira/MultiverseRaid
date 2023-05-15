@@ -17,19 +17,39 @@ void MultiverseRaid::Init() {
     Size(3840, 2160);
     if(audio == nullptr) {
         audio = new Audio();
-        audio->Add(THUNDER_STORM_PHRASE, "Resources/Wizard/ThunderStormPhrase.wav");
-        audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
         audio->Add(THEME, "Resources/Theme.wav");
         audio->Add(FIRE, "Resources/Fire.wav");
         audio->Add(HITWALL, "Resources/Hitwall.wav");
         audio->Add(EXPLODE, "Resources/Explode.wav");
         audio->Add(START, "Resources/Start.wav");
 
-        audio->Volume(THUNDER_STORM_PHRASE, 0.2f);
-        audio->Frequency(THUNDER_STORM_PHRASE, 1.5f);
+        audio->Add(THUNDER_STORM_LIGHTING, "Resources/Wizard/ThunderStormLighting.wav");
+        audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
+        audio->Add(LASER_BEAM, "Resources/Robot/LaserBeam.wav");
+        audio->Add(BLACK_HOLE, "Resources/Alien/BlackHole.wav");
+        audio->Add(COSMIC_ORB, "Resources/Alien/CosmicOrb.wav", (uint) 3);
+        audio->Add(DRONE_ATTACK, "Resources/Robot/DroneAttack.wav", (uint) 3);
 
-        audio->Volume(FIRE_BALL, 0.2f);
+        audio->Add(ALIEN_THEME, "Resources/Alien/AlienTheme.wav");
+        audio->Add(WIZARD_THEME, "Resources/Wizard/WizardTheme.wav");
+        audio->Add(WIZARD_RARE_THEME, "Resources/Wizard/WizardRareTheme.wav");
+        audio->Add(ROBOT_THEME, "Resources/Robot/RobotTheme.wav");
+
+        audio->Volume(THUNDER_STORM_LIGHTING, 0.05f);
+        audio->Frequency(THUNDER_STORM_LIGHTING, 1.5f);
+        audio->Volume(FIRE_BALL, 0.05f);
         audio->Frequency(FIRE_BALL, 2.0f);
+        audio->Volume(LASER_BEAM, 0.2f);
+        audio->Volume(BLACK_HOLE, 0.1f);
+        audio->Frequency(BLACK_HOLE, 1.5f);
+        audio->Volume(COSMIC_ORB, 0.05f);
+        audio->Frequency(COSMIC_ORB, 1.5f);
+        
+        audio->Volume(DRONE_ATTACK, 0.01f);
+        audio->Volume(ALIEN_THEME, 0.03f);
+        audio->Volume(WIZARD_THEME, 0.3f);
+        audio->Volume(WIZARD_RARE_THEME, 0.1f);
+        audio->Volume(ROBOT_THEME, 0.05f);
 
         audio->Volume(THEME, 0.0f);
         audio->Volume(FIRE, 0.0f);
@@ -112,9 +132,12 @@ void MultiverseRaid::Draw() {
 }
 
 void MultiverseRaid::Finalize() {
+    scene->Remove(player, STATIC);
+
     //delete audio;
     delete hud;
     delete scene;
+    delete player;
     delete backg;
     delete waveGenerator;
 

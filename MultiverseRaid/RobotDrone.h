@@ -13,6 +13,7 @@ class RobotDrone : public Object {
     private:
         static EntityAttributes dronesAttributes;
 
+        bool shouldGoUp = true;
         TileSet* drone = nullptr;
         Animation* animation = nullptr;
         Timer* attackTimer = nullptr;

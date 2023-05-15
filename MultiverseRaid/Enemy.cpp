@@ -33,10 +33,13 @@ void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {
 void Enemy::HandlePlayerAttackCollision(
     Attack* attack, float damageReduction
 ) {
-    if(damageReceiverTimer->Elapsed() < attack->DamageTickTime()) return;
+    bool sameAsLastAttack = attack == lastAttackReceived;
+    if(sameAsLastAttack && damageReceiverTimer->Elapsed() < attack->DamageTickTime()) return;
 
     float damageToApply = attack->DamagePerTick() * (1.0f - damageReduction);
     ApplyDamage(damageToApply);
+    
+    lastAttackReceived = attack;
     damageReceiverTimer->Reset();
 
     if(colorTimer == nullptr) {

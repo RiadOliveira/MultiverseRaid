@@ -4,7 +4,7 @@
 
 RobotAttack::RobotAttack(float damage, Object* target) {
     damageType = ROBOT;
-    damageTickTime = 1.0f;
+    damageTickTime = 0.5f;
     damagePerTick = damage;
 
     Player* player = MultiverseRaid::player;
@@ -19,7 +19,7 @@ RobotAttack::RobotAttack(float damage, Object* target) {
         "Resources/Robot/RobotAttack.png",
         (uint) tileWidth, (uint) tileHeight, 6, 6
     );
-    animation = new Animation(laserBeam, 0.16f, false);
+    animation = new Animation(laserBeam, 0.20f, false);
     uint sequence[6] = {0, 1, 2, 3, 4, 5};
     animation->Add(0, sequence, 6);
 

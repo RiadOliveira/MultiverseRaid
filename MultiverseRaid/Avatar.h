@@ -10,7 +10,8 @@ enum AvatarType { WIZARD, ROBOT, ALIEN };
 class Avatar : public Object {
     protected:
         const static float ALLOW_SWITCH_TIME;
-        const static float ACTIVE_TIME_LIMIT;
+        const static float DEFAULT_ACTIVE_TIME_LIMIT;
+        static float ACTIVE_TIME_LIMIT;
 
         static bool canSwitchAvatar;
         static bool reachedActiveTimeLimit;
