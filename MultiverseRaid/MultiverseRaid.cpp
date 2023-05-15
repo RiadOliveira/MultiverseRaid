@@ -43,7 +43,7 @@ void MultiverseRaid::Init() {
     hud = new Hud();
     waveGenerator = new WaveGenerator();
 
-    scene->Add(player, MOVING);
+    scene->Add(player, STATIC);
     scene->Add(new Delay(), STATIC);
 
     float difx = (game->Width() - window->Width()) / 2.0f;
@@ -65,9 +65,7 @@ void MultiverseRaid::Update() {
 
     if(waveGenerator->FinishedCurrentWave()) {
         waveGenerator->Start(++gameWave);
-
         if(gameWave > 1) player->LevelUp();
-        else player->ResetAttributes();
     }
 
     waveGenerator->UpdateGeneration();

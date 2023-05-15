@@ -8,7 +8,7 @@
 #include "WizardEnemy.h"
 #include "AlienEnemy.h"
 
-void Player::ResetAttributes() {
+void Player::SetAttributes() {
     attributes.hp = 10.0f;
     attributes.damage = 0.0f;
     attributes.speed = 180.0f;
@@ -27,11 +27,12 @@ Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
 
     BBox(new Circle(18.0f));
     MoveTo(game->CenterX(), game->CenterY());
+    SetAttributes();
     type = PLAYER;
 
     Scene * scene = MultiverseRaid::scene;
     avatars[selectedAvatar]->HandleSelectAvatar();
-    scene->Add(avatars[selectedAvatar], MOVING);
+    scene->Add(avatars[selectedAvatar], STATIC);
 }
 
 Player::~Player() {
@@ -124,13 +125,13 @@ void Player::Update() {
         
         Avatar* previousAvatar = avatars[selectedAvatar];
         previousAvatar->HandleUnselectAvatar();
-        scene->Remove(previousAvatar, MOVING);
+        scene->Remove(previousAvatar, STATIC);
 
         selectedAvatar = (selectedAvatar + 1) % 3;
         Avatar* currentAvatar = avatars[selectedAvatar];
 
         currentAvatar->HandleSelectAvatar();
-        scene->Add(currentAvatar, MOVING);
+        scene->Add(currentAvatar, STATIC);
         Avatar::ResetTimersData();
     }
 }

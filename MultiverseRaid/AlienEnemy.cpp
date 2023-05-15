@@ -76,19 +76,20 @@ void AlienEnemy::UpdateWaveAttributes() {
 }
 
 void AlienEnemy::OnCollision(Object * obj) {
-    if(obj->Type() == PLAYER) {
+    uint objType = obj->Type();
+
+    if(objType == PLAYER) {
         HandlePlayerCollision(
             aliensAttributes.damage,
             aliensAttributes.attackSpeed
         );
         return;
     };
-    if(obj->Type() != PLAYER_ATTACK) return;
+    if(objType != PLAYER_ATTACK) return;
 
     Attack* attack = (Attack*) obj;
     bool receiveIncreaseDamage = attack->DamageType() == ROBOT;
     float damageReduction = receiveIncreaseDamage ? 0.0f : aliensAttributes.defense;
-
     HandlePlayerAttackCollision(attack, damageReduction);
 }
 

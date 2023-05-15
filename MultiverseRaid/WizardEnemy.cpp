@@ -78,12 +78,17 @@ void WizardEnemy::UpdateWaveAttributes() {
 }
 
 void WizardEnemy::OnCollision(Object * obj) {
-    if(obj->Type() != PLAYER_ATTACK) return;
+    uint objType = obj->Type();
+
+    if(objType == PLAYER || objType == ENEMY) {
+        HandleEntityCollision(obj, wizardsAttributes.speed);
+        return;
+    }
+    if(objType != PLAYER_ATTACK) return;
 
     Attack* attack = (Attack*) obj;
     bool receiveIncreaseDamage = attack->DamageType() == ALIEN;
     float damageReduction = receiveIncreaseDamage ? 0.0f : wizardsAttributes.defense;
-
     HandlePlayerAttackCollision(attack, damageReduction);
 }
 
@@ -98,7 +103,7 @@ void WizardEnemy::HandleAttackPlayer() {
 
     MultiverseRaid::scene->Add(
         new WizardEnemyAttack(wizardsAttributes.damage, this),
-        STATIC
+        MOVING
     );
     attackSpeedTimer->Reset();
 }

@@ -37,7 +37,7 @@ void WizardEnemyAttack::OnCollision(Object* obj) {
     if(obj->Type() != PLAYER) return;
 
     MultiverseRaid::player->ApplyDamage(damagePerTick, WIZARD);
-    MultiverseRaid::scene->Delete(this, STATIC);
+    MultiverseRaid::scene->Delete(this, MOVING);
 }
 
 void WizardEnemyAttack::Update() {

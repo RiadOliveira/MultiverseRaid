@@ -15,6 +15,13 @@ Enemy::~Enemy() {
     delete colorTimer;
 }
 
+void Enemy::HandleEntityCollision(Object* entity, float speed) {
+    float angle = Line::Angle(Point(x, y), Point(entity->X(), entity->Y()));
+    Vector vector = Vector(angle + 180.0f, speed);
+
+    Translate(vector.XComponent() * gameTime, -vector.YComponent() * gameTime);
+}
+
 void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {
     Player * player = MultiverseRaid::player;
 

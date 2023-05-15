@@ -28,6 +28,7 @@ RobotDrone::RobotDrone() {
     uint sequence[4] = {0, 1, 2, 3};
     animation->Add(0, sequence, 4);
 
+    attackTimer->Start();
     type = PLAYER_PASSIVE;
 }
 
@@ -67,7 +68,7 @@ void RobotDrone::OnCollision(Object* obj) {
         RobotDroneAttack* attack = new RobotDroneAttack(
             dronesAttributes.damage, angle + (float) ind, this
         );
-        MultiverseRaid::scene->Add(attack, MOVING);
+        MultiverseRaid::scene->Add(attack, STATIC);
     }
 
     attackTimer->Reset();

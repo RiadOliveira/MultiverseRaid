@@ -16,6 +16,7 @@ class Player : public Object {
         EntityAttributes attributes;
         uint level;
 
+        void SetAttributes();
         void HandleMovement();
         float GetSelectedAvatarDefenseValue();
         bool HasDisadvantageOnEnemyType(uint enemyType);
@@ -29,9 +30,8 @@ class Player : public Object {
         void ApplyDamage(float damage, uint damageType);
         uint TileSetState();
 
-        void ResetAttributes();
-        void LevelUp();
         
+        void LevelUp();
         void Update();
         void Draw();
 };

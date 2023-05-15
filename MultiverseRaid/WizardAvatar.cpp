@@ -12,16 +12,16 @@ WizardAvatar::~WizardAvatar() {
 
 void WizardAvatar::HandleSelectAvatar() {
     thunderStorm = new WizardThunderStorm();
-    MultiverseRaid::scene->Add(thunderStorm, MOVING);
+    MultiverseRaid::scene->Add(thunderStorm, STATIC);
 }
 
 void WizardAvatar::HandleUnselectAvatar() {
-    MultiverseRaid::scene->Delete(thunderStorm, MOVING);
+    MultiverseRaid::scene->Delete(thunderStorm, STATIC);
 }
 
 void WizardAvatar::HandleBasicAttack(Object* obj) {
     WizardAttack* attack = new WizardAttack(8.0f, obj);
-    MultiverseRaid::scene->Add(attack, MOVING);
+    MultiverseRaid::scene->Add(attack, STATIC);
     MultiverseRaid::audio->Play(FIRE_BALL);
 }
 

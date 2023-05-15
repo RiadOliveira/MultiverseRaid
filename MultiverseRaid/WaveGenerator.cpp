@@ -83,7 +83,7 @@ void WaveGenerator::UpdateGeneration() {
         Point* position = GenerateRandomPosition();
 
         enemy->MoveTo(position->X(), position->Y());
-        MultiverseRaid::scene->Add(enemy, STATIC);
+        MultiverseRaid::scene->Add(enemy, MOVING);
 
         delete position;
     }

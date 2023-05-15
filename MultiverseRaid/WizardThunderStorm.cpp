@@ -26,7 +26,7 @@ void WizardThunderStorm::OnCollision(Object* obj) {
 
     Point* target = new Point(obj->X(), obj->Y());
     MultiverseRaid::scene->Add(
-        new ThunderStormLighting(target), MOVING
+        new ThunderStormLighting(target), STATIC
     );
     MultiverseRaid::audio->Play(THUNDER_STORM_PHRASE);
 

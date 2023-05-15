@@ -76,19 +76,26 @@ void RobotEnemy::UpdateWaveAttributes() {
 }
 
 void RobotEnemy::OnCollision(Object * obj) {
-    if(obj->Type() == PLAYER) {
-        HandlePlayerCollision(
-            robotsAttributes.damage,
-            robotsAttributes.attackSpeed
-        );
-        return;
-    };
-    if(obj->Type() != PLAYER_ATTACK) return;
+    uint objType = obj->Type();
+    bool isPlayer = objType == PLAYER;
 
+    if(isPlayer || objType == ENEMY) {
+        HandleEntityCollision(obj, robotsAttributes.speed);
+        if(isPlayer) {
+            HandlePlayerCollision(
+                robotsAttributes.damage,
+                robotsAttributes.attackSpeed
+            );
+        }
+
+        return;
+    }
+
+    if(objType != PLAYER_ATTACK) return;
     Attack* attack = (Attack*) obj;
+
     bool receiveIncreaseDamage = attack->DamageType() == WIZARD;
     float damageReduction = receiveIncreaseDamage ? 0.0f : robotsAttributes.defense;
-
     HandlePlayerAttackCollision(attack, damageReduction);
 }
 
