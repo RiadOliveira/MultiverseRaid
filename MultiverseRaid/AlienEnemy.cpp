@@ -85,7 +85,7 @@ void AlienEnemy::OnCollision(Object * obj) {
     };
     if(obj->Type() != PLAYER_ATTACK) return;
 
-    PlayerAttack* attack = (PlayerAttack*) obj;
+    Attack* attack = (Attack*) obj;
     bool receiveIncreaseDamage = attack->DamageType() == ROBOT;
     float damageReduction = receiveIncreaseDamage ? 0.0f : aliensAttributes.defense;
 

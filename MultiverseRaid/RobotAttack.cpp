@@ -41,6 +41,8 @@ RobotAttack::RobotAttack(float damage, Object* target) {
 
     Point list[4] = {p1, p2, p3, p4};
     BBox(new Poly(list, 4));
+
+    type = PLAYER_ATTACK;
 }
 
 RobotAttack::~RobotAttack() {

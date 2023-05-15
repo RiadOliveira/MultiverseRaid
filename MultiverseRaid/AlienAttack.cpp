@@ -34,6 +34,8 @@ AlienAttack::AlienAttack(float damage, Object* target) {
     MoveTo(posX + 22 * cos(speed.Radians()), posY - 22 * sin(speed.Radians()));
     RotateTo(-angle + 90.0f);
     BBox(new Circle(58.0f));
+
+    type = PLAYER_ATTACK;
 }
 
 AlienAttack::~AlienAttack() {

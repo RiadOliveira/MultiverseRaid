@@ -3,11 +3,11 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Animation.h"
 
-class RobotAttack : public PlayerAttack {
+class RobotAttack : public Attack {
     private:
         float angle = 0.0f;
 

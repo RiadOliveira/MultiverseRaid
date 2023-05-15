@@ -1,5 +1,6 @@
 #include "WizardEnemy.h"
 #include "MultiverseRaid.h"
+#include "WizardEnemyAttack.h"
 #include "Random.h"
 
 EntityAttributes WizardEnemy::defaultAttributes = {
@@ -73,7 +74,7 @@ void WizardEnemy::UpdateWaveAttributes() {
 void WizardEnemy::OnCollision(Object * obj) {
     if(obj->Type() != PLAYER_ATTACK) return;
 
-    PlayerAttack* attack = (PlayerAttack*) obj;
+    Attack* attack = (Attack*) obj;
     bool receiveIncreaseDamage = attack->DamageType() == ALIEN;
     float damageReduction = receiveIncreaseDamage ? 0.0f : wizardsAttributes.defense;
 
@@ -83,12 +84,16 @@ void WizardEnemy::OnCollision(Object * obj) {
 void WizardEnemy::HandleAttackPlayer() {
     Player* player = MultiverseRaid::player;
     float playerX = player->X();
-    float playerY = player->X();
+    float playerY = player->Y();
 
     float distance = Point::Distance(Point(playerX, playerY), Point(x, y));
     if(distance > wizardsAttributes.range) return;
     if(attackSpeedTimer->Elapsed() < wizardsAttributes.attackSpeed) return;
 
+    MultiverseRaid::scene->Add(
+        new WizardEnemyAttack(wizardsAttributes.damage, this),
+        STATIC
+    );
     attackSpeedTimer->Reset();
 }
 

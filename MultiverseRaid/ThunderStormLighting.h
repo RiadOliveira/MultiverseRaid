@@ -3,11 +3,11 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Animation.h"
 
-class ThunderStormLighting : public PlayerAttack {
+class ThunderStormLighting : public Attack {
     private:
         TileSet* lighting = nullptr;
         Animation* animation = nullptr;

@@ -186,7 +186,7 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerAttack.cpp" />
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RobotAttack.cpp" />
@@ -207,6 +207,7 @@
     <ClCompile Include="WizardAttack.cpp" />
     <ClCompile Include="WizardAvatar.cpp" />
     <ClCompile Include="WizardEnemy.cpp" />
+    <ClCompile Include="WizardEnemyAttack.cpp" />
     <ClCompile Include="WizardThunderStorm.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -235,7 +236,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerAttack.h" />
+    <ClInclude Include="Attack.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Resources.h" />
@@ -258,6 +259,7 @@
     <ClInclude Include="WizardAttack.h" />
     <ClInclude Include="WizardAvatar.h" />
     <ClInclude Include="WizardEnemy.h" />
+    <ClInclude Include="WizardEnemyAttack.h" />
     <ClInclude Include="WizardThunderStorm.h" />
   </ItemGroup>
   <ItemGroup>

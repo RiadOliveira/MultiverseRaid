@@ -24,7 +24,7 @@ void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {
 }
 
 void Enemy::HandlePlayerAttackCollision(
-    PlayerAttack* attack, float damageReduction
+    Attack* attack, float damageReduction
 ) {
     if(damageReceiverTimer->Elapsed() < attack->DamageTickTime()) return;
 

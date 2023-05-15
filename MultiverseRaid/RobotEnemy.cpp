@@ -81,7 +81,7 @@ void RobotEnemy::OnCollision(Object * obj) {
     };
     if(obj->Type() != PLAYER_ATTACK) return;
 
-    PlayerAttack* attack = (PlayerAttack*) obj;
+    Attack* attack = (Attack*) obj;
     bool receiveIncreaseDamage = attack->DamageType() == WIZARD;
     float damageReduction = receiveIncreaseDamage ? 0.0f : robotsAttributes.defense;
 

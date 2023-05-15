@@ -3,12 +3,12 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Vector.h"
 #include "Animation.h"
 
-class AlienCosmicOrb : public PlayerAttack {
+class AlienCosmicOrb : public Attack {
     private:
         Sprite* sprite;
         Vector speed;

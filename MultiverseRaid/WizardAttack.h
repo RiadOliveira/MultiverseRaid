@@ -3,12 +3,12 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Vector.h"
 #include "Animation.h"
 
-class WizardAttack : public PlayerAttack {
+class WizardAttack : public Attack {
     private:
         TileSet* fireBall = nullptr;
         Animation* animation = nullptr;

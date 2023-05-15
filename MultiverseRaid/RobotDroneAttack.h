@@ -3,11 +3,11 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "RobotDrone.h"
 #include "Vector.h"
 
-class RobotDroneAttack : public PlayerAttack {
+class RobotDroneAttack : public Attack {
     private:
         Sprite* sprite = nullptr;
 

@@ -7,7 +7,7 @@
 #include "Player.h"
 #include "Timer.h"
 #include "Vector.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Animation.h"
 
@@ -26,7 +26,7 @@ class Enemy : public Object {
 
         void HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed);
         void HandlePlayerAttackCollision(
-            PlayerAttack* attack, float damageReduction
+            Attack* attack, float damageReduction
         );
         void DefaultDraw(float scale);
     public:

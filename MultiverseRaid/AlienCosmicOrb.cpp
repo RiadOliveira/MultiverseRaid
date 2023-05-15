@@ -27,6 +27,8 @@ AlienCosmicOrb::AlienCosmicOrb(
     
     MoveTo(posX, posY);
     BBox(new Circle(21.0f));
+
+    type = PLAYER_ATTACK;
 }
 
 AlienCosmicOrb::~AlienCosmicOrb() {

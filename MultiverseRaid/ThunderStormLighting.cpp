@@ -17,6 +17,8 @@ ThunderStormLighting::ThunderStormLighting(Point* target) {
 
     MoveTo(target->X(), target->Y());
     BBox(new Circle(40.0f));
+
+    type = PLAYER_ATTACK;
 }
 
 ThunderStormLighting::~ThunderStormLighting() {

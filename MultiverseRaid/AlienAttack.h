@@ -3,12 +3,12 @@
 
 #include "Types.h"
 #include "Sprite.h"
-#include "PlayerAttack.h"
+#include "Attack.h"
 #include "TileSet.h"
 #include "Vector.h"
 #include "Animation.h"
 
-class AlienAttack : public PlayerAttack {
+class AlienAttack : public Attack {
     private:
         TileSet* blackHole = nullptr;
         Animation* animation = nullptr;
