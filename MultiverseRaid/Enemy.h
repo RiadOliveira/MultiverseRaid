@@ -26,7 +26,10 @@ class Enemy : public Object {
         Timer* damageReceiverTimer = nullptr;
 
         void HandleEntityCollision(Object* entity, float speed);
-        void HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed);
+        void HandlePlayerCollisionAttack(
+            float enemyDamage, float enemyAttackSpeed,
+            uint soundId
+        );
         void HandlePlayerAttackCollision(
             Attack* attack, float damageReduction
         );

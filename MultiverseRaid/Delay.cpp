@@ -16,15 +16,9 @@ Delay::~Delay()
 
 void Delay::Update()
 {
-    if (notPlayed && timer.Elapsed(2.0f))
-    {
-        MultiverseRaid::audio->Play(START);
-        notPlayed = false;
-    }
+    if (notPlayed && timer.Elapsed(2.0f)) notPlayed = false;
 
-    if (timer.Elapsed(2.0f))
-    {
-        MultiverseRaid::audio->Play(THEME, true);
+    if (timer.Elapsed(2.0f)) {
         MultiverseRaid::viewHUD = true;
         MultiverseRaid::scene->Delete();
     }

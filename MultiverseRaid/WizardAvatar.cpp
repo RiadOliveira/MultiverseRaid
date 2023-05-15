@@ -1,7 +1,7 @@
 #include "WizardAvatar.h"
 #include "WizardAttack.h"
-#include "Random.h"
 #include "MultiverseRaid.h"
+#include "Random.h"
 
 bool WizardAvatar::legendaryMode = false;
 bool WizardAvatar::timeIsStopped = false;

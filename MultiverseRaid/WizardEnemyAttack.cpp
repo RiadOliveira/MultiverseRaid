@@ -37,6 +37,7 @@ void WizardEnemyAttack::OnCollision(Object* obj) {
     if(obj->Type() != PLAYER) return;
 
     MultiverseRaid::player->ApplyDamage(damagePerTick, WIZARD);
+    MultiverseRaid::audio->Play(WIZARD_ENEMY_ATTACK);
     MultiverseRaid::scene->Delete(this, MOVING);
 }
 

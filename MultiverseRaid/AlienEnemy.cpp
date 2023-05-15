@@ -80,9 +80,9 @@ void AlienEnemy::OnCollision(Object * obj) {
     uint objType = obj->Type();
 
     if(objType == PLAYER) {
-        HandlePlayerCollision(
-            aliensAttributes.damage,
-            aliensAttributes.attackSpeed
+        HandlePlayerCollisionAttack(
+            aliensAttributes.damage, aliensAttributes.attackSpeed,
+            ALIEN_ENEMY_ATTACK
         );
         return;
     };

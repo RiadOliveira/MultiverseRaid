@@ -182,7 +182,6 @@
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Hud.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Missile.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Particles.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -201,7 +200,6 @@
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Vector.cpp" />
-    <ClCompile Include="WallHit.cpp" />
     <ClCompile Include="WaveGenerator.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WizardAttack.cpp" />
@@ -232,7 +230,6 @@
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Hud.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="Missile.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Particles.h" />
     <ClInclude Include="Player.h" />
@@ -253,7 +250,6 @@
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Types.h" />
     <ClInclude Include="Vector.h" />
-    <ClInclude Include="WallHit.h" />
     <ClInclude Include="WaveGenerator.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WizardAttack.h" />

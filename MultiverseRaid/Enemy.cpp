@@ -30,11 +30,15 @@ void Enemy::HandleEntityCollision(Object* entity, float speed) {
     else if (y > game->Height() - 50) MoveTo(x, game->Height() - 50);
 }
 
-void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {
+void Enemy::HandlePlayerCollisionAttack(
+    float enemyDamage, float enemyAttackSpeed, uint soundId
+) {
     Player * player = MultiverseRaid::player;
 
     if(attackSpeedTimer->Elapsed() < enemyAttackSpeed) return;
     player->ApplyDamage(enemyDamage, enemyType);
+
+    MultiverseRaid::audio->Play(soundId);
     attackSpeedTimer->Reset();
 }
 

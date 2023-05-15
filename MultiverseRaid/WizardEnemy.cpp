@@ -106,6 +106,7 @@ void WizardEnemy::HandleAttackPlayer() {
         new WizardEnemyAttack(wizardsAttributes.damage, this),
         MOVING
     );
+    MultiverseRaid::audio->Play(WIZARD_ENEMY_CAST);
     attackSpeedTimer->Reset();
 }
 

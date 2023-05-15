@@ -83,9 +83,9 @@ void RobotEnemy::OnCollision(Object * obj) {
     if(isPlayer || objType == ENEMY) {
         HandleEntityCollision(obj, robotsAttributes.speed);
         if(isPlayer) {
-            HandlePlayerCollision(
-                robotsAttributes.damage,
-                robotsAttributes.attackSpeed
+            HandlePlayerCollisionAttack(
+                robotsAttributes.damage, robotsAttributes.attackSpeed,
+                ROBOT_ENEMY_ATTACK
             );
         }
 
