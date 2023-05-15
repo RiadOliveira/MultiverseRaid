@@ -5,6 +5,7 @@
 #include "WizardEnemy.h"
 #include "AlienEnemy.h"
 #include "Delay.h"
+#include "WizardAvatar.h"
 
 Player * MultiverseRaid::player  = nullptr;
 Audio  * MultiverseRaid::audio   = nullptr;
@@ -32,7 +33,7 @@ void MultiverseRaid::Init() {
 
         audio->Add(ALIEN_THEME, "Resources/Alien/AlienTheme.wav");
         audio->Add(WIZARD_THEME, "Resources/Wizard/WizardTheme.wav");
-        audio->Add(WIZARD_RARE_THEME, "Resources/Wizard/WizardRareTheme.wav");
+        audio->Add(WIZARD_LEGENDARY_THEME, "Resources/Wizard/WizardLegendaryTheme.wav");
         audio->Add(ROBOT_THEME, "Resources/Robot/RobotTheme.wav");
 
         audio->Volume(THUNDER_STORM_LIGHTING, 0.05f);
@@ -48,7 +49,7 @@ void MultiverseRaid::Init() {
         audio->Volume(DRONE_ATTACK, 0.01f);
         audio->Volume(ALIEN_THEME, 0.03f);
         audio->Volume(WIZARD_THEME, 0.3f);
-        audio->Volume(WIZARD_RARE_THEME, 0.1f);
+        audio->Volume(WIZARD_LEGENDARY_THEME, 0.1f);
         audio->Volume(ROBOT_THEME, 0.05f);
 
         audio->Volume(THEME, 0.0f);
@@ -124,7 +125,10 @@ void MultiverseRaid::Update() {
 } 
 
 void MultiverseRaid::Draw() {
-    backg->Draw(viewport);
+    Color backgroundColor = WizardAvatar::timeIsStopped ?
+        Color(0.4f, 1.0f, 0.4f, 1.0f) : Color(1.0f, 1.0f, 1.0f, 1.0f);
+
+    backg->Draw(viewport, backgroundColor);
     scene->Draw();
 
     if (viewHUD) hud->Draw();

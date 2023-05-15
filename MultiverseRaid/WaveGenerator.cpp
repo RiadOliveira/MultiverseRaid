@@ -3,6 +3,7 @@
 #include "RobotEnemy.h"
 #include "AlienEnemy.h"
 #include "MultiverseRaid.h"
+#include "Engine.h"
 #include "Random.h"
 
 float WaveGenerator::WAVE_TOTAL_TIME = 32.0f;
@@ -60,10 +61,17 @@ Point* WaveGenerator::GenerateRandomPosition() {
     RandI side{0, 1};
     RandF distance{290.0f, 1000.0f};
 
-    return new Point(
-        player->X() + (side.Rand() ? 1 : -1) * distance.Rand(),
-        player->Y() - (side.Rand() ? 1 : -1) * distance.Rand()
-    );
+    float xPosition = player->X() + (side.Rand() ? 1 : -1) * distance.Rand();
+    float yPosition = player->Y() - (side.Rand() ? 1 : -1) * distance.Rand();
+    Game* game = Engine::game;
+
+    if (xPosition < 50) xPosition = 50;
+    else if (xPosition > game->Width() - 50) xPosition = game->Width() - 50;
+
+    if (yPosition < 50) yPosition = 50;
+    else if (yPosition > game->Height() - 50) yPosition = game->Height() - 50;
+
+    return new Point(xPosition, yPosition);
 }
 
 void WaveGenerator::UpdateGeneration() {

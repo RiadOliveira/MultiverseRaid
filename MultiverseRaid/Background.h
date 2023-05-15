@@ -1,11 +1,11 @@
 /**********************************************************************************
-// Background (Arquivo de Cabeçalho)
+// Background (Arquivo de Cabeï¿½alho)
 // 
-// Criação:     07 Dez 2011
-// Atualização: 01 Nov 2021
+// Criaï¿½ï¿½o:     07 Dez 2011
+// Atualizaï¿½ï¿½o: 01 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Representa um pano de fundo maior que a janela
+// Descriï¿½ï¿½o:   Representa um pano de fundo maior que a janela
 //
 **********************************************************************************/
 
@@ -14,7 +14,7 @@
 
 // -------------------------------------------------------------------------------
 
-#include "Types.h"                      // tipos específicos da engine
+#include "Types.h"                      // tipos especï¿½ficos da engine
 #include "Image.h"                      // carregamento de imagens
 #include "Sprite.h"                     // desenho de sprites
 #include <string>                       // biblioteca string da STL
@@ -25,14 +25,14 @@ using std::string;                      // permite usar string sem std::
 class Background
 {
 private:
-    SpriteData spriteData;              // informações do sprite 
+    SpriteData spriteData;              // informaï¿½ï¿½es do sprite 
     const Image * image;                // imagem de fundo
 
 public:
     Background(string filename);        // construtor    
     ~Background();                      // destrutor
 
-    void Draw(ViewPort & sourceRect);   // desenha uma porção da imagem 
+    void Draw(ViewPort & sourceRect, Color color);   // desenha uma porï¿½ï¿½o da imagem 
     uint Width();                       // retorna a largura do pano de fundo
     uint Height();                      // retorna a altura do pano de fundo
 }; 

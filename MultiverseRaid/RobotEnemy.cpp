@@ -1,5 +1,6 @@
 #include "RobotEnemy.h"
 #include "MultiverseRaid.h"
+#include "WizardAvatar.h"
 
 EntityAttributes RobotEnemy::defaultAttributes = {
     10.0f, //hp
@@ -104,6 +105,7 @@ void RobotEnemy::Update() {
         MultiverseRaid::scene->Delete();
         return;
     }
+    if(WizardAvatar::timeIsStopped) return;
 
     Player * player = MultiverseRaid::player;
     speed->RotateTo(Line::Angle(Point(x, y), Point(player->X(), player->Y())));

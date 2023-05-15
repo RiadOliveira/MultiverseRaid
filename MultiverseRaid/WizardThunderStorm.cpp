@@ -1,4 +1,5 @@
 #include "WizardThunderStorm.h"
+#include "WizardAvatar.h"
 #include "ThunderStormLighting.h"
 #include "MultiverseRaid.h"
 #include "Vector.h"
@@ -23,7 +24,9 @@ WizardThunderStorm::~WizardThunderStorm() {
 
 void WizardThunderStorm::OnCollision(Object* obj) {
     if(obj->Type() != ENEMY) return;
-    if(cooldownTimer->Elapsed() < 3.0f) return;
+
+    float requiredElapsed = 3.0f / (1.0f + (float) WizardAvatar::legendaryMode);
+    if(cooldownTimer->Elapsed() < requiredElapsed) return;
 
     Point* target = new Point(obj->X(), obj->Y());
     MultiverseRaid::scene->Add(

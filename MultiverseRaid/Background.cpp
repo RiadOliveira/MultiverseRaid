@@ -1,16 +1,17 @@
 /**********************************************************************************
-// Background (Código Fonte)
+// Background (Cï¿½digo Fonte)
 // 
-// Criação:     07 Dez 2011
-// Atualização: 01 Nov 2021
+// Criaï¿½ï¿½o:     07 Dez 2011
+// Atualizaï¿½ï¿½o: 01 Nov 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Representa um pano de fundo maior que a janela
+// Descriï¿½ï¿½o:   Representa um pano de fundo maior que a janela
 //
 **********************************************************************************/
 
 
 #include "Background.h"
+#include "WizardAvatar.h"
 #include "Engine.h"
 
 // -------------------------------------------------------------------------------
@@ -39,15 +40,16 @@ Background::~Background()
 
 // -------------------------------------------------------------------------------
 
-void Background::Draw(ViewPort & vp)
+void Background::Draw(ViewPort & vp, Color color)
 { 
-    // define um sprite com a região do pano de fundo limitada pela viewport
+    // define um sprite com a regiï¿½o do pano de fundo limitada pela viewport
     spriteData.width = uint(vp.right - vp.left);
     spriteData.height = uint(vp.bottom - vp.top);
     spriteData.texCoord.x = vp.left / float(image->Width());
     spriteData.texCoord.y = vp.top / float(image->Height());
     spriteData.texSize.x = spriteData.width / float(image->Width());
     spriteData.texSize.y = spriteData.height / float(image->Height());
+    spriteData.color = color;
 
     // adiciona o sprite na lista de desenho
     Engine::renderer->Draw(spriteData);

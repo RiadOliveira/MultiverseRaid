@@ -3,6 +3,7 @@
 #include "WizardEnemyAttack.h"
 #include "Random.h"
 #include "MultiverseRaid.h"
+#include "WizardAvatar.h"
 
 EntityAttributes WizardEnemy::defaultAttributes = {
     5.0f, //hp
@@ -113,6 +114,7 @@ void WizardEnemy::Update() {
         MultiverseRaid::scene->Delete();
         return;
     }
+    if(WizardAvatar::timeIsStopped) return;
 
     HandleAttackPlayer();
 

@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "WizardAvatar.h"
 #include "MultiverseRaid.h"
 
 Enemy::Enemy(): damageReceiverTimer(new Timer()), attackSpeedTimer(new Timer()) {
@@ -16,10 +17,17 @@ Enemy::~Enemy() {
 }
 
 void Enemy::HandleEntityCollision(Object* entity, float speed) {
+    if(WizardAvatar::timeIsStopped) return;
+
     float angle = Line::Angle(Point(x, y), Point(entity->X(), entity->Y()));
     Vector vector = Vector(angle + 180.0f, speed);
-
     Translate(vector.XComponent() * gameTime, -vector.YComponent() * gameTime);
+
+    if (x < 50) MoveTo(50, y);
+    else if (x > game->Width() - 50) MoveTo(game->Width() - 50, y);
+
+    if (y < 50) MoveTo(x, 50);
+    else if (y > game->Height() - 50) MoveTo(x, game->Height() - 50);
 }
 
 void Enemy::HandlePlayerCollision(float enemyDamage, float enemyAttackSpeed) {

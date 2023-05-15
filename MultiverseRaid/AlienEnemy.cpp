@@ -1,6 +1,7 @@
 #include "MultiverseRaid.h"
 #include "AlienEnemy.h"
 #include "Random.h"
+#include "WizardAvatar.h"
 
 EntityAttributes AlienEnemy::defaultAttributes = {
     6.0f, //hp
@@ -94,14 +95,15 @@ void AlienEnemy::OnCollision(Object * obj) {
 }
 
 void AlienEnemy::Update() {
-    animation->NextFrame();
     if(IsDead()) {
         MultiverseRaid::scene->Delete();
         return;
     }
+    if(WizardAvatar::timeIsStopped) return;
 
     float parsedSpeed = aliensAttributes.speed * gameTime;
     Translate(speed->XComponent() * parsedSpeed, -speed->YComponent() * parsedSpeed);
+    animation->NextFrame();
 
     if (x < 100 || y < 100 || x > game->Width() - 100 || y > game->Height() - 100) {
         Player * player = MultiverseRaid::player;

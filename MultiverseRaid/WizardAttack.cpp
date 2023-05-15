@@ -4,7 +4,7 @@
 
 WizardAttack::WizardAttack(float damage, Object* target) {
     damageType = WIZARD;
-    damageTickTime = 1.0f;
+    damageTickTime =  1.0f;
     damagePerTick = damage;
 
     Player* player = MultiverseRaid::player;
