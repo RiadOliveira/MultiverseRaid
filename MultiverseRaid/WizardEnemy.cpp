@@ -39,16 +39,16 @@ WizardEnemy::WizardEnemy() {
     uint rightSequence[4] = { 7, 6, 5, 4 };
     animation->Add(RIGHT, rightSequence, 4);
 
-    Point vertex[20] =
+    Point vertex[17] =
     {
-       Point(1, -8), Point(7, -4), Point(7,5),  Point(1, 9),
-       Point(12, 16), Point(4, 21), Point(5, 34), Point(-30, 34),
-       Point(-30, 26), Point(-34, 22), Point(-27, 12), Point(-34, 7),
-       Point(-34, -2), Point(-32, -6), Point(-28, -6), Point(-20, -20),
-       Point(-9, -20), Point(-3, -12), Point(-11, -12), Point(-10, -7)
+        Point(1, -12), Point(10, -20), Point(24, -20), Point(32, -7),
+        Point(42, 4), Point(32, 12), Point(42, 23), Point(36, 25), Point(32, 34),
+        Point(-32, 34), Point(-36, 25), Point(-42, 23), Point(-32, 12), Point(-42, 4) ,
+        Point(-32, -7), Point(-24, -20), Point(-10, -20)
+
 
     };
-    BBox(new Poly(vertex, 20));
+    BBox(new Poly(vertex, 17));
     type = ENEMY;
     enemyType = WIZARD;
     MultiverseRaid::remainingEnemies++;
