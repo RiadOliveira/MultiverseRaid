@@ -34,11 +34,14 @@ WizardEnemyAttack::~WizardEnemyAttack() {
 }
 
 void WizardEnemyAttack::OnCollision(Object* obj) {
-    if(obj->Type() != PLAYER) return;
+    uint objType = obj->Type();
+    if(objType != PLAYER && objType != PLAYER_ATTACK) return;
 
-    MultiverseRaid::player->ApplyDamage(damagePerTick, WIZARD);
-    MultiverseRaid::audio->Play(WIZARD_ENEMY_ATTACK);
     MultiverseRaid::scene->Delete(this, MOVING);
+    if(objType == PLAYER) {
+        MultiverseRaid::player->ApplyDamage(damagePerTick, WIZARD);
+        MultiverseRaid::audio->Play(WIZARD_ENEMY_ATTACK);
+    }
 }
 
 void WizardEnemyAttack::Update() {

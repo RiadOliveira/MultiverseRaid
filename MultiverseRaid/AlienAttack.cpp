@@ -31,7 +31,12 @@ AlienAttack::AlienAttack(float damage, Object* target) {
     speed.RotateTo(angle);
     speed.ScaleTo(270.0f);
     
-    MoveTo(posX + 22 * cos(speed.Radians()), posY - 22 * sin(speed.Radians()));
+    ScaleTo(1.0f + min((MultiverseRaid::gameWave - 1) / 3 * 0.15, 0.3f));
+    float factor = 86 * scale;
+    MoveTo(
+        posX + factor * cos(speed.Radians()),
+        posY - factor * sin(speed.Radians())
+    );
     RotateTo(-angle + 90.0f);
     BBox(new Circle(58.0f));
 

@@ -8,9 +8,9 @@ AlienAvatar::AlienAvatar() {
 
     tileSet = new TileSet(
         "Resources/Alien/AlienAvatar.png",
-        (uint)250, (uint)300, 4, 8
+        250, 300, 4, 8
     );
-    animation = new Animation(tileSet, 0.6f, true);
+    animation = new Animation(tileSet, 0.25f, true);
 
     uint rightSequence[4] = { 0, 1, 2, 3 };
     animation->Add(RIGHT, rightSequence, 4);
@@ -28,7 +28,9 @@ AlienAvatar::~AlienAvatar() {
 }
 
 void AlienAvatar::HandleSelectAvatar() {
-    orbsQuantity = 3;
+    uint gameWave = MultiverseRaid::gameWave - 1;
+    orbsQuantity = min(max(gameWave - (gameWave % 3), 2), 5);
+
     cosmicOrbImage = new Image("Resources/Alien/AlienCosmicOrb.png");
     cosmicOrbs = new AlienCosmicOrb*[orbsQuantity];
 

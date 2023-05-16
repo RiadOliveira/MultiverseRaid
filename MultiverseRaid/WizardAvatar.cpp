@@ -12,9 +12,9 @@ WizardAvatar::WizardAvatar(): selectedTheme(WIZARD_THEME) {
 
     tileSet = new TileSet(
         "Resources/Wizard/WizardAvatar.png",
-        (uint)250, (uint)300, 4, 8
+        250, 300, 4, 8
     );
-    animation = new Animation(tileSet, 0.4f, true);
+    animation = new Animation(tileSet, 0.25f, true);
 
     uint rightSequence[4] = { 0, 1, 2, 3 };
     animation->Add(RIGHT, rightSequence, 4);
@@ -68,9 +68,23 @@ void WizardAvatar::HandleUnselectAvatar() {
 }
 
 void WizardAvatar::HandleBasicAttack(Object* obj) {
-    WizardAttack* attack = new WizardAttack(8.0f, obj);
-    MultiverseRaid::scene->Add(attack, STATIC);
-    MultiverseRaid::audio->Play(FIRE_BALL);
+    Player* player = MultiverseRaid::player;
+    Point* playerPoint = new Point(player->X(), player->Y());
+
+    float angle = Line::Angle(*playerPoint, Point(obj->X(), obj->Y()));
+    int fireBallQuantity = 1 + min((MultiverseRaid::gameWave - 1) / 3 * 2, 5);
+
+    int angleModifier = 15 * (fireBallQuantity - 1) / 2;
+    for(int ind=-angleModifier ; ind<=angleModifier ; ind += 15) {
+         WizardAttack* attack = new WizardAttack(
+            8.0f, playerPoint, angle + ind
+        );
+        
+        MultiverseRaid::scene->Add(attack, STATIC);
+        MultiverseRaid::audio->Play(FIRE_BALL);
+    }
+    
+    delete playerPoint;
 }
 
 void WizardAvatar::HandleUlt() {

@@ -2,18 +2,17 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-RobotAttack::RobotAttack(float damage, Object* target) {
+RobotAttack::RobotAttack(
+    float damage, Point* playerPoint,
+    float laserAngle
+): angle(laserAngle) {
     damageType = ROBOT;
-    damageTickTime = 0.5f;
+    damageTickTime = 0.7f;
     damagePerTick = damage;
-
-    Player* player = MultiverseRaid::player;
-    float posX = player->X();
-    float posY = player->Y();
 
     float tileWidth = 24.0f, halfTileWidth = tileWidth/2;
     float tileHeight = 270.0f, halfTileHeight = tileHeight/2;
-    float distanceFromPlayer = 18.0f + halfTileHeight;
+    float distanceFromPlayer = 40.0f + halfTileHeight;
 
     laserBeam = new TileSet(
         "Resources/Robot/RobotAttack.png",
@@ -23,13 +22,10 @@ RobotAttack::RobotAttack(float damage, Object* target) {
     uint sequence[6] = {0, 1, 2, 3, 4, 5};
     animation->Add(0, sequence, 6);
 
-    angle = Line::Angle(
-        Point(posX, posY), Point(target->X(), target->Y())
-    );
     Vector vector = Vector(angle, distanceFromPlayer);
-
     MoveTo(
-        posX + vector.XComponent(), posY - vector.YComponent()
+        playerPoint->X() + vector.XComponent(),
+        playerPoint->Y() - vector.YComponent()
     );
     Rotate(-(angle + 90.0f));
 
@@ -54,7 +50,7 @@ void RobotAttack::Update() {
     float posX = player->X();
     float posY = player->Y();
 
-    Vector vector = Vector(angle, 153.0f);
+    Vector vector = Vector(angle, 175.0f);
     MoveTo(
         posX + vector.XComponent(), posY - vector.YComponent()
     );

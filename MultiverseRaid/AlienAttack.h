@@ -24,7 +24,7 @@ class AlienAttack : public Attack {
 };
 
 inline void AlienAttack::Draw() {
-    animation->Draw(x, y, z, 0.8f, rotation);
+    animation->Draw(x, y, z, scale - 0.18f, rotation);
 }
 
 #endif

@@ -8,9 +8,9 @@ RobotAvatar::RobotAvatar() {
 
     tileSet = new TileSet(
         "Resources/Robot/RobotAvatar.png",
-        (uint)250, (uint)300, 4, 8
+        250, 300, 4, 8
     );
-    animation = new Animation(tileSet, 0.6f, true);
+    animation = new Animation(tileSet, 0.25f, true);
 
     uint rightSequence[4] = { 0, 1, 2, 3 };
     animation->Add(RIGHT, rightSequence, 4);
@@ -36,9 +36,23 @@ void RobotAvatar::HandleUnselectAvatar() {
 }
 
 void RobotAvatar::HandleBasicAttack(Object* obj) {
-    RobotAttack* attack = new RobotAttack(8.0f, obj);
-    MultiverseRaid::scene->Add(attack, STATIC);
-    MultiverseRaid::audio->Play(LASER_BEAM);
+    Player* player = MultiverseRaid::player;
+    Point* playerPoint = new Point(player->X(), player->Y());
+
+    float angle = Line::Angle(*playerPoint, Point(obj->X(), obj->Y()));
+    int laserQuantity = min(max(1,(MultiverseRaid::gameWave - 1) / 3 * 2), 4);
+
+    int angleModifier = 360 / laserQuantity;
+    for(int ind=0 ; ind<laserQuantity ; ind++) {
+         RobotAttack* attack = new RobotAttack(
+            8.0f, playerPoint, angle + angleModifier * ind
+        );
+        
+        MultiverseRaid::scene->Add(attack, STATIC);
+        MultiverseRaid::audio->Play(LASER_BEAM);
+    }
+    
+    delete playerPoint;
 }
 
 void RobotAvatar::HandleUlt() {

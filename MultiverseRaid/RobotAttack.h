@@ -14,7 +14,10 @@ class RobotAttack : public Attack {
         TileSet* laserBeam = nullptr;
         Animation* animation = nullptr;
     public:
-        RobotAttack(float damage, Object* target);
+        RobotAttack(
+            float damage, Point* playerPoint,
+            float laserAngle
+        );
         ~RobotAttack();
 
         void Update();

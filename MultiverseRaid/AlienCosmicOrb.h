@@ -25,7 +25,7 @@ class AlienCosmicOrb : public Attack {
 };
 
 inline void AlienCosmicOrb::Draw() {
-    sprite->Draw(x, y, z, 0.15f, rotation);
+    sprite->Draw(x, y, z, 0.14f, rotation);
 }
 
 #endif

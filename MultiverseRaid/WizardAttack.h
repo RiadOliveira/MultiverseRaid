@@ -15,7 +15,9 @@ class WizardAttack : public Attack {
 
         Vector speed;
     public:
-        WizardAttack(float damage, Object* target);
+        WizardAttack(
+            float damage, Point* playerPoint, float angle
+        );
         ~WizardAttack();
 
         void Update();

@@ -117,11 +117,17 @@ void Player::HandleMovement() {
 
     if (y < 50) MoveTo(x, 50);
     else if (y > game->Height() - 50) MoveTo(x, game->Height() - 50);
+
+    Animation* avatarAnimation = avatars[selectedAvatar]->animation;
+    avatarAnimation->Select(tileSetState);
+
+    bool playerMoved = upCommandPressed || downCommandPressed ||
+        rightCommandPressed || leftCommandPressed;
+    if(playerMoved) avatarAnimation->NextFrame();
+    else avatarAnimation->Frame(0);
 }
 
 void Player::Update() {
-    HandleMovement();
-
     bool hasToSwitchAvatar = Avatar::ReachedActiveTimeLimit();
     bool chooseAndCanSwitchAvatar = window->KeyDown('Q') && Avatar::CanSwitchAvatar();
     if(hasToSwitchAvatar || chooseAndCanSwitchAvatar) {
@@ -139,8 +145,7 @@ void Player::Update() {
         Avatar::ResetTimersData();
     }
 
-    avatars[selectedAvatar]->animation->Select(tileSetState);
-    avatars[selectedAvatar]->animation->NextFrame();
+    HandleMovement();
 }
 
 void Player::Draw() {

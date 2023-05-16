@@ -21,8 +21,8 @@ void MultiverseRaid::Init() {
         audio = new Audio();
 
         audio->Add(THUNDER_STORM_LIGHTING, "Resources/Wizard/ThunderStormLighting.wav");
-        audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav");
-        audio->Add(LASER_BEAM, "Resources/Robot/LaserBeam.wav");
+        audio->Add(FIRE_BALL, "Resources/Wizard/FireBall.wav", 5);
+        audio->Add(LASER_BEAM, "Resources/Robot/LaserBeam.wav", 4);
         audio->Add(BLACK_HOLE, "Resources/Alien/BlackHole.wav");
         audio->Add(COSMIC_ORB, "Resources/Alien/CosmicOrb.wav", 3);
         audio->Add(DRONE_ATTACK, "Resources/Robot/DroneAttack.wav", 3);

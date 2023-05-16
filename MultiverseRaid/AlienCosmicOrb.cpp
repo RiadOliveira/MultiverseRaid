@@ -26,7 +26,7 @@ AlienCosmicOrb::AlienCosmicOrb(
     speed.ScaleTo(200.0f);
     
     MoveTo(posX, posY);
-    BBox(new Circle(21.0f));
+    BBox(new Circle(27.0f));
 
     type = PLAYER_ATTACK;
 }
