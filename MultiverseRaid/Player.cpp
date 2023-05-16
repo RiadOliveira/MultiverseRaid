@@ -11,8 +11,8 @@ void Player::SetAttributes() {
     attributes.hp = 10.0f;
     attributes.damage = 0.0f;
     attributes.speed = 180.0f;
-    attributes.attackSpeed = 0.0f;
-    attributes.defense = 0.3f;
+    attributes.attackSpeed = 1.0f;
+    attributes.defense = 0.0f;
     attributes.range = 290.0f;
 }
 
@@ -54,10 +54,10 @@ void Player::LevelUp() {
     attributes.hp = 10.0f + level * 5.0f;
     attributes.damage += 2.0f;
     attributes.speed += 20.0f;
-    attributes.attackSpeed -= 0.2f;
+    attributes.attackSpeed -= 0.072f;
 
-    if(attributes.attackSpeed < 1.0f) {
-        attributes.attackSpeed = 1.0f;
+    if(attributes.attackSpeed < 0.5f) {
+        attributes.attackSpeed = 0.5f;
     }
 }
 

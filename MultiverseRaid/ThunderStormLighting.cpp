@@ -3,9 +3,10 @@
 #include "Vector.h"
 
 ThunderStormLighting::ThunderStormLighting(Point* target) {
+    type = PLAYER_ATTACK;
     damageType = WIZARD;
-    damageTickTime = 1.0f;
-    damagePerTick = 8.0f;
+    SetDamageTickTime(1.0f);
+    SetDamagePerTick(8.0f);
 
     lighting = new TileSet(
         "Resources/Wizard/LightingAttack.png",
@@ -17,8 +18,6 @@ ThunderStormLighting::ThunderStormLighting(Point* target) {
 
     MoveTo(target->X(), target->Y());
     BBox(new Circle(40.0f));
-
-    type = PLAYER_ATTACK;
 }
 
 ThunderStormLighting::~ThunderStormLighting() {

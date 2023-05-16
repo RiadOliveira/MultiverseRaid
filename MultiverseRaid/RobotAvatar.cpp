@@ -45,7 +45,7 @@ void RobotAvatar::HandleBasicAttack(Object* obj) {
     int angleModifier = 360 / laserQuantity;
     for(int ind=0 ; ind<laserQuantity ; ind++) {
          RobotAttack* attack = new RobotAttack(
-            8.0f, playerPoint, angle + angleModifier * ind
+            playerPoint, angle + angleModifier * ind
         );
         
         MultiverseRaid::scene->Add(attack, STATIC);

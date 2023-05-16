@@ -37,7 +37,7 @@ void AlienAvatar::HandleSelectAvatar() {
     float orbsAngle = 360.0f / orbsQuantity;
     for(uint ind=0 ; ind<orbsQuantity ; ind++) {
         cosmicOrbs[ind] = new AlienCosmicOrb(
-            cosmicOrbImage, 8.0f, orbsAngle * ind
+            cosmicOrbImage, orbsAngle * ind
         );
         MultiverseRaid::scene->Add(cosmicOrbs[ind], STATIC);
     }
@@ -55,7 +55,7 @@ void AlienAvatar::HandleUnselectAvatar() {
 }
 
 void AlienAvatar::HandleBasicAttack(Object* obj) {
-    AlienAttack* attack = new AlienAttack(8.0f, obj);
+    AlienAttack* attack = new AlienAttack(obj);
     MultiverseRaid::scene->Add(attack, STATIC);
     MultiverseRaid::audio->Play(BLACK_HOLE);
 }

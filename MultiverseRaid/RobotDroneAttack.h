@@ -10,7 +10,6 @@
 class RobotDroneAttack : public Attack {
     private:
         Sprite* sprite = nullptr;
-
         Point startPoint;
         Vector speed;
     public:

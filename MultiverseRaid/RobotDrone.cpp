@@ -70,7 +70,10 @@ void RobotDrone::MoveToPlayer() {
 void RobotDrone::OnCollision(Object* obj) {
     uint type = obj->Type();
     if(type != ENEMY) return;
-    if(attackTimer->Elapsed() < dronesAttributes.attackSpeed) return;
+
+    float playerAttackSpeed = MultiverseRaid::player->Attributes().attackSpeed;
+    float cooldown = dronesAttributes.attackSpeed - (1.0f - playerAttackSpeed);
+    if(attackTimer->Elapsed() < cooldown) return;
 
     float angle = Line::Angle(Point(x, y), Point(obj->X(), obj->Y()));
     for(int ind=-10 ; ind<=10 ; ind += 10) {

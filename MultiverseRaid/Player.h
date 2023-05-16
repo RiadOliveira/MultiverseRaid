@@ -28,7 +28,7 @@ class Player : public Object {
         void ApplyDamage(float damage, uint damageType);
         uint TileSetState();
 
-        
+        EntityAttributes Attributes();
         void LevelUp();
         void Update();
         void Draw();
@@ -40,6 +40,10 @@ inline float Player::Hp() {
 
 inline bool Player::IsDead() {
     return attributes.hp <= 0.0f;
+}
+
+inline EntityAttributes Player::Attributes() {
+    return attributes;
 }
 
 inline uint Player::TileSetState() { return tileSetState; }

@@ -25,7 +25,11 @@ WizardThunderStorm::~WizardThunderStorm() {
 void WizardThunderStorm::OnCollision(Object* obj) {
     if(obj->Type() != ENEMY) return;
 
-    float requiredElapsed = 3.0f / (1.0f + (float) WizardAvatar::legendaryMode);
+    float attackSpeed = MultiverseRaid::player->Attributes().attackSpeed;
+    float cooldown = 3.0f - (1.0f - attackSpeed);
+    float legendaryModeModifier = 1.0f + (float) WizardAvatar::legendaryMode;
+
+    float requiredElapsed = cooldown / legendaryModeModifier;
     if(cooldownTimer->Elapsed() < requiredElapsed) return;
 
     Point* target = new Point(obj->X(), obj->Y());

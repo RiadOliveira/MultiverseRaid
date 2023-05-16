@@ -5,11 +5,12 @@
 RobotDroneAttack::RobotDroneAttack(
     float damage, float angle, RobotDrone* drone
 ) {
+    type = PLAYER_ATTACK;
     damageType = ROBOT;
-    damageTickTime = 2.0f;
-    damagePerTick = damage;
-    sprite = new Sprite("Resources/Robot/RobotDroneAttack.png");
+    SetDamageTickTime(2.0f);
+    SetDamagePerTick(damage);
 
+    sprite = new Sprite("Resources/Robot/RobotDroneAttack.png");
     float posX = drone->X();
     float posY = drone->Y();
     speed.RotateTo(angle);
@@ -23,8 +24,6 @@ RobotDroneAttack::RobotDroneAttack(
     MoveTo(startPoint.X(), startPoint.Y());
     RotateTo(-angle);
     BBox(new Circle(9.0f));
-
-    type = PLAYER_ATTACK;
 }
 
 RobotDroneAttack::~RobotDroneAttack() {

@@ -15,7 +15,7 @@ class AlienAttack : public Attack {
 
         Vector speed;
     public:
-        AlienAttack(float damage, Object* target);
+        AlienAttack(Object* target);
         ~AlienAttack();
 
         void OnCollision(Object* obj);

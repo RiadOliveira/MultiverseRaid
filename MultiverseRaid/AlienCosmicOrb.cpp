@@ -2,15 +2,13 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-AlienCosmicOrb::AlienCosmicOrb(
-    Image* cosmicOrb, float damage,
-    float playerAngle
-) {
+AlienCosmicOrb::AlienCosmicOrb(Image* cosmicOrb, float playerAngle) {
+    type = PLAYER_ATTACK;
     damageType = ALIEN;
-    damageTickTime = 2.0f;
-    damagePerTick = damage;
-    sprite = new Sprite(cosmicOrb);
+    SetDamageTickTime(2.0f);
+    SetDamagePerTick(8.0f);
 
+    sprite = new Sprite(cosmicOrb);
     Player* player = MultiverseRaid::player;
     float posX, posY;
 
@@ -27,8 +25,6 @@ AlienCosmicOrb::AlienCosmicOrb(
     
     MoveTo(posX, posY);
     BBox(new Circle(27.0f));
-
-    type = PLAYER_ATTACK;
 }
 
 AlienCosmicOrb::~AlienCosmicOrb() {

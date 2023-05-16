@@ -77,7 +77,7 @@ void WizardAvatar::HandleBasicAttack(Object* obj) {
     int angleModifier = 15 * (fireBallQuantity - 1) / 2;
     for(int ind=-angleModifier ; ind<=angleModifier ; ind += 15) {
          WizardAttack* attack = new WizardAttack(
-            8.0f, playerPoint, angle + ind
+            playerPoint, angle + ind
         );
         
         MultiverseRaid::scene->Add(attack, STATIC);

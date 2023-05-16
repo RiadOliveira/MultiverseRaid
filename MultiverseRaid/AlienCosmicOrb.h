@@ -13,10 +13,7 @@ class AlienCosmicOrb : public Attack {
         Sprite* sprite;
         Vector speed;
     public:
-        AlienCosmicOrb(
-            Image* cosmicOrb, float damage,
-            float playerAngle
-        );
+        AlienCosmicOrb(Image* cosmicOrb, float playerAngle);
         ~AlienCosmicOrb();
 
         void OnCollision(Object* obj);

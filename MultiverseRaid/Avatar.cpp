@@ -25,11 +25,15 @@ Avatar::~Avatar() {
     delete animation;
 }
 
-void Avatar::OnCollision(Object* obj) {
-    uint type = obj->Type();
-    if(type != ENEMY) return;
+float Avatar::GetParsedBasicAttackCooldown() {
+    float attackSpeed = MultiverseRaid::player->Attributes().attackSpeed;
+    return basicAttackCooldown - (1.0f - attackSpeed);
+}
 
-    if(basicAttackTimer->Elapsed() >= basicAttackCooldown) {
+void Avatar::OnCollision(Object* obj) {
+    if(obj->Type() != ENEMY) return;
+
+    if(basicAttackTimer->Elapsed() >= GetParsedBasicAttackCooldown()) {
         HandleBasicAttack(obj);
         basicAttackTimer->Reset();
         BBox()->ScaleTo(0.0f);
@@ -41,7 +45,7 @@ void Avatar::Update() {
     MoveTo(player->X(), player->Y());
     HandleUlt();
 
-    if(basicAttackTimer->Elapsed() >= basicAttackCooldown) {
+    if(basicAttackTimer->Elapsed() >= GetParsedBasicAttackCooldown()) {
         BBox()->ScaleTo(min(BBox()->Scale() + 0.1f, 1.0f));
     }
 

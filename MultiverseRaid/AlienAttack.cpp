@@ -2,10 +2,11 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-AlienAttack::AlienAttack(float damage, Object* target) {
+AlienAttack::AlienAttack(Object* target) {
+    type = PLAYER_ATTACK;
     damageType = ALIEN;
-    damageTickTime = 1.0f;
-    damagePerTick = damage;
+    SetDamageTickTime(0.7f);
+    SetDamagePerTick(8.0f);
 
     Player* player = MultiverseRaid::player;
     float posX = player->X();
@@ -31,16 +32,17 @@ AlienAttack::AlienAttack(float damage, Object* target) {
     speed.RotateTo(angle);
     speed.ScaleTo(270.0f);
     
-    ScaleTo(1.0f + min((MultiverseRaid::gameWave - 1) / 3 * 0.15, 0.3f));
-    float factor = 86 * scale;
+    int waveDivision = (MultiverseRaid::gameWave - 1) / 3;
+    float scaleIncrease = (float) waveDivision * 0.15f;
+    ScaleTo(1.0f + min(scaleIncrease, 0.3f));
+
+    float factor = 86.0f * scale;
     MoveTo(
         posX + factor * cos(speed.Radians()),
         posY - factor * sin(speed.Radians())
     );
     RotateTo(-angle + 90.0f);
     BBox(new Circle(58.0f));
-
-    type = PLAYER_ATTACK;
 }
 
 AlienAttack::~AlienAttack() {
@@ -52,7 +54,7 @@ void AlienAttack::OnCollision(Object* obj) {
     if(obj->Type() != ENEMY) return;
 
     float angle = Line::Angle(Point(obj->X(), obj->Y()), Point(x, y));
-    Vector gravitationalField = Vector(angle, 400.0f);
+    Vector gravitationalField = Vector(angle, 350.0f);
 
     float xTranslation = gravitationalField.XComponent() * gameTime;
     float yTranslation = gravitationalField.YComponent() * gameTime;

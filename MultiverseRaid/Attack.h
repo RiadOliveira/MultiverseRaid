@@ -8,6 +8,9 @@ class Attack : public Object {
         uint damageType = 0;
         float damageTickTime = 0.0f;
         float damagePerTick = 0.0f;
+
+        void SetDamageTickTime(float tickTime);
+        void SetDamagePerTick(float damage);
     public:
         Attack();
         virtual ~Attack();
@@ -15,7 +18,7 @@ class Attack : public Object {
         uint DamageType();
         float DamageTickTime();
         float DamagePerTick();
-        
+
         virtual void Update() = 0;
         virtual void Draw() = 0;
 };

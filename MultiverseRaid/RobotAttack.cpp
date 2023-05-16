@@ -2,13 +2,11 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-RobotAttack::RobotAttack(
-    float damage, Point* playerPoint,
-    float laserAngle
-): angle(laserAngle) {
+RobotAttack::RobotAttack(Point* playerPoint, float laserAngle): angle(laserAngle) {
+    type = PLAYER_ATTACK;
     damageType = ROBOT;
-    damageTickTime = 0.7f;
-    damagePerTick = damage;
+    SetDamageTickTime(0.7f);
+    SetDamagePerTick(8.0f);
 
     float tileWidth = 24.0f, halfTileWidth = tileWidth/2;
     float tileHeight = 270.0f, halfTileHeight = tileHeight/2;
@@ -37,8 +35,6 @@ RobotAttack::RobotAttack(
 
     Point list[4] = {p1, p2, p3, p4};
     BBox(new Poly(list, 4));
-
-    type = PLAYER_ATTACK;
 }
 
 RobotAttack::~RobotAttack() {

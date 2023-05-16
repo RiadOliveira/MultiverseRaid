@@ -2,13 +2,11 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-WizardAttack::WizardAttack(
-    float damage, Point* playerPoint,
-    float angle
-) {
+WizardAttack::WizardAttack(Point* playerPoint, float angle) {
+    type = PLAYER_ATTACK;
     damageType = WIZARD;
-    damageTickTime =  1.0f;
-    damagePerTick = damage;
+    SetDamageTickTime(1.0f);
+    SetDamagePerTick(8.0f);
 
     fireBall = new TileSet(
         "Resources/Wizard/FireBallAttack.png",
@@ -27,8 +25,6 @@ WizardAttack::WizardAttack(
     );
     RotateTo(-angle + 90.0f);
     BBox(new Circle(22.0f));
-
-    type = PLAYER_ATTACK;
 }
 
 WizardAttack::~WizardAttack() {

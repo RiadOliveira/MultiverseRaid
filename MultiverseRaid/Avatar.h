@@ -26,6 +26,7 @@ class Avatar : public Object {
         uint avatarType = 0;
         float basicAttackCooldown = 0.0f;
         
+        float GetParsedBasicAttackCooldown();
         virtual void HandleBasicAttack(Object* obj) = 0;
         virtual void HandleUlt() = 0;
     public:

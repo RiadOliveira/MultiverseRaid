@@ -2,14 +2,13 @@
 #include "MultiverseRaid.h"
 #include "Vector.h"
 
-WizardEnemyAttack::WizardEnemyAttack(
-    float damage, WizardEnemy* origin
-) {
+WizardEnemyAttack::WizardEnemyAttack(float damage, WizardEnemy* origin) {
+    type = ENEMY_ATTACK;
     damageType = WIZARD;
-    damageTickTime = 1.0f;
-    damagePerTick = damage;
-    energyBall = new Sprite("Resources/Wizard/EnergyBall.png");
+    SetDamageTickTime(1.0f);
+    SetDamagePerTick(damage);
 
+    energyBall = new Sprite("Resources/Wizard/EnergyBall.png");
     Player* player = MultiverseRaid::player;
     float targetX = player->X(), targetY = player->Y();
     float posX = origin->X(), posY = origin->Y();
@@ -25,8 +24,6 @@ WizardEnemyAttack::WizardEnemyAttack(
     MoveTo(posX + 22 * cos(speed.Radians()), posY - 22 * sin(speed.Radians()));
     RotateTo(-angle + 90.0f);
     BBox(new Circle(14.0f));
-
-    type = ENEMY_ATTACK;
 }
 
 WizardEnemyAttack::~WizardEnemyAttack() {
