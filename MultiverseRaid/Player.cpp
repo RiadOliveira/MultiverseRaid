@@ -22,7 +22,16 @@ Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
     avatars[ROBOT] = new RobotAvatar();
     avatars[ALIEN] = new AlienAvatar();
 
-    BBox(new Circle(18.0f));
+    Point vertex[16] =
+    {
+        Point(11, -35), Point(12, -28), Point(20, -26), Point(20, -8),
+        Point(24, 12), Point(20, 12), Point(20, 18), Point(20, 35),
+        Point(-20, 35), Point(-20, 18), Point(-20, 12), Point(-24, 12),
+        Point(-20, -8), Point(-20, -26), Point(-12, -28), Point(-11, -35)
+
+    };
+    BBox(new Poly(vertex, 16));
+
     MoveTo(game->CenterX(), game->CenterY());
     SetAttributes();
     type = PLAYER;
