@@ -28,7 +28,7 @@ AlienAvatar::~AlienAvatar() {
 }
 
 void AlienAvatar::HandleSelectAvatar() {
-    uint gameWave = MultiverseRaid::gameWave - 1;
+    uint gameWave = max(MultiverseRaid::gameWave, 1) - 1;
     orbsQuantity = min(max(gameWave - (gameWave % 3), 2), 5);
 
     cosmicOrbImage = new Image("Resources/Alien/AlienCosmicOrb.png");

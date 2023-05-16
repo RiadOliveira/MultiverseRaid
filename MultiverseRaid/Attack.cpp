@@ -16,7 +16,9 @@ void Attack::SetDamagePerTick(float damage) {
     damagePerTick = damage;
 
     if(type == PLAYER_ATTACK) {
-        float damage = MultiverseRaid::player->Attributes().damage;
-        damagePerTick += damage;
+        Player* player = MultiverseRaid::player;
+
+        float playerDamage = player == nullptr ? 0.0f : player->Attributes().damage;
+        damagePerTick += playerDamage;
     }
 }

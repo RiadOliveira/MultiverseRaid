@@ -5,8 +5,8 @@
 AlienCosmicOrb::AlienCosmicOrb(Image* cosmicOrb, float playerAngle) {
     type = PLAYER_ATTACK;
     damageType = ALIEN;
-    SetDamageTickTime(2.0f);
-    SetDamagePerTick(8.0f);
+    SetDamageTickTime(0.7f);
+    SetDamagePerTick(2.0f);
 
     sprite = new Sprite(cosmicOrb);
     Player* player = MultiverseRaid::player;

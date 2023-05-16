@@ -6,6 +6,7 @@
 #include "RobotEnemy.h"
 #include "WizardEnemy.h"
 #include "AlienEnemy.h"
+#include "Random.h"
 
 void Player::SetAttributes() {
     attributes.hp = 10.0f;
@@ -16,7 +17,7 @@ void Player::SetAttributes() {
     attributes.range = 290.0f;
 }
 
-Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
+Player::Player(): tileSetState(LEFT), level(0) {
     avatars = new Avatar*[3];
     avatars[WIZARD] = new WizardAvatar();
     avatars[ROBOT] = new RobotAvatar();
@@ -37,6 +38,9 @@ Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
     type = PLAYER;
 
     Scene * scene = MultiverseRaid::scene;
+    RandI randomAvatar{0, 2};
+    selectedAvatar = randomAvatar.Rand();
+
     avatars[selectedAvatar]->HandleSelectAvatar();
     scene->Add(avatars[selectedAvatar], STATIC);
 }
@@ -52,12 +56,12 @@ void Player::LevelUp() {
     level++;
 
     attributes.hp = 10.0f + level * 5.0f;
-    attributes.damage += 2.0f;
-    attributes.speed += 20.0f;
-    attributes.attackSpeed -= 0.072f;
+    attributes.damage += 0.25f;
+    attributes.speed += 10.0f;
+    attributes.attackSpeed -= 0.05f;
 
-    if(attributes.attackSpeed < 0.5f) {
-        attributes.attackSpeed = 0.5f;
+    if(attributes.attackSpeed < 0.7f) {
+        attributes.attackSpeed = 0.7f;
     }
 }
 

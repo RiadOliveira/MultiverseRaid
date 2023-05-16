@@ -6,7 +6,7 @@ AlienAttack::AlienAttack(Object* target) {
     type = PLAYER_ATTACK;
     damageType = ALIEN;
     SetDamageTickTime(0.7f);
-    SetDamagePerTick(8.0f);
+    SetDamagePerTick(4.0f);
 
     Player* player = MultiverseRaid::player;
     float posX = player->X();

@@ -5,8 +5,8 @@
 ThunderStormLighting::ThunderStormLighting(Point* target) {
     type = PLAYER_ATTACK;
     damageType = WIZARD;
-    SetDamageTickTime(1.0f);
-    SetDamagePerTick(8.0f);
+    SetDamageTickTime(0.7f);
+    SetDamagePerTick(6.0f);
 
     lighting = new TileSet(
         "Resources/Wizard/LightingAttack.png",

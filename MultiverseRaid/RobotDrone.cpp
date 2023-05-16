@@ -4,7 +4,7 @@
 
 EntityAttributes RobotDrone::dronesAttributes = {
     0.0f, //hp
-    4.0f, //damage
+    2.0f, //damage
     190.0f, //speed
     2.0f, //attackSpeed
     0.0f, //defense

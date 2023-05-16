@@ -6,7 +6,7 @@ RobotAttack::RobotAttack(Point* playerPoint, float laserAngle): angle(laserAngle
     type = PLAYER_ATTACK;
     damageType = ROBOT;
     SetDamageTickTime(0.7f);
-    SetDamagePerTick(8.0f);
+    SetDamagePerTick(4.0f);
 
     float tileWidth = 24.0f, halfTileWidth = tileWidth/2;
     float tileHeight = 270.0f, halfTileHeight = tileHeight/2;

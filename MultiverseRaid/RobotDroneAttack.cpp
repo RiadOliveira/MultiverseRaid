@@ -7,7 +7,7 @@ RobotDroneAttack::RobotDroneAttack(
 ) {
     type = PLAYER_ATTACK;
     damageType = ROBOT;
-    SetDamageTickTime(2.0f);
+    SetDamageTickTime(0.7f);
     SetDamagePerTick(damage);
 
     sprite = new Sprite("Resources/Robot/RobotDroneAttack.png");

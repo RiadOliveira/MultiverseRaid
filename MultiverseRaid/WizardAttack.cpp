@@ -5,8 +5,8 @@
 WizardAttack::WizardAttack(Point* playerPoint, float angle) {
     type = PLAYER_ATTACK;
     damageType = WIZARD;
-    SetDamageTickTime(1.0f);
-    SetDamagePerTick(8.0f);
+    SetDamageTickTime(0.7f);
+    SetDamagePerTick(6.0f);
 
     fireBall = new TileSet(
         "Resources/Wizard/FireBallAttack.png",
