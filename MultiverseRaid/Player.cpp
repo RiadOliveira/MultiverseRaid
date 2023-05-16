@@ -9,7 +9,7 @@
 #include "Random.h"
 
 void Player::SetAttributes() {
-    attributes.hp = 10.0f;
+    attributes.hp = 16.0f;
     attributes.damage = 0.0f;
     attributes.speed = 180.0f;
     attributes.attackSpeed = 1.0f;
@@ -55,7 +55,7 @@ Player::~Player() {
 void Player::LevelUp() {
     level++;
 
-    attributes.hp = 10.0f + level * 5.0f;
+    attributes.hp = 16.0f + level * 8.0f;
     attributes.damage += 0.25f;
     attributes.speed += 10.0f;
     attributes.attackSpeed -= 0.05f;

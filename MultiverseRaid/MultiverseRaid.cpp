@@ -60,7 +60,7 @@ void MultiverseRaid::Init() {
         audio->Volume(ALIEN_ENEMY_ATTACK, 0.04f);
     }
 
-    backg   = new Background("Resources/Space.jpg");
+    backg   = new Background("Resources/Arena.jpg");
     scene   = new Scene();
 
     waveGenerator = new WaveGenerator();
