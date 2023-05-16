@@ -5,6 +5,18 @@
 RobotAvatar::RobotAvatar() {
     avatarType = ROBOT;
     basicAttackCooldown = 2.5f;
+
+    tileSet = new TileSet(
+        "Resources/Robot/RobotAvatar.png",
+        (uint)250, (uint)300, 4, 8
+    );
+    animation = new Animation(tileSet, 0.6f, true);
+
+    uint rightSequence[4] = { 0, 1, 2, 3 };
+    animation->Add(RIGHT, rightSequence, 4);
+
+    uint leftSequence[4] = { 7, 6, 5, 4 };
+    animation->Add(LEFT, leftSequence, 4);
 }
 
 RobotAvatar::~RobotAvatar() {

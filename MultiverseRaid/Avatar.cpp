@@ -21,6 +21,8 @@ Avatar::Avatar() {
 }
 
 Avatar::~Avatar() {
+    delete tileSet;
+    delete animation;
 }
 
 void Avatar::OnCollision(Object* obj) {

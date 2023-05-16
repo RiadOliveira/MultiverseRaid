@@ -3,12 +3,10 @@
 
 #include "EntityAttributes.h"
 #include "Object.h"
-#include "Sprite.h"
 #include "Avatar.h"
 
 class Player : public Object {
     private:
-        Sprite * sprite;
         Avatar ** avatars;
         uint selectedAvatar;
 

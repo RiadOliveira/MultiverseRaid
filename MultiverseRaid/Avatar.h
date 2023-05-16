@@ -4,6 +4,8 @@
 #include "Types.h"
 #include "Object.h"
 #include "Timer.h"
+#include "TileSet.h"
+#include "Animation.h"
 
 enum AvatarType { WIZARD, ROBOT, ALIEN };
 
@@ -16,6 +18,8 @@ class Avatar : public Object {
         static bool canSwitchAvatar;
         static bool reachedActiveTimeLimit;
 
+        TileSet* tileSet = nullptr;
+
         static Timer* basicAttackTimer;
         static Timer* activeTimeTimer;
 
@@ -25,6 +29,8 @@ class Avatar : public Object {
         virtual void HandleBasicAttack(Object* obj) = 0;
         virtual void HandleUlt() = 0;
     public:
+        Animation* animation = nullptr;
+
         Avatar();
         virtual ~Avatar();
 

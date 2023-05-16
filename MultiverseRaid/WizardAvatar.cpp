@@ -9,6 +9,18 @@ bool WizardAvatar::timeIsStopped = false;
 WizardAvatar::WizardAvatar(): selectedTheme(WIZARD_THEME) {
     avatarType = WIZARD;
     basicAttackCooldown = 2.0f;
+
+    tileSet = new TileSet(
+        "Resources/Wizard/WizardAvatar.png",
+        (uint)250, (uint)300, 4, 8
+    );
+    animation = new Animation(tileSet, 0.4f, true);
+
+    uint rightSequence[4] = { 0, 1, 2, 3 };
+    animation->Add(RIGHT, rightSequence, 4);
+
+    uint leftSequence[4] = { 7, 6, 5, 4 };
+    animation->Add(LEFT, leftSequence, 4);
 }
 
 WizardAvatar::~WizardAvatar() {

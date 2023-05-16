@@ -17,8 +17,6 @@ void Player::SetAttributes() {
 }
 
 Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
-    sprite = new Sprite("Resources/Player.png");
-
     avatars = new Avatar*[3];
     avatars[WIZARD] = new WizardAvatar();
     avatars[ROBOT] = new RobotAvatar();
@@ -35,8 +33,6 @@ Player::Player(): tileSetState(LEFT), level(0), selectedAvatar(WIZARD) {
 }
 
 Player::~Player() {
-    delete sprite;
-
     for(int ind=0 ; ind<3 ; ind++) {
         if(ind != selectedAvatar) delete avatars[ind];
     }
@@ -133,9 +129,11 @@ void Player::Update() {
         scene->Add(currentAvatar, STATIC);
         Avatar::ResetTimersData();
     }
+
+    avatars[selectedAvatar]->animation->Select(tileSetState);
+    avatars[selectedAvatar]->animation->NextFrame();
 }
 
 void Player::Draw() {
-    float rotation = tileSetState == LEFT ? 0.0f : 180.0f;
-    sprite->Draw(x, y, Layer::MIDDLE, 1.0f, rotation);
+    avatars[selectedAvatar]->animation->Draw(x, y, Layer::MIDDLE, 0.25f);
 }
