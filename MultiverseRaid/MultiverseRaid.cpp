@@ -133,7 +133,7 @@ void MultiverseRaid::Update() {
 
 void MultiverseRaid::Draw() {
     Color backgroundColor = WizardAvatar::timeIsStopped ?
-        Color(0.4f, 1.0f, 0.4f, 1.0f) : Color(1.0f, 1.0f, 1.0f, 1.0f);
+        Color(0.6f, 1.0f, 0.6f, 1.0f) : Color(1.0f, 1.0f, 1.0f, 1.0f);
 
     backg->Draw(viewport, backgroundColor);
     scene->Draw();

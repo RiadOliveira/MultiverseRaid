@@ -17,7 +17,7 @@ void Hud::Update() {
 }
 
 void Hud::Draw() {
-    Color textColor{ 0.7f, 0.7f, 0.7f, 1.0f };
+    Color textColor{ 0.0f, 0.0f, 0.0f, 1.0f };
 
     text.str("");
     text << "Multiverse Raid";
